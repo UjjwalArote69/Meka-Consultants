@@ -274,10 +274,15 @@ export default function Services() {
       const timeoutId = setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
-          const offset = 160; // navbar + sticky filter bar
-          const y =
-            element.getBoundingClientRect().top + window.scrollY - offset;
-          window.scrollTo({ top: y, behavior: "smooth" });
+          const lenis = window.__lenis;
+          if (lenis && typeof lenis.scrollTo === "function") {
+            lenis.scrollTo(element, { offset: -160 });
+          } else {
+            const offset = 160; // navbar + sticky filter bar
+            const y =
+              element.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top: y, behavior: "smooth" });
+          }
         }
       }, 800);
 

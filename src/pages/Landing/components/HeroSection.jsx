@@ -109,24 +109,13 @@ export default function HeroSection() {
       {/* ── MAIN CONTENT ── */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex-1 flex flex-col h-full">
         
-        {/* MASTHEAD FRAMING */}
-        <div className="flex justify-between items-start w-full absolute top-0 left-0 px-6 lg:px-12 pt-6 pointer-events-none">
-          <div className="frame-element flex items-center gap-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#B38356] animate-pulse" />
-            <p className="text-[10px] tracking-[0.3em] uppercase font-bold text-slate-500">
-              Meka Group
-            </p>
-          </div>
-          <div className="frame-element hidden md:flex items-center gap-4 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400">
-            <span>Mumbai · India</span>
-          </div>
-        </div>
+     
 
         {/* ── CENTERED HERO BODY ── */}
         <div className="flex-1 flex flex-col items-center justify-center text-center mt-10 lg:mt-4 max-w-5xl mx-auto w-full">
           
           <h1 
-            className="font-serif text-slate-900 tracking-tight leading-[0.95] text-[3.5rem] md:text-7xl lg:text-[7.5rem] mb-8"
+            className="font-serif text-slate-900 tracking-tight leading-[0.9] text-[3.5rem] md:text-7xl lg:text-[7.5rem] mb-8"
             aria-label="You run the business. We run the people."
           >
             <span className="block flex flex-wrap justify-center gap-x-[0.2em] gap-y-2 mb-2 lg:mb-4">

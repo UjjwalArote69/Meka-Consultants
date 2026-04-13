@@ -1,11 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router"; // Use react-router-dom if on v6
+import gsap from "gsap";
 
 /**
  * MEKA Consultants — Navbar
  * Palette: Ink #050A15 / Base #FAFAFA / Bronze #B38356
+ *
+ * Desktop nav: unchanged.
+ * Mobile nav: kept minimal — clean serif list, inline-expanding Services
+ * submenu, a single CTA, and one line of direct contact.
  */
 
 function useHashScroll() {
@@ -19,7 +24,18 @@ function useHashScroll() {
 
     if (location.pathname === targetPath && hash) {
       const el = document.getElementById(hash);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (el) {
+        const lenis = window.__lenis;
+        if (lenis && typeof lenis.scrollTo === "function") {
+          lenis.scrollTo(el, { offset: -160 });
+        } else {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      } else {
+        // Element not in DOM (e.g. filtered out) — navigate to update the hash
+        // and let the target page's own scroll handler take over
+        navigate(href);
+      }
     } else {
       navigate(href);
     }
@@ -47,7 +63,6 @@ function DesktopNavItem({ link, currentPath, onNavClick }) {
     timeoutRef.current = setTimeout(() => setIsOpen(false), 200);
   };
 
-  // Cleanup timeout on unmount
   useEffect(() => {
     return () => clearTimeout(timeoutRef.current);
   }, []);
@@ -82,7 +97,6 @@ function DesktopNavItem({ link, currentPath, onNavClick }) {
         )}
       </a>
 
-      {/* Pure CSS/Tailwind Dropdown Transition */}
       {hasChildren && (
         <div
           className={`absolute top-[100%] pt-2 z-50 transition-all duration-300 ease-out ${
@@ -111,11 +125,87 @@ function DesktopNavItem({ link, currentPath, onNavClick }) {
                     <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-slate-800 group-hover/link:text-[#B38356] transition-colors">
                       {child.label}
                     </p>
-                    
                   </div>
                   <span className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#B38356] shrink-0 mt-0.5">
                     →
                   </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════
+// MOBILE NAV ITEM
+// ═══════════════════════════════════════════════
+function MobileNavItem({ link, currentPath, onNavClick, onClose }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const hasChildren = link.children && link.children.length > 0;
+  const isActive =
+    currentPath === link.href || currentPath.startsWith(link.href + "/");
+
+  const handleRowClick = (e) => {
+    if (hasChildren) {
+      e.preventDefault();
+      setIsExpanded((v) => !v);
+    } else {
+      onNavClick(e, link.href);
+      onClose();
+    }
+  };
+
+  const handleChildClick = (e, href) => {
+    onNavClick(e, href);
+    onClose();
+  };
+
+  return (
+    <div className="mobile-nav-item">
+      <button
+        onClick={handleRowClick}
+        className="w-full flex items-center justify-between text-left py-3 group"
+        aria-expanded={hasChildren ? isExpanded : undefined}
+      >
+        <span
+          className={`font-serif text-4xl font-light leading-none transition-colors duration-300 ${
+            isActive
+              ? "text-[#B38356]"
+              : "text-white group-hover:text-[#B38356]"
+          }`}
+        >
+          {link.label}
+        </span>
+
+        {hasChildren && (
+          <ChevronDown
+            size={20}
+            strokeWidth={1.5}
+            className={`text-white/40 transition-all duration-500 ${
+              isExpanded ? "rotate-180 text-[#B38356]" : ""
+            }`}
+          />
+        )}
+      </button>
+
+      {hasChildren && (
+        <div
+          className="grid transition-[grid-template-rows] duration-500 ease-out"
+          style={{ gridTemplateRows: isExpanded ? "1fr" : "0fr" }}
+        >
+          <div className="overflow-hidden">
+            <div className="pb-3 pt-1 space-y-3">
+              {link.children.map((child) => (
+                <a
+                  key={child.href}
+                  href={child.href}
+                  onClick={(e) => handleChildClick(e, child.href)}
+                  className="block text-slate-400 text-sm font-light leading-snug hover:text-[#B38356] transition-colors"
+                >
+                  {child.label}
                 </a>
               ))}
             </div>
@@ -132,6 +222,7 @@ function DesktopNavItem({ link, currentPath, onNavClick }) {
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const mobilePanelRef = useRef(null);
   const location = useLocation();
   const currentPath = location.pathname;
   const handleNavClick = useHashScroll();
@@ -148,6 +239,41 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Gentle stagger when the panel opens
+  useEffect(() => {
+    if (!isMobileMenuOpen || !mobilePanelRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".mobile-nav-item",
+        { y: 20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.07,
+          ease: "power3.out",
+          delay: 0.25,
+        }
+      );
+
+      gsap.fromTo(
+        ".mobile-footer-el",
+        { y: 15, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.08,
+          ease: "power3.out",
+          delay: 0.6,
+        }
+      );
+    }, mobilePanelRef);
+
+    return () => ctx.revert();
+  }, [isMobileMenuOpen]);
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -175,85 +301,86 @@ export default function Navbar() {
         },
       ],
     },
-    { label: "Insights", href: "/blog" },
+    // { label: "Insights", href: "/blog" },
     { label: "FAQ", href: "/faq" },
   ];
 
   return (
     <>
-      {/* ── MOBILE MENU ── */}
+      {/* ═══════════════════════════════════════════ */}
+      {/* MOBILE MENU                                  */}
+      {/* ═══════════════════════════════════════════ */}
       <div
-        className={`fixed inset-0 z-[100] bg-[#050A15] text-white transition-transform duration-[0.8s] ease-[cubic-bezier(0.76,0,0.24,1)] ${
+        ref={mobilePanelRef}
+        className={`fixed inset-0 z-[100] bg-[#050A15] text-white transition-transform duration-[0.8s] ease-[cubic-bezier(0.76,0,0.24,1)] flex flex-col ${
           isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="flex justify-between items-center px-6 pt-10 pb-6 border-b border-white/5">
+        {/* Header */}
+        <div className="flex justify-between items-center px-6 md:px-8 pt-6 pb-6">
           <span className="font-serif text-xl tracking-wide text-white">
-            MEKA <span className="text-[#B38356]">Consultants</span>
+            MEKA{" "}
+            <span className="text-[#B38356] italic font-light">
+              Consultants
+            </span>
           </span>
           <button
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-white hover:text-[#B38356] transition-colors p-2"
+            className="w-10 h-10 flex items-center justify-center text-white hover:text-[#B38356] transition-colors"
+            aria-label="Close menu"
           >
-            <X size={32} strokeWidth={1} />
+            <X size={24} strokeWidth={1.5} />
           </button>
         </div>
 
-        <div className="flex flex-col justify-center h-[calc(100vh-200px)] px-8 gap-6 overflow-y-auto">
-          {navLinks.map((item, index) => {
-            const isActive =
-              currentPath === item.href ||
-              currentPath.startsWith(item.href + "/");
-            return (
-              <div key={index} className="overflow-hidden">
-                <a
-                  href={item.href}
-                  onClick={(e) => {
-                    handleNavClick(e, item.href);
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className={`inline-block text-3xl md:text-5xl font-serif font-light transition-colors ${
-                    isActive ? "text-[#B38356]" : "text-white hover:text-[#B38356]"
-                  }`}
-                  style={{
-                    transform: isMobileMenuOpen ? "translateY(0)" : "translateY(100%)",
-                    transition: `transform 0.8s cubic-bezier(0.76,0,0.24,1) ${
-                      index * 0.08 + 0.2
-                    }s, color 0.3s ease`,
-                  }}
-                >
-                  {item.label}
-                </a>
-              </div>
-            );
-          })}
+        {/* Navigation */}
+        <nav className="flex-1 px-6 md:px-8 pt-4 pb-6 overflow-y-auto">
+          <div className="space-y-1">
+            {navLinks.map((link) => (
+              <MobileNavItem
+                key={link.label}
+                link={link}
+                currentPath={currentPath}
+                onNavClick={handleNavClick}
+                onClose={() => setIsMobileMenuOpen(false)}
+              />
+            ))}
+          </div>
+        </nav>
 
-          <div
-            className="mt-8 pt-8 border-t border-white/10"
-            style={{
-              opacity: isMobileMenuOpen ? 1 : 0,
-              transition: `opacity 0.8s ease 0.8s`,
-            }}
-          >
-            <p className="text-[10px] tracking-[0.2em] uppercase text-slate-500 mb-3 font-bold">
-              Ready to partner?
-            </p>
-            <p className="text-sm text-slate-300 font-light mb-6 leading-relaxed">
-              Think Smarter · Grow Faster · Lead Confidently
-            </p>
-            <Link to="/contact">
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="bg-[#B38356] hover:bg-white hover:text-slate-900 text-white w-full py-5 text-[11px] tracking-[0.25em] uppercase font-bold transition-colors duration-300"
-              >
-                Get in Touch
-              </button>
-            </Link>
+        {/* Footer — minimal */}
+        <div className="px-6 md:px-8 pb-10 pt-6 border-t border-white/5 shrink-0">
+          <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+            <button className="mobile-footer-el group w-full bg-[#B38356] hover:bg-white text-white hover:text-slate-900 py-4 text-[11px] tracking-[0.25em] uppercase font-bold transition-colors duration-300 flex items-center justify-center gap-3">
+              Start a Conversation
+              <ArrowUpRight
+                size={14}
+                className="transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+              />
+            </button>
+          </Link>
+
+          <div className="mobile-footer-el mt-5 flex items-center justify-center gap-4 text-xs font-light text-slate-500">
+            <a
+              href="mailto:mail@meka.com"
+              className="hover:text-[#B38356] transition-colors"
+            >
+              mail@meka.com
+            </a>
+            <span className="w-1 h-1 rounded-full bg-slate-700" />
+            <a
+              href="tel:+912240890000"
+              className="hover:text-[#B38356] transition-colors"
+            >
+              +91 22 4089 0000
+            </a>
           </div>
         </div>
       </div>
 
-      {/* ── DESKTOP NAV ── */}
+      {/* ═══════════════════════════════════════════ */}
+      {/* DESKTOP NAV — unchanged                      */}
+      {/* ═══════════════════════════════════════════ */}
       <div className="fixed w-full top-0 z-50 flex justify-center px-4 pt-6 pointer-events-none">
         <nav
           className={`pointer-events-auto transition-all duration-700 w-full max-w-[1400px] rounded-full px-5 lg:px-8 py-1.5 ${
@@ -263,7 +390,6 @@ export default function Navbar() {
           }`}
         >
           <div className="flex justify-between items-center w-full h-full">
-            {/* LOGO */}
             <Link to="/" className="flex items-center gap-2 shrink-0">
               <img
                 className="md:h-12 md:w-auto h-8 w-auto"
@@ -272,7 +398,6 @@ export default function Navbar() {
               />
             </Link>
 
-            {/* LINKS + CTA */}
             <div className="hidden lg:flex items-center space-x-7 xl:space-x-9 text-[10px] tracking-[0.2em] uppercase font-bold">
               {navLinks.map((link) => (
                 <DesktopNavItem
@@ -290,11 +415,11 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* MOBILE HAMBURGER */}
             <div className="flex lg:hidden items-center">
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
                 className="text-slate-900 p-2 hover:text-[#B38356] transition-colors"
+                aria-label="Open menu"
               >
                 <Menu size={28} strokeWidth={1.5} />
               </button>

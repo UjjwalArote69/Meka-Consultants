@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router'
 import LandingPage from './pages/Landing/LandingPage'
 import About from './pages//About/About'
-import Projects from './pages/Projects'
-import Expertise from './pages/Expertise'
 import Contact from './pages/Contact'
 import Loader from './components/layout/Loader' // Adjust the import path if your Loader is inside /components
 import Services from './pages/Services'
-import Careers from './pages/Careers'
+import FAQ from './pages/FAQ'
+import ScrollToTop from './components/ScrollToTop'
 
 const App = () => {
   // 1. Initialize state by checking sessionStorage. 
@@ -27,17 +26,15 @@ const App = () => {
     <>
       {/* 3. Conditionally render the Loader completely outside the Router */}
       {showLoader && <Loader onComplete={handleLoaderComplete} />}
-
       {/* 4. The Router stays mounted in the background. 
           When the loader columns slide up, this content will be ready underneath. */}
       <Router>
+          <ScrollToTop/>
         <Routes>
           <Route path='/' element={<LandingPage/>}/>
           <Route path='/about' element={<About/>}/>
-          <Route path='/projects' element={<Projects/>}/>
-          <Route path='/expertise' element={<Expertise/>}/>
           <Route path='/services' element={<Services/>}/>
-          <Route path='/careers' element={<Careers/>}/>
+          <Route path='/faq' element={<FAQ/>}/>
           <Route path='/contact' element={<Contact/>}/>
         </Routes>
       </Router>

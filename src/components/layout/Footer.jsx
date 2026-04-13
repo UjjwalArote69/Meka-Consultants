@@ -223,11 +223,11 @@ export default function Footer() {
                     About
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to="/blog" className="hover:text-[#B38356] transition-colors">
                     Insights
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to="/faq" className="hover:text-[#B38356] transition-colors">
                     FAQ
@@ -273,12 +273,8 @@ export default function Footer() {
         >
           <p>&copy; {new Date().getFullYear()} Meka Group. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link to="/privacy" className="hover:text-slate-900 transition-colors">
-              Privacy Policy
-            </Link>
-            <Link to="/terms" className="hover:text-slate-900 transition-colors">
-              Terms &amp; Conditions
-            </Link>
+            <span>Privacy Policy</span>
+            <span>Terms &amp; Conditions</span>
           </div>
         </div>
       </div>

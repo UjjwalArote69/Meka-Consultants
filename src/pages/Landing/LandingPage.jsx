@@ -5,25 +5,6 @@ import Footer from "../../components/layout/Footer";
 // Above-the-fold — loads normally so there's no initial layout shift
 import HeroSection from "./components/HeroSection";
 
-// Below-the-fold sections, lazy-loaded.
-// File names are kept from the Dredging scaffold so nothing breaks, but
-// each one is being re-scoped for Consultants content. Purpose per section:
-//
-//   MetricsSection      → "Impact in numbers" for Consultants:
-//                          e.g. years advising, professionals deployed,
-//                          industries served, engagements completed.
-//
-//   PhilosophySection   → The three pillars expanded:
-//                          Think Smarter · Grow Faster · Lead Confidently.
-//
-//   CapabilitiesSection → The four consulting services expanded with
-//                          descriptive cards:
-//                          Strategic Consulting · Operational Excellence ·
-//                          Outsourced Manpower · End-to-End Execution.
-//
-//   LeadershipSection   → Leadership + engagement leads (retains name).
-//
-// (Request each one when you want it rewritten.)
 const MetricsSection = lazy(() => import("./components/MetricsSection"));
 const PhilosophySection = lazy(() => import("./components/PhilosophySection"));
 const CapabilitiesSection = lazy(() =>

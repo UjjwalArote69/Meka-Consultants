@@ -11,6 +11,10 @@ const lenis = new Lenis({
   smoothTouch: false,
 });
 
+// Expose for ScrollToTop (and anything else that needs to drive Lenis
+// from outside main.jsx). Underscore prefix marks it as internal.
+window.__lenis = lenis;
+
 function raf(time) {
   lenis.raf(time);
   requestAnimationFrame(raf);
@@ -18,10 +22,8 @@ function raf(time) {
 
 requestAnimationFrame(raf);
 
-createRoot(
-  document.getElementById("root"),
-).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />
-  </StrictMode>,
+  </StrictMode>
 );
