@@ -6,140 +6,224 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const metricsData = [
-  { value: "40+", label: "Years of Heritage", sub: "Since 1986" },
-  { value: "150+", label: "Projects Executed", sub: "Global Operations" },
-  { value: "25+", label: "Specialized Vessels", sub: "Technical Fleet" },
-  { value: "10M+", label: "CBM Dredged Annually", sub: "Precision Volume" },
+  {
+    num: "01",
+    target: 40,
+    suffix: "+",
+    label: "Years of Group Legacy",
+    sub: "Meka Group · Est. 1986",
+    fill: 0.9,
+  },
+  {
+    num: "02",
+    target: 1200,
+    suffix: "+",
+    label: "Professionals Deployed",
+    sub: "Across functions and levels",
+    fill: 0.75,
+  },
+  {
+    num: "03",
+    target: 20,
+    suffix: "+",
+    label: "Industries Served",
+    sub: "BFSI, energy, logistics, and more",
+    fill: 0.55,
+  },
+  {
+    num: "04",
+    target: 350,
+    suffix: "+",
+    label: "Mandates Delivered",
+    sub: "Consulting and manpower engagements",
+    fill: 0.85,
+  },
 ];
 
 export default function MetricsSection() {
   const containerRef = useRef(null);
-  const lineRef = useRef(null);
-  const metricRefs = useRef([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Vertical "Depth Scale" Line Animation
+      // 1. Header & Meta reveal
       gsap.fromTo(
-        lineRef.current,
-        { scaleY: 0 },
+        ".header-element",
+        { y: 20, opacity: 0 },
         {
-          scaleY: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top center",
-            end: "bottom center",
-            scrub: true,
-          },
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: { trigger: ".header-element", start: "top 85%" },
         }
       );
 
-      // 2. Staggered Metric Reveal
-      metricRefs.current.forEach((el, index) => {
+      // 2. Top rule stretches
+      gsap.fromTo(
+        ".top-rule",
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 1.2,
+          ease: "expo.inOut",
+          scrollTrigger: { trigger: ".top-rule", start: "top 85%" },
+        }
+      );
+
+      // 3. Metric Cards Timeline
+      const cards = gsap.utils.toArray(".metric-card");
+      
+      cards.forEach((card, i) => {
+        const metric = metricsData[i];
+        
         const tl = gsap.timeline({
           scrollTrigger: {
-            trigger: el,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none none",
           },
         });
 
         tl.fromTo(
-          el.querySelector(".metric-number"),
-          { x: -30, opacity: 0 },
-          { x: 0, opacity: 1, duration: 1, ease: "expo.out" }
-        )
-        .fromTo(
-          el.querySelector(".metric-info"),
-          { x: 20, opacity: 0 },
-          { x: 0, opacity: 1, duration: 1, ease: "expo.out" },
-          "-=0.8"
-        )
-        .fromTo(
-          el.querySelector(".depth-marker"),
+          card.querySelector(".metric-index"),
+          { y: -10, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }
+        );
+
+        // Counter animation
+        const numEl = card.querySelector(".metric-number");
+        const counter = { value: 0 };
+        
+        tl.fromTo(numEl, { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.1)
+          .to(
+            counter,
+            {
+              value: metric.target,
+              duration: 2, // Slightly longer for a smoother finish
+              ease: "expo.out",
+              onUpdate: () => {
+                const formatted = Math.floor(counter.value).toLocaleString("en-US");
+                numEl.innerText = `${formatted}${metric.suffix}`;
+              },
+            },
+            "<"
+          );
+
+        tl.fromTo(
+          card.querySelectorAll(".metric-text"),
+          { y: 15, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: "power3.out" },
+          "-=1.5"
+        );
+
+        tl.fromTo(
+          card.querySelector(".metric-bar"),
           { scaleX: 0 },
-          { scaleX: 1, duration: 0.6, ease: "power2.inOut" },
-          "-=1"
+          { scaleX: metric.fill, duration: 1.2, ease: "expo.out" },
+          "-=1.0"
         );
       });
+
+      // 4. Bottom note
+      gsap.fromTo(
+        ".bottom-note",
+        { opacity: 0, y: 10 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: { trigger: ".bottom-note", start: "top 95%" },
+        }
+      );
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section 
-      ref={containerRef} 
-      className="py-40 bg-[#FAFAFA] relative overflow-hidden"
+    <section
+      ref={containerRef}
+      className="py-32 md:py-40 bg-[#FAFAFA] relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative">
         
-        {/* Section Header */}
-        <div className="mb-32">
-          <p className="text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase mb-4">
-            Operational Benchmarks
+        {/* ═══════ HEADER ═══════ */}
+        <div className="mb-12 max-w-3xl">
+          <p className="header-element text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase mb-5">
+            By the Numbers
           </p>
-          <h2 className="text-4xl md:text-5xl font-serif text-slate-900">
-            Measured Excellence.
+          <h2 className="header-element text-5xl md:text-6xl lg:text-[4.5rem] font-serif text-slate-900 leading-[1] tracking-tight">
+            Scale, <span className="italic text-[#B38356] font-light">measured.</span>
           </h2>
         </div>
 
-        <div className="relative">
-          {/* Central Depth Line (The "Scale") */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-slate-200 origin-top hidden md:block" />
-          <div 
-            ref={lineRef}
-            className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-[#B38356] origin-top z-10 hidden md:block" 
-          />
-
-          <div className="flex flex-col gap-32 md:gap-48">
-            {metricsData.map((metric, index) => (
-              <div 
-                key={index} 
-                ref={(el) => (metricRefs.current[index] = el)}
-                className={`relative flex flex-col md:flex-row items-start md:items-center w-full ${
-                  index % 2 === 0 ? "md:flex-row-reverse" : ""
-                }`}
-              >
-                {/* Visual Depth Marker (The Horizontal Notch) */}
-                <div 
-                  className={`depth-marker absolute left-0 md:left-1/2 top-1/2 -translate-y-1/2 h-px bg-[#B38356] z-20 hidden md:block ${
-                    index % 2 === 0 ? "w-24 -translate-x-full" : "w-24"
-                  }`} 
-                />
-
-                {/* Number Content */}
-                <div className={`w-full md:w-1/2 px-0 md:px-16 ${index % 2 === 0 ? "md:text-left" : "md:text-right"}`}>
-                  <h3 className="metric-number text-7xl md:text-9xl font-serif text-slate-900 leading-none tracking-tighter">
-                    {metric.value}
-                  </h3>
-                </div>
-
-                {/* Label Content */}
-                <div className={`w-full md:w-1/2 px-0 md:px-16 mt-4 md:mt-0 ${index % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
-                  <div className="metric-info">
-                    <p className="text-xs tracking-[0.3em] uppercase font-bold text-[#B38356] mb-2">
-                      {metric.label}
-                    </p>
-                    <p className="text-slate-400 font-light text-[10px] tracking-[0.1em] uppercase">
-                      {metric.sub}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* ═══════ META ROW ═══════ */}
+        <div className="header-element flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400 mb-8">
+          <span>Dossier · 2026</span>
+          <span className="w-8 h-px bg-slate-300" />
+          <span>Meka Consultants</span>
+          <span className="w-8 h-px bg-slate-300" />
+          <span>Professional Services</span>
         </div>
 
-        {/* Ambient Technical Detail */}
-        <div className="mt-40 pt-10 border-t border-slate-200 flex justify-between items-center opacity-40">
-           <span className="text-[9px] font-mono tracking-widest text-slate-400 uppercase">
-             Hydrographic Precision Mapping // Status: Active
-           </span>
-           <span className="text-[9px] font-mono tracking-widest text-slate-400">
-             © 2026 MEKA DREDGING
-           </span>
+        {/* ═══════ TOP RULE ═══════ */}
+        <div className="top-rule h-px w-full bg-slate-200 origin-left mb-0" />
+
+        {/* ═══════ 4-COLUMN METRIC GRID ═══════ */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-200 border-b border-slate-200">
+          {metricsData.map((metric, i) => (
+            <div
+              key={metric.num}
+              className="metric-card group relative p-8 lg:p-10 hover:bg-white transition-colors duration-500 flex flex-col"
+            >
+              {/* Screen reader only text for accessibility */}
+              <span className="sr-only">
+                {metric.target}{metric.suffix} {metric.label}
+              </span>
+
+              {/* Index marker */}
+              <div className="metric-index flex items-center gap-3 mb-10">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#B38356] group-hover:scale-125 transition-transform duration-300" />
+                <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 group-hover:text-slate-600 transition-colors">
+                  {metric.num}
+                </span>
+              </div>
+
+              {/* Counting number (Hidden from screen readers to prevent spam) */}
+              <h3 
+                className="metric-number font-serif text-6xl md:text-7xl lg:text-[5.5rem] text-slate-900 leading-[0.85] tracking-tight mb-8"
+                aria-hidden="true"
+              >
+                0{metric.suffix}
+              </h3>
+
+              {/* Label + sub */}
+              <div className="mt-auto mb-8">
+                <p className="metric-text text-[11px] tracking-[0.2em] uppercase font-bold text-[#B38356] mb-3 leading-relaxed">
+                  {metric.label}
+                </p>
+                <p className="metric-text text-slate-500 font-light text-[13px] leading-relaxed max-w-[220px]">
+                  {metric.sub}
+                </p>
+              </div>
+
+              {/* Progress bar */}
+              <div className="relative h-px w-full bg-slate-100 overflow-hidden mt-auto">
+                <span className="metric-bar absolute inset-y-0 left-0 w-full bg-[#B38356] origin-left" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ═══════ BOTTOM NOTE ═══════ */}
+        <div className="bottom-note mt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[10px] tracking-[0.2em] uppercase font-mono text-slate-400">
+          <span className="flex items-center gap-3">
+            <span className="w-1 h-1 bg-slate-300 rounded-full" />
+            Figures combine Meka Group legacy with Consultants practice
+          </span>
+          <span>Updated · Q1 2026</span>
         </div>
       </div>
     </section>

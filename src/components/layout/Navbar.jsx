@@ -1,63 +1,42 @@
-/* eslint-disable react-hooks/set-state-in-effect */
-import React, {
-  useState,
-  useEffect,
-  useRef,
-} from "react";
-import {
-  Menu,
-  X,
-  ChevronDown,
-} from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router";
-import gsap from "gsap";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect, useRef } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router"; // Use react-router-dom if on v6
 
-// Helper: handle hash-based scroll for SPA navigation
+/**
+ * MEKA Consultants — Navbar
+ * Palette: Ink #050A15 / Base #FAFAFA / Bronze #B38356
+ */
+
 function useHashScroll() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleNavClick = (e, href) => {
+  return (e, href) => {
     e.preventDefault();
-
-    // Parse the href to separate pathname and hash
-    const [pathname, hash] = href.split('#');
+    const [pathname, hash] = href.split("#");
     const targetPath = pathname || location.pathname;
 
     if (location.pathname === targetPath && hash) {
-      // Already on the same page — just scroll to the hash
       const el = document.getElementById(hash);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {
-      // Navigate to a different page (with or without hash)
       navigate(href);
     }
   };
-
-  return handleNavClick;
 }
 
 // ═══════════════════════════════════════════════
-// 1. DESKTOP NAV ITEM (Handles Hover & Dropdown)
+// DESKTOP NAV ITEM
 // ═══════════════════════════════════════════════
-function DesktopNavItem({
-  link,
-  currentPath,
-  onNavClick,
-}) {
+function DesktopNavItem({ link, currentPath, onNavClick }) {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
   const timeoutRef = useRef(null);
 
   const isActive =
-    currentPath === link.href ||
-    currentPath.startsWith(link.href + "/");
+    currentPath === link.href || currentPath.startsWith(link.href + "/");
   const hasChildren = link.children && link.children.length > 0;
-  
-  // Check if this menu should be rendered as a wide mega-menu
-  const isMega = link.columns && link.columns > 1;
+  const isMega = !!link.mega;
 
   const handleMouseEnter = () => {
     clearTimeout(timeoutRef.current);
@@ -65,70 +44,59 @@ function DesktopNavItem({
   };
 
   const handleMouseLeave = () => {
-    // 200ms delay ensures mouse can travel the gap without closing the menu
     timeoutRef.current = setTimeout(() => setIsOpen(false), 200);
   };
 
+  // Cleanup timeout on unmount
   useEffect(() => {
-    if (!dropdownRef.current) return;
-
-    if (isOpen) {
-      gsap.killTweensOf(dropdownRef.current);
-      gsap.to(dropdownRef.current, {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.4,
-        ease: "power3.out",
-        display: "block",
-      });
-    } else {
-      gsap.killTweensOf(dropdownRef.current);
-      gsap.to(dropdownRef.current, {
-        autoAlpha: 0,
-        y: 8,
-        duration: 0.25,
-        ease: "power2.in",
-        display: "none",
-      });
-    }
-  }, [isOpen]);
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
 
   return (
     <div
-      className="relative flex items-center h-full py-2 group"
+      className="relative flex items-center h-full py-6 group cursor-pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <a
         href={link.href}
         onClick={(e) => onNavClick(e, link.href)}
-        className={`flex items-center gap-1 transition-colors duration-300 ${
-          isActive
-            ? "text-[#B38356] relative after:content-[''] after:absolute after:-bottom-2 after:left-1/2 after:-translate-x-1/2 after:w-1/2 after:h-[2px] after:bg-[#B38356]"
-            : "text-slate-500 hover:text-slate-900"
+        className={`flex items-center gap-1.5 transition-colors duration-300 ${
+          isActive ? "text-[#B38356]" : "text-slate-500 hover:text-slate-900"
         }`}
       >
+        {isActive && (
+          <span className="w-1 h-1 rounded-full bg-[#B38356] mr-1" />
+        )}
         {link.label}
         {hasChildren && (
           <ChevronDown
             size={12}
             strokeWidth={2.5}
-            className={`transition-transform duration-300 ${isOpen ? "rotate-180 text-[#B38356]" : "text-slate-400 group-hover:text-slate-900"}`}
+            className={`transition-transform duration-300 ${
+              isOpen
+                ? "rotate-180 text-[#B38356]"
+                : "text-slate-400 group-hover:text-slate-900"
+            }`}
           />
         )}
       </a>
 
+      {/* Pure CSS/Tailwind Dropdown Transition */}
       {hasChildren && (
         <div
-          ref={dropdownRef}
-          // Dynamically adjust width based on whether it's a mega menu
-          className={`absolute top-[100%] left-1/2 -translate-x-1/2 pt-6 hidden opacity-0 translate-y-2 z-50 ${isMega ? 'w-[640px]' : 'min-w-[240px]'}`}
+          className={`absolute top-[100%] pt-2 z-50 transition-all duration-300 ease-out ${
+            isMega ? "left-1/2 -translate-x-1/2 w-[520px]" : "left-0 min-w-[240px]"
+          } ${
+            isOpen
+              ? "opacity-100 visible translate-y-0"
+              : "opacity-0 invisible translate-y-3 pointer-events-none"
+          }`}
         >
-          <div className="bg-white/95 backdrop-blur-xl border border-slate-200/70 p-4 shadow-[0_30px_60px_rgba(5,10,21,0.08)] rounded-2xl relative overflow-hidden">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-[3px] bg-gradient-to-r from-[#8b6540] to-[#B38356] rounded-b-full" />
+          <div className="bg-white/95 backdrop-blur-xl border border-slate-200/70 shadow-[0_30px_60px_rgba(5,10,21,0.08)] rounded-2xl overflow-hidden">
+            <div className="h-[3px] w-full bg-gradient-to-r from-[#8b6540] via-[#B38356] to-transparent" />
 
-            {/* Dynamic Grid Layout for Mega Menus */}
-            <div className={isMega ? "grid grid-cols-2 gap-x-6 gap-y-1" : "flex flex-col gap-1"}>
+            <div className={`p-3 ${isMega ? "grid grid-cols-1 gap-1" : "flex flex-col gap-1"}`}>
               {link.children.map((child, idx) => (
                 <a
                   key={idx}
@@ -137,12 +105,15 @@ function DesktopNavItem({
                     onNavClick(e, child.href);
                     setIsOpen(false);
                   }}
-                  className="group/link flex items-center justify-between px-4 py-3 transition-all duration-300 hover:bg-slate-100 rounded-xl"
+                  className="group/link flex items-start gap-4 px-4 py-3 rounded-xl transition-colors duration-300 hover:bg-[#FAFAFA]"
                 >
-                  <span className="text-[10px] tracking-[0.15em] font-sans font-bold text-slate-500 group-hover/link:text-[#B38356] transition-colors duration-300 uppercase truncate">
-                    {child.label}
-                  </span>
-                  <span className="opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-[#B38356] shrink-0">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-slate-800 group-hover/link:text-[#B38356] transition-colors">
+                      {child.label}
+                    </p>
+                    
+                  </div>
+                  <span className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#B38356] shrink-0 mt-0.5">
                     →
                   </span>
                 </a>
@@ -156,7 +127,7 @@ function DesktopNavItem({
 }
 
 // ═══════════════════════════════════════════════
-// 2. MAIN NAVBAR COMPONENT
+// MAIN NAVBAR
 // ═══════════════════════════════════════════════
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -178,66 +149,47 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ═══════════════════════════════════════════════
-  // NAVIGATION DATA
-  // ═══════════════════════════════════════════════
-  const leftLinks = [
+  const navLinks = [
     { label: "Home", href: "/" },
-    {
-      label: "About",
-      href: "/about",
-      children: [
-        { label: "Our Heritage", href: "/about#heritage" },
-        { label: "Board of Directors", href: "/about#board" },
-        { label: "Mission & Vision", href: "/about#mission" },
-      ],
-    },
-    {
-      label: "Projects",
-      href: "/projects",
-    },
-  ];
-
-  const rightLinks = [
+    { label: "About", href: "/about" },
     {
       label: "Services",
       href: "/services",
-      columns: 2, // <--- TRIGGERS THE WIDE 2-COLUMN MEGA MENU
+      mega: true,
       children: [
-        { label: "Feasibility Studies", href: "/services#feasibility" },
-        { label: "Licence Applications", href: "/services#licence" },
-        { label: "Planning and Design", href: "/services#planning" },
-        { label: "Numerical and Physical Modelling", href: "/services#modelling" },
-        { label: "Environmental Impact Assessment", href: "/services#assessment" },
-        { label: "Contract Documentation", href: "/services#documentation" },
-        { label: "Plant and Equipment Specifications", href: "/services#specifications" },
-        { label: "Budget Pricing", href: "/services#pricing" },
-        { label: "Project Evaluation", href: "/services#evaluation" },
-        { label: "Contract Supervision", href: "/services#supervision" },
-        { label: "Project Monitoring and Auditing", href: "/services#monitoring" },
-        { label: "Expert Witness", href: "/services#experts" },
-        { label: "Dispute Resolution", href: "/services#resolution" },
+        {
+          label: "Strategic & Management Consulting",
+          href: "/services#strategic",
+        },
+        {
+          label: "Operational Excellence & Process Optimization",
+          href: "/services#operations",
+        },
+        {
+          label: "Outsourced Manpower Supply",
+          href: "/services#manpower",
+        },
+        {
+          label: "End-to-End Execution Support",
+          href: "/services#execution",
+        },
       ],
     },
-    {
-      label: "Careers",
-      href: "/careers",
-    },
+    { label: "Insights", href: "/blog" },
+    { label: "FAQ", href: "/faq" },
   ];
-
-  const allLinks = [...leftLinks, ...rightLinks];
 
   return (
     <>
-      {/* ── CINEMATIC MOBILE MENU ── */}
+      {/* ── MOBILE MENU ── */}
       <div
         className={`fixed inset-0 z-[100] bg-[#050A15] text-white transition-transform duration-[0.8s] ease-[cubic-bezier(0.76,0,0.24,1)] ${
           isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
         <div className="flex justify-between items-center px-6 pt-10 pb-6 border-b border-white/5">
-          <span className="font-serif font-bold text-xl tracking-widest uppercase text-white">
-            Meka<span className="text-[#B38356]">Dredging</span>
+          <span className="font-serif text-xl tracking-wide text-white">
+            MEKA <span className="text-[#B38356]">Consultants</span>
           </span>
           <button
             onClick={() => setIsMobileMenuOpen(false)}
@@ -248,7 +200,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex flex-col justify-center h-[calc(100vh-200px)] px-8 gap-6 overflow-y-auto">
-          {allLinks.map((item, index) => {
+          {navLinks.map((item, index) => {
             const isActive =
               currentPath === item.href ||
               currentPath.startsWith(item.href + "/");
@@ -265,7 +217,9 @@ export default function Navbar() {
                   }`}
                   style={{
                     transform: isMobileMenuOpen ? "translateY(0)" : "translateY(100%)",
-                    transition: `transform 0.8s cubic-bezier(0.76,0,0.24,1) ${index * 0.08 + 0.2}s, color 0.3s ease`,
+                    transition: `transform 0.8s cubic-bezier(0.76,0,0.24,1) ${
+                      index * 0.08 + 0.2
+                    }s, color 0.3s ease`,
                   }}
                 >
                   {item.label}
@@ -276,63 +230,68 @@ export default function Navbar() {
 
           <div
             className="mt-8 pt-8 border-t border-white/10"
-            style={{ opacity: isMobileMenuOpen ? 1 : 0, transition: `opacity 0.8s ease 0.8s` }}
+            style={{
+              opacity: isMobileMenuOpen ? 1 : 0,
+              transition: `opacity 0.8s ease 0.8s`,
+            }}
           >
-            <p className="text-[10px] tracking-[0.2em] uppercase text-slate-500 mb-6 font-bold">
-              Initiate a Project
+            <p className="text-[10px] tracking-[0.2em] uppercase text-slate-500 mb-3 font-bold">
+              Ready to partner?
+            </p>
+            <p className="text-sm text-slate-300 font-light mb-6 leading-relaxed">
+              Think Smarter · Grow Faster · Lead Confidently
             </p>
             <Link to="/contact">
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="bg-[#B38356] hover:bg-white hover:text-slate-900 text-white w-full py-5 text-[11px] tracking-[0.25em] uppercase font-bold transition-colors duration-300"
               >
-                Engage With Us
+                Get in Touch
               </button>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* ── FLOATING PILL NAVIGATION ── */}
+      {/* ── DESKTOP NAV ── */}
       <div className="fixed w-full top-0 z-50 flex justify-center px-4 pt-6 pointer-events-none">
         <nav
-          className={`pointer-events-auto transition-all duration-700 w-full max-w-[1400px] rounded-full px-6 lg:px-10 py-3.5 ${
+          className={`pointer-events-auto transition-all duration-700 w-full max-w-[1400px] rounded-full px-5 lg:px-8 py-1.5 ${
             scrolled
               ? "bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(5,10,21,0.06)] border border-slate-200/50"
               : "bg-white/0 border border-transparent"
           }`}
         >
-          <div className="flex justify-between items-center relative w-full h-full">
-            {/* LEFT LINKS */}
-            <div className="hidden lg:flex items-center justify-start space-x-7 xl:space-x-10 text-[10px] tracking-[0.2em] uppercase font-bold z-10">
-              {leftLinks.map((link) => (
-                <DesktopNavItem key={link.label} link={link} currentPath={currentPath} onNavClick={handleNavClick} />
+          <div className="flex justify-between items-center w-full h-full">
+            {/* LOGO */}
+            <Link to="/" className="flex items-center gap-2 shrink-0">
+              <img
+                className="md:h-12 md:w-auto h-8 w-auto"
+                src="/logo.png"
+                alt="Meka Consultants"
+              />
+            </Link>
+
+            {/* LINKS + CTA */}
+            <div className="hidden lg:flex items-center space-x-7 xl:space-x-9 text-[10px] tracking-[0.2em] uppercase font-bold">
+              {navLinks.map((link) => (
+                <DesktopNavItem
+                  key={link.label}
+                  link={link}
+                  currentPath={currentPath}
+                  onNavClick={handleNavClick}
+                />
               ))}
-            </div>
 
-            {/* ABSOLUTE CENTER LOGO */}
-            <div className="flex items-center justify-start lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-20 pointer-events-auto">
-              <Link to="/">
-                  <img className="md:h-10 md:w-20 h-7.5 w-15" src="/logo.png" alt="" />
-                
-              </Link>
-            </div>
-
-            {/* RIGHT LINKS & ENGAGE BUTTON */}
-            <div className="hidden lg:flex items-center justify-end space-x-7 xl:space-x-10 text-[10px] tracking-[0.2em] uppercase font-bold z-10">
-              {rightLinks.map((link) => (
-                <DesktopNavItem key={link.label} link={link} currentPath={currentPath} onNavClick={handleNavClick} />
-              ))}
-
-              <Link to="/contact" className="ml-4">
-                <button className="bg-slate-900 hover:bg-[#B38356] text-white px-7 py-3 rounded-full text-[10px] tracking-[0.15em] uppercase font-bold transition-all duration-300 shadow-md hover:shadow-xl hover:shadow-[#B38356]">
-                  Engage
+              <Link to="/contact">
+                <button className="bg-slate-900 hover:bg-[#B38356] text-white px-6 py-3 rounded-full text-[10px] tracking-[0.15em] uppercase font-bold transition-all duration-300 shadow-md hover:shadow-xl hover:shadow-[#B38356]/30">
+                  Get in Touch
                 </button>
               </Link>
             </div>
 
-            {/* MOBILE HAMBURGER ICON */}
-            <div className="flex lg:hidden items-center justify-end z-20">
+            {/* MOBILE HAMBURGER */}
+            <div className="flex lg:hidden items-center">
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
                 className="text-slate-900 p-2 hover:text-[#B38356] transition-colors"

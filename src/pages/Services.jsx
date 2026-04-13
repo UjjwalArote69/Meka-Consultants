@@ -1,331 +1,592 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from "react";
 import {
-  ClipboardCheck, FileText, Compass, Waves, Leaf, ScrollText,
-  Wrench, IndianRupee, BarChart3, HardHat, Activity, Scale, Handshake,
-  ArrowDownRight, Target
-} from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-import { Link, useLocation } from 'react-router'; 
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
+  TrendingUp, Network, Briefcase, Map,
+  ClipboardCheck, Workflow, Target, LineChart,
+  Users, UserPlus, Users2, FileCheck,
+  LayoutGrid, RefreshCcw, Settings2,
+  ArrowDownRight, Filter, AlertCircle,
+} from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { Link, useLocation } from "react-router";
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ═══════════════════════════════════════════════
-// SERVICE DATA
-// ═══════════════════════════════════════════════
-const services = [
+/**
+ * MEKA Consultants — Services
+ *
+ * Content sourced directly from mekaconsultants.com/services (the four
+ * live discipline pages). Discipline-level descriptions are used
+ * verbatim where the real site has them. Module subsections are derived
+ * from the stated scope of each discipline — for Manpower, the five
+ * modules mirror the site's own bulleted list one-to-one.
+ *
+ * The regulatory note from the live Manpower page is surfaced as a
+ * dedicated disclaimer strip on that discipline section:
+ *   "MEKA Consultants provides manpower services only.
+ *    No machinery or equipment is supplied."
+ *
+ * Palette: Ink #050A15 · Base #FAFAFA · Bronze #B38356
+ */
+
+// ═══════════════════════════════════════════════════════════════════
+// DATA — sourced from mekaconsultants.com
+// ═══════════════════════════════════════════════════════════════════
+
+const disciplines = [
   {
-    id: 'feasibility', num: '01', icon: ClipboardCheck, phase: 'pre',
-    title: 'Feasibility Studies',
-    short: 'Strategic clarity before commitment.',
-    desc: 'We deliver detailed feasibility studies to help clients make informed, strategic decisions before project commencement. Our assessments combine technical expertise, environmental analysis, and cost evaluation to ensure every project begins with clarity and measurable viability.',
-    tags: ['Risk Analysis', 'Site Assessment', 'Cost-Benefit'],
+    id: "strategic",
+    num: "I",
+    title: "Strategic & Management Consulting",
+    tagline: "Clarity before commitment.",
+    // Verbatim from mekaconsultants.com/services
+    desc: "Data-driven advisory services supporting leadership decision-making, business planning, organizational structuring, and performance improvement.",
+    modules: [
+      {
+        id: "leadership-decision",
+        num: "1.1",
+        icon: Briefcase,
+        title: "Leadership Decision-Making",
+        tagline: "Data, framed for decisions.",
+        desc: "Structured advisory for executives and boards — translating market data, internal performance signals, and strategic options into decisions leadership can act on with confidence.",
+        tags: ["Executive Advisory", "Decision Support", "Scenario Planning"],
+      },
+      {
+        id: "business-planning",
+        num: "1.2",
+        icon: TrendingUp,
+        title: "Business Planning",
+        tagline: "From ambition to plan.",
+        desc: "Annual and multi-year business planning that translates strategic intent into funded, prioritized, and measurable initiatives — each with a named owner and a schedule.",
+        tags: ["Annual Plans", "Budgeting", "Prioritization"],
+      },
+      {
+        id: "org-structuring",
+        num: "1.3",
+        icon: Network,
+        title: "Organizational Structuring",
+        tagline: "Structure follows strategy.",
+        desc: "Reshaping structures, roles, reporting lines, and spans of control to match strategic intent — including leadership configuration and workforce planning.",
+        tags: ["Org Design", "Role Definition", "Workforce Planning"],
+      },
+      {
+        id: "performance-improvement",
+        num: "1.4",
+        icon: Target,
+        title: "Performance Improvement",
+        tagline: "Metrics that drive action.",
+        desc: "Diagnosing and closing performance gaps — from topline growth to functional productivity — with measurement systems, operating rhythms, and accountable owners.",
+        tags: ["Performance Diagnostics", "KPIs", "Operating Rhythm"],
+      },
+    ],
   },
   {
-    id: 'licence', num: '02', icon: FileText, phase: 'pre',
-    title: 'Licence Applications',
-    short: 'Navigating complex regulatory frameworks.',
-    desc: 'Before the commencement of any marine operation, securing the correct licensing is critical. We manage the entire end-to-end application process, liaising directly with maritime authorities, environmental agencies, and local government bodies.',
-    tags: ['Compliance', 'Regulatory Approvals', 'Documentation'],
+    id: "operations",
+    num: "II",
+    title: "Operational Excellence & Process Optimization",
+    tagline: "Efficiency, productivity, governance.",
+    // Verbatim from mekaconsultants.com/services
+    desc: "Improving efficiency, productivity, and governance across projects and organizations through structured operational frameworks.",
+    modules: [
+      {
+        id: "efficiency",
+        num: "2.1",
+        icon: Workflow,
+        title: "Efficiency Improvement",
+        tagline: "Friction, removed.",
+        desc: "Identifying and eliminating waste, handoffs, and bottlenecks across operational workflows — applying lean principles adapted for service and knowledge work.",
+        tags: ["Lean Ops", "Waste Elimination", "Workflow Redesign"],
+      },
+      {
+        id: "productivity",
+        num: "2.2",
+        icon: LineChart,
+        title: "Productivity Enhancement",
+        tagline: "Output per hour, raised.",
+        desc: "Programs that raise output and throughput across teams and functions — through better tooling, clearer roles, and measurement against productive-time benchmarks.",
+        tags: ["Throughput", "Team Productivity", "Tooling"],
+      },
+      {
+        id: "governance",
+        num: "2.3",
+        icon: ClipboardCheck,
+        title: "Governance Frameworks",
+        tagline: "Clarity on who decides.",
+        desc: "Structured governance models for projects, programs, and organizations — with clear decision rights, escalation paths, and review cadences.",
+        tags: ["Project Governance", "Decision Rights", "Escalation"],
+      },
+      {
+        id: "operational-frameworks",
+        num: "2.4",
+        icon: Settings2,
+        title: "Operational Framework Design",
+        tagline: "Repeatable, not ad-hoc.",
+        desc: "Designing and implementing structured frameworks — from SOPs to operating models — that standardize how work runs at scale, audit-ready and adaptable.",
+        tags: ["SOPs", "Operating Model", "Standardization"],
+      },
+    ],
   },
   {
-    id: 'planning', num: '03', icon: Compass, phase: 'pre',
-    title: 'Planning and Design',
-    short: 'Architecting sustainable marine infrastructure.',
-    desc: 'Our engineering teams utilize advanced CAD and hydrographic software to design comprehensive project blueprints. From breakwater architecture to optimal dredging channel layouts, we engineer for maximum efficiency and long-term structural resilience.',
-    tags: ['CAD Modeling', 'Blueprint Generation', 'Structural Engineering'],
+    id: "manpower",
+    num: "III",
+    title: "Outsourced Manpower Supply",
+    tagline: "Right people, right away.",
+    // Verbatim from mekaconsultants.com/services
+    desc: "End-to-end outsourced manpower services — supplying qualified professionals, technical staff, and project teams across industries.",
+    disclaimer:
+      "MEKA Consultants provides manpower services only. No machinery or equipment is supplied.",
+    // The five modules below mirror the site's own bulleted list exactly.
+    modules: [
+      {
+        id: "project-deployment",
+        num: "3.1",
+        icon: LayoutGrid,
+        title: "Project-Based Manpower Deployment",
+        tagline: "Teams scoped to the project.",
+        desc: "Deployment of dedicated manpower for specific projects — sized, skilled, and timed to the engagement, demobilized cleanly on completion.",
+        tags: ["Project Teams", "Scoped Deployment", "Handover"],
+      },
+      {
+        id: "staffing-duration",
+        num: "3.2",
+        icon: UserPlus,
+        title: "Long-Term & Short-Term Staffing",
+        tagline: "Engagements of any tenure.",
+        desc: "Long-term placements for enduring roles, and short-term augmentation for seasonal or burst capacity needs — under a single managed contract.",
+        tags: ["Long-Term", "Short-Term", "Contract Staffing"],
+      },
+      {
+        id: "technical-personnel",
+        num: "3.3",
+        icon: Users,
+        title: "Skilled, Semi-Skilled & Technical Personnel",
+        tagline: "Every skill tier, supplied.",
+        desc: "Qualified professionals across skill bands — from technical specialists to skilled trades and semi-skilled support — vetted and deployed to client sites.",
+        tags: ["Technical", "Skilled Trades", "Semi-Skilled"],
+      },
+      {
+        id: "mobilization",
+        num: "3.4",
+        icon: RefreshCcw,
+        title: "Mobilization, Replacement & Demobilization",
+        tagline: "Lifecycle, managed.",
+        desc: "End-to-end lifecycle management of deployed personnel — mobilization onto site, in-engagement replacement when needed, and compliant demobilization.",
+        tags: ["Mobilization", "Replacement", "Demobilization"],
+      },
+      {
+        id: "payroll-compliance",
+        num: "3.5",
+        icon: FileCheck,
+        title: "Payroll, Statutory Compliance & HR Administration",
+        tagline: "Employer-of-record, end-to-end.",
+        desc: "Full administration of deployed personnel: payroll processing, statutory and labour-law compliance, benefits, and HR support — all handled under one contract.",
+        tags: ["Payroll", "Statutory Compliance", "HR Admin"],
+      },
+    ],
   },
   {
-    id: 'modelling', num: '04', icon: Waves, phase: 'pre',
-    title: 'Numerical & Physical Modelling',
-    short: 'Predictive analytics for aquatic environments.',
-    desc: 'We simulate tidal currents, wave impacts, and sediment transport using state-of-the-art numerical models. This predictive data allows us to optimize our dredging strategies and physical designs to withstand extreme marine conditions.',
-    tags: ['Wave Simulation', 'Sediment Transport', 'Tidal Analysis'],
-  },
-  {
-    id: 'assessment', num: '05', icon: Leaf, phase: 'pre',
-    title: 'Environmental Impact',
-    short: 'Protecting fragile coastal biomes.',
-    desc: 'Meka Dredging is committed to sustainable operations. We conduct rigorous Environmental Impact Assessments (EIA) to identify potential ecological disruptions, proposing and implementing strict mitigation strategies to protect marine life and water quality.',
-    tags: ['Ecological Surveys', 'Water Quality Monitoring', 'Mitigation'],
-  },
-  {
-    id: 'documentation', num: '06', icon: ScrollText, phase: 'pre',
-    title: 'Contract Documentation',
-    short: 'Airtight operational agreements.',
-    desc: 'We draft and review comprehensive technical specifications and contract documents. Ensuring all operational parameters, safety protocols, and deliverable milestones are explicitly defined to protect all stakeholders involved.',
-    tags: ['Legal Review', 'Technical Specs', 'Milestone Planning'],
-  },
-  {
-    id: 'specifications', num: '07', icon: Wrench, phase: 'pre',
-    title: 'Plant & Equipment Specs',
-    short: 'Optimizing asset deployment.',
-    desc: 'Not every dredger fits every job. We analyze project requirements to specify the exact plant and equipment needed—whether it’s a Cutter Suction Dredger for hard rock or a Trailing Suction Hopper Dredger for large-scale sand retrieval.',
-    tags: ['Vessel Selection', 'Asset Optimization', 'Capacity Planning'],
-  },
-  {
-    id: 'pricing', num: '08', icon: IndianRupee, phase: 'pre',
-    title: 'Budget Pricing',
-    short: 'Transparent financial modeling.',
-    desc: 'Delivering highly accurate budget estimates based on current market rates, fuel costs, equipment mobilization, and estimated operational timelines. We provide transparent financial modeling to prevent budget overruns.',
-    tags: ['Cost Estimation', 'Financial Modeling', 'Resource Allocation'],
-  },
-  {
-    id: 'evaluation', num: '09', icon: BarChart3, phase: 'exe',
-    title: 'Project Evaluation',
-    short: 'Real-time performance metrics.',
-    desc: 'During execution, we continuously evaluate operational data against the initial baseline. This involves daily volume tracking, fuel efficiency analysis, and timeline adherence to ensure the project remains strictly on course.',
-    tags: ['Performance Tracking', 'Efficiency Analysis', 'Baseline Comparison'],
-  },
-  {
-    id: 'supervision', num: '10', icon: HardHat, phase: 'exe',
-    title: 'Contract Supervision',
-    short: 'On-site leadership and safety enforcement.',
-    desc: 'Our senior project managers provide rigorous on-site supervision. We enforce strict adherence to engineering designs, safety protocols, and environmental mitigation plans, serving as the direct point of contact for client updates.',
-    tags: ['Site Management', 'Safety Enforcement', 'Quality Control'],
-  },
-  {
-    id: 'monitoring', num: '11', icon: Activity, phase: 'exe',
-    title: 'Project Monitoring',
-    short: 'Continuous hydrographic surveying.',
-    desc: 'Utilizing advanced multibeam echo sounders and RTK GPS, we conduct continuous monitoring of the dredged seabed. This ensures we are hitting exact depth tolerances and immediately identifying any deviations from the design profile.',
-    tags: ['Hydrographic Surveys', 'RTK GPS', 'Depth Tolerance'],
-  },
-  {
-    id: 'experts', num: '12', icon: Scale, phase: 'post',
-    title: 'Expert Witness',
-    short: 'Authoritative maritime testimony.',
-    desc: 'In the event of maritime disputes, our senior engineers and dredging masters serve as authoritative expert witnesses. We provide objective, data-backed analysis and testimony regarding dredging practices, contract adherence, and technical execution.',
-    tags: ['Legal Testimony', 'Technical Analysis', 'Dispute Resolution'],
-  },
-  {
-    id: 'resolution', num: '13', icon: Handshake, phase: 'post',
-    title: 'Dispute Resolution',
-    short: 'Fair and technical arbitration.',
-    desc: 'We assist in mediating and resolving complex maritime engineering disputes. By leveraging our deep technical understanding of the dredging industry, we help parties reach equitable resolutions outside of prolonged litigation.',
-    tags: ['Mediation', 'Arbitration', 'Technical Consultation'],
+    id: "execution",
+    num: "IV",
+    title: "End-to-End Execution Support",
+    tagline: "Strategy and execution, bridged.",
+    // Verbatim from mekaconsultants.com/services
+    desc: "Bridging the gap between strategy and execution by aligning leadership direction, operational planning, and outsourced manpower — ensuring predictable, scalable outcomes.",
+    modules: [
+      {
+        id: "strategy-alignment",
+        num: "4.1",
+        icon: Map,
+        title: "Strategy–Execution Alignment",
+        tagline: "From intent to action.",
+        desc: "Translating leadership direction into operating plans, owner assignments, and measurable milestones — closing the gap where strategies usually stall.",
+        tags: ["Cascade", "Plan Alignment", "Ownership"],
+      },
+      {
+        id: "operational-planning",
+        num: "4.2",
+        icon: ClipboardCheck,
+        title: "Operational Planning",
+        tagline: "Detailed plans, owned plans.",
+        desc: "Detailed operational planning — resources, timelines, dependencies, risks — scoped to the mandate and tracked through structured program cadences.",
+        tags: ["Operating Plans", "Resource Planning", "Risk Management"],
+      },
+      {
+        id: "manpower-integration",
+        num: "4.3",
+        icon: Users2,
+        title: "Manpower Integration",
+        tagline: "Plans and people, together.",
+        desc: "Integrating deployed manpower into the execution plan — onboarding, roles, accountability — so that plans and people arrive together, not sequentially.",
+        tags: ["Onboarding", "Team Integration", "Accountability"],
+      },
+      {
+        id: "outcomes",
+        num: "4.4",
+        icon: TrendingUp,
+        title: "Outcome Delivery & Scaling",
+        tagline: "Predictable, scalable outcomes.",
+        desc: "Running the delivery cadence day-to-day until outcomes are met — then scaling what worked and transitioning stewardship back to the client's teams.",
+        tags: ["Delivery Cadence", "Scaling", "Transition"],
+      },
+    ],
   },
 ];
 
-const phases = [
-  { id: 'all', label: 'All Capabilities' },
-  { id: 'pre', label: 'Pre-Project / Planning' },
-  { id: 'exe', label: 'Execution / Supervision' },
-  { id: 'post', label: 'Post-Project / Legal' },
+const filters = [
+  { id: "all", label: "All Modules", count: 17 },
+  { id: "strategic", label: "Strategic", count: 4 },
+  { id: "operations", label: "Operational", count: 4 },
+  { id: "manpower", label: "Manpower", count: 5 },
+  { id: "execution", label: "Execution", count: 4 },
 ];
+
+// ═══════════════════════════════════════════════════════════════════
+// COMPONENT
+// ═══════════════════════════════════════════════════════════════════
 
 export default function Services() {
-  const [activePhase, setActivePhase] = useState('all');
+  const [activeFilter, setActiveFilter] = useState("all");
   const containerRef = useRef(null);
-  const cardsWrapperRef = useRef(null);
   const location = useLocation();
 
-  const filteredServices = services.filter(s => activePhase === 'all' || s.phase === activePhase);
+  const visibleDisciplines = disciplines.filter(
+    (d) => activeFilter === "all" || d.id === activeFilter
+  );
 
-  // ═══════════════════════════════════════════════
-  // CROSS-PAGE HASH NAVIGATION FIX
-  // ═══════════════════════════════════════════════
+  // ── Cross-page hash navigation ──
   useEffect(() => {
-    // 1. Check if the URL contains a hash (e.g., /services#licence)
     if (location.hash) {
-      const id = location.hash.replace('#', '');
-      
-      // 2. Ensure the correct filter tab is active so the element actually exists to be scrolled to
-      const targetService = services.find((s) => s.id === id);
-      if (targetService && activePhase !== 'all' && activePhase !== targetService.phase) {
-        setActivePhase(targetService.phase);
+      const id = location.hash.replace("#", "");
+
+      const directMatch = disciplines.find((d) => d.id === id);
+      const moduleMatch = disciplines.find((d) =>
+        d.modules.some((m) => m.id === id)
+      );
+      const parent = directMatch || moduleMatch;
+
+      if (parent && activeFilter !== "all" && activeFilter !== parent.id) {
+        setActiveFilter(parent.id);
       }
 
-      // 3. THE MAGIC FIX: Delay the scroll calculation until AFTER GSAP finishes animating the Hero
       const timeoutId = setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
-          const navbarOffset = 120; // Exact height compensation for your floating pill navbar
-          const y = element.getBoundingClientRect().top + window.scrollY - navbarOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
+          const offset = 160; // navbar + sticky filter bar
+          const y =
+            element.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top: y, behavior: "smooth" });
         }
-      }, 800); // 800ms gives the Hero grid-lines and text reveals time to settle
+      }, 800);
 
       return () => clearTimeout(timeoutId);
     } else {
-      // If no hash, guarantee we start cleanly at the top of the page
       window.scrollTo(0, 0);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.hash]); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.hash]);
 
-
-  useGSAP(() => {
-    const tl = gsap.timeline();
-
-    tl.to('.grid-line-h', { scaleX: 1, duration: 1.5, ease: 'expo.inOut', stagger: 0.1 })
-      .to('.grid-line-v', { scaleY: 1, duration: 1.5, ease: 'expo.inOut', stagger: 0.1 }, "-=1.2")
-      .fromTo('.reveal-hero', 
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, stagger: 0.1, ease: 'power3.out' },
-        "-=1"
+  // ── Hero reveal ──
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        ".svc-meta",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.8, stagger: 0.08, ease: "power2.out", delay: 0.2 }
       );
-  }, { scope: containerRef });
 
-  useGSAP(() => {
-    gsap.fromTo('.service-card',
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, stagger: 0.05, ease: 'power2.out' }
-    );
-  }, { dependencies: [activePhase], scope: containerRef });
+      gsap.fromTo(
+        ".svc-hero-line",
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: "expo.out",
+          delay: 0.5,
+        }
+      );
+
+      gsap.fromTo(
+        ".svc-hero-desc",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 1.1 }
+      );
+
+      gsap.fromTo(
+        ".svc-filter-bar",
+        { y: -10, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 1.3 }
+      );
+    },
+    { scope: containerRef }
+  );
+
+  // ── Per-discipline reveals (rerun when filter changes) ──
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        ".disc-header-el",
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.08,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".disc-section",
+            start: "top 90%",
+          },
+        }
+      );
+
+      const cards = gsap.utils.toArray(".module-card");
+      cards.forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { clipPath: "inset(0% 100% 0% 0%)", y: 20 },
+          {
+            clipPath: "inset(0% 0% 0% 0%)",
+            y: 0,
+            duration: 0.9,
+            delay: (i % 2) * 0.08,
+            ease: "expo.out",
+            scrollTrigger: { trigger: card, start: "top 88%" },
+          }
+        );
+      });
+    },
+    { dependencies: [activeFilter], scope: containerRef }
+  );
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#B38356] selection:text-white">
+    <div
+      ref={containerRef}
+      className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#B38356] selection:text-white overflow-hidden"
+    >
       <Navbar />
 
-      {/* ── TYPOGRAPHIC BLUEPRINT HERO ── */}
-      <section className="relative pt-48 pb-32 lg:pt-64 lg:pb-40 overflow-hidden bg-[#FAFAFA]">
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="grid-line-h absolute top-[25%] left-0 w-full h-px bg-slate-200 origin-left" style={{ transform: 'scaleX(0)' }} />
-          <div className="grid-line-h absolute top-[50%] left-0 w-full h-px bg-slate-200 origin-right" style={{ transform: 'scaleX(0)' }} />
-          <div className="grid-line-h absolute top-[75%] left-0 w-full h-px bg-slate-200 origin-left" style={{ transform: 'scaleX(0)' }} />
-          <div className="grid-line-v absolute left-[15%] top-0 w-px h-full bg-slate-200 origin-top" style={{ transform: 'scaleY(0)' }} />
-          <div className="grid-line-v absolute left-[85%] top-0 w-px h-full bg-slate-200 origin-bottom" style={{ transform: 'scaleY(0)' }} />
+      {/* ═══════════════════════════════════════════════════════════ */}
+      {/* HERO / MASTHEAD                                              */}
+      {/* ═══════════════════════════════════════════════════════════ */}
+      <section className="relative pt-40 pb-20 lg:pt-52 lg:pb-24 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-12 flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+          <span className="svc-meta">File · MC-2026-01</span>
+          <span className="svc-meta">§ VI · Services Index</span>
+          <span className="svc-meta">17 Modules · 4 Disciplines</span>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
-          <div className="max-w-4xl">
-            <div className="overflow-hidden mb-8">
-              <p className="reveal-hero text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4">
-                <Target size={14} className="text-[#B38356]" />
-                Operational Modules
-              </p>
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-serif text-slate-900 leading-[0.95] tracking-tight mb-10">
-              <div className="overflow-hidden pb-2"><span className="reveal-hero block">Strategic</span></div>
-              <div className="overflow-hidden pb-2">
-                <span className="reveal-hero flex items-center gap-6">
-                  Maritime <span className="text-[#B38356] italic font-light">Execution.</span>
-                </span>
-              </div>
-            </h1>
-
-            <div className="overflow-hidden">
-              <p className="reveal-hero text-slate-500 font-light text-lg md:text-xl leading-relaxed max-w-2xl">
-                From preliminary feasibility studies to final environmental handover, we provide end-to-end engineering authority across the entire lifecycle of coastal infrastructure.
-              </p>
-            </div>
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="overflow-hidden mb-6">
+            <p className="svc-hero-line text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4">
+              <span className="w-8 h-px bg-[#B38356]" /> The Services Index
+            </p>
           </div>
+
+          <h1 className="font-serif text-slate-900 tracking-tight leading-[0.95] text-5xl md:text-7xl lg:text-[7rem] mb-10">
+            <span className="block overflow-hidden">
+              <span className="svc-hero-line inline-block">Four disciplines.</span>
+            </span>
+            <span className="block overflow-hidden">
+              <span className="svc-hero-line inline-block text-[#B38356] italic font-light">
+                One practice.
+              </span>
+            </span>
+          </h1>
+
+          <p className="svc-hero-desc max-w-2xl text-slate-600 text-base md:text-lg leading-relaxed font-light">
+            Business consulting and outsourced manpower — organized across
+            four disciplines. Each module scopes independently or as part of
+            a larger mandate, and every engagement is led by a senior partner
+            accountable to the client.
+          </p>
         </div>
       </section>
 
-      {/* ── STICKY INDEX LAYOUT ── */}
-      <section className="py-20 lg:py-32 relative border-t border-slate-200 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-start">
-            
-            {/* LEFT COLUMN: Sticky Filters */}
-            <div className="lg:col-span-4 lg:sticky lg:top-32">
-              <h2 className="text-3xl font-serif text-slate-900 mb-8">Service Modules</h2>
-              
-              <div className="flex flex-col gap-2 relative">
-                <div className="absolute left-[11px] top-4 bottom-4 w-px bg-slate-200 -z-10" />
-                
-                {phases.map((phase) => (
-                  <button
-                    key={phase.id}
-                    onClick={() => setActivePhase(phase.id)}
-                    className={`text-left py-3 px-6 rounded-full text-[10px] tracking-[0.15em] uppercase font-bold transition-all duration-300 relative ${
-                      activePhase === phase.id
-                        ? 'bg-slate-900 text-white shadow-lg shadow-slate-900/10'
-                        : 'bg-white/50 text-slate-500 hover:bg-slate-50 hover:text-slate-900 border border-transparent hover:border-slate-200'
+      {/* ═══════════════════════════════════════════════════════════ */}
+      {/* HORIZONTAL STICKY FILTER BAR                                 */}
+      {/* ═══════════════════════════════════════════════════════════ */}
+      <div className="svc-filter-bar sticky top-[88px] z-30 bg-[#FAFAFA]/95 backdrop-blur-md border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center gap-4 overflow-x-auto">
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 flex items-center gap-2 shrink-0">
+            <Filter size={12} />
+            Navigator
+          </span>
+
+          <div className="flex items-center gap-2 shrink-0">
+            {filters.map((f) => {
+              const isActive = activeFilter === f.id;
+              return (
+                <button
+                  key={f.id}
+                  onClick={() => setActiveFilter(f.id)}
+                  className={`group inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] tracking-[0.15em] uppercase font-bold transition-all duration-300 ${
+                    isActive
+                      ? "bg-slate-900 text-white"
+                      : "bg-white border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#B38356]"
+                  }`}
+                >
+                  <span>{f.label}</span>
+                  <span
+                    className={`font-mono text-[9px] ${
+                      isActive
+                        ? "text-white/60"
+                        : "text-slate-400 group-hover:text-[#B38356]/70"
                     }`}
                   >
-                    {phase.label}
-                  </button>
-                ))}
-              </div>
+                    {f.count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
 
-              <div className="mt-16 hidden lg:block">
-                <p className="text-slate-400 font-light text-sm leading-relaxed">
-                  Select a phase to filter our specialized operational capabilities. Our modular approach ensures precision at every stage of development.
-                </p>
-              </div>
-            </div>
+      {/* ═══════════════════════════════════════════════════════════ */}
+      {/* DISCIPLINES & MODULES                                        */}
+      {/* ═══════════════════════════════════════════════════════════ */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          {visibleDisciplines.map((disc, dIdx) => (
+            <div
+              key={disc.id}
+              id={disc.id}
+              className={`disc-section scroll-mt-40 ${
+                dIdx > 0 ? "pt-24 md:pt-32 mt-24 md:mt-32 border-t border-slate-200" : ""
+              }`}
+            >
+              {/* Discipline header */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-10 md:mb-14">
+                <div className="lg:col-span-3">
+                  <p className="disc-header-el font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-3">
+                    § {disc.num} · Discipline
+                  </p>
+                  <span className="disc-header-el font-serif text-7xl md:text-8xl text-[#B38356] leading-none inline-block">
+                    {disc.num}
+                  </span>
+                </div>
 
-            {/* RIGHT COLUMN: Scrolling Cards */}
-            <div className="lg:col-span-8" ref={cardsWrapperRef}>
-              <div className="flex flex-col gap-8">
-                {filteredServices.map((service) => (
-                  <div 
-                    key={service.id} 
-                    id={service.id}
-                    className="service-card scroll-mt-32 group bg-[#FAFAFA] border border-slate-200 p-8 md:p-10 hover:border-[#B38356] transition-colors duration-500 relative overflow-hidden"
-                  >
-                    <span className="absolute -top-6 -right-4 text-[120px] font-serif text-slate-200/50 group-hover:text-[#B38356]/10 transition-colors duration-500 pointer-events-none select-none">
-                      {service.num}
+                <div className="lg:col-span-9">
+                  <h2 className="disc-header-el font-serif text-3xl md:text-5xl lg:text-6xl text-slate-900 leading-[1.05] mb-6">
+                    {disc.title}
+                  </h2>
+                  <p className="disc-header-el text-[#B38356] italic text-lg md:text-xl font-light mb-6">
+                    {disc.tagline}
+                  </p>
+                  <p className="disc-header-el text-slate-600 text-base leading-relaxed font-light max-w-2xl mb-8">
+                    {disc.desc}
+                  </p>
+                  <div className="disc-header-el flex items-center gap-3 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400">
+                    <span>
+                      {disc.modules.length} modules in this discipline
                     </span>
-
-                    <div className="relative z-10">
-                      <div className="flex items-center gap-4 mb-6">
-                        <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border border-slate-200 group-hover:bg-[#B38356]/10 group-hover:border-[#B38356]/30 transition-colors duration-500 shadow-sm">
-                          <service.icon className="w-5 h-5 text-slate-500 group-hover:text-[#B38356] transition-colors duration-500" />
-                        </div>
-                        <div>
-                          <p className="text-[#B38356] text-[9px] tracking-[0.2em] uppercase font-bold mb-1">
-                            Phase: {phases.find(p => p.id === service.phase)?.label.split(' / ')[0]}
-                          </p>
-                          <h3 className="text-2xl font-serif text-slate-900">{service.title}</h3>
-                        </div>
-                      </div>
-
-                      <p className="text-slate-900 font-medium text-sm mb-4">
-                        {service.short}
-                      </p>
-                      
-                      <p className="text-slate-500 font-light text-sm leading-relaxed mb-8 max-w-2xl">
-                        {service.desc}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2">
-                        {service.tags.map((tag, i) => (
-                          <span 
-                            key={i} 
-                            className="text-[9px] tracking-[0.15em] uppercase font-mono px-3 py-1.5 bg-white border border-slate-200 text-slate-500"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                    <span className="w-6 h-px bg-slate-300" />
+                    <span className="text-[#B38356]">
+                      {disc.num}.1 – {disc.num}.{disc.modules.length}
+                    </span>
                   </div>
-                ))}
+                </div>
+              </div>
+
+              {/* Regulatory disclaimer strip — only when the discipline has one */}
+              {disc.disclaimer && (
+                <div className="disc-header-el mb-12 lg:ml-[calc(25%+1rem)]">
+                  <div className="flex items-start gap-3 p-5 border border-[#B38356]/30 bg-[#B38356]/5 text-sm">
+                    <AlertCircle
+                      size={16}
+                      className="text-[#B38356] mt-0.5 shrink-0"
+                      strokeWidth={1.5}
+                    />
+                    <p className="text-slate-700 italic font-light leading-relaxed">
+                      {disc.disclaimer}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Modules grid — 2 columns */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+                {disc.modules.map((m) => {
+                  const Icon = m.icon;
+                  return (
+                    <article
+                      key={m.id}
+                      id={m.id}
+                      className="module-card scroll-mt-40 group bg-white border border-slate-200 p-6 md:p-8 transition-colors duration-500 hover:border-[#B38356] hover:shadow-[0_8px_30px_-16px_rgba(179,131,86,0.2)] flex gap-5"
+                    >
+                      {/* Icon box */}
+                      <div className="w-14 h-14 shrink-0 border border-slate-200 flex items-center justify-center text-slate-400 group-hover:border-[#B38356] group-hover:text-[#B38356] group-hover:bg-[#FAFAFA] transition-all duration-500">
+                        <Icon size={20} strokeWidth={1.5} />
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-2">
+                          <span className="font-mono text-[11px] tracking-[0.15em] text-[#B38356] font-bold">
+                            {m.num}
+                          </span>
+                          <span className="h-px flex-1 bg-slate-200" />
+                        </div>
+
+                        <h3 className="font-serif text-xl md:text-2xl text-slate-900 group-hover:text-[#B38356] transition-colors duration-300 leading-tight mb-1">
+                          {m.title}
+                        </h3>
+                        <p className="text-[#B38356] italic text-sm font-light mb-4">
+                          {m.tagline}
+                        </p>
+
+                        <p className="text-slate-600 text-sm leading-relaxed font-light mb-5">
+                          {m.desc}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2">
+                          {m.tags.map((tag, tIdx) => (
+                            <span
+                              key={tIdx}
+                              className="text-[9px] tracking-[0.12em] uppercase font-bold px-2.5 py-1 border border-slate-200 text-slate-500 group-hover:border-[#B38356]/40 group-hover:text-[#B38356]/80 transition-colors duration-500"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
             </div>
+          ))}
 
-          </div>
+          {visibleDisciplines.length === 0 && (
+            <div className="py-32 text-center text-slate-400 text-sm">
+              No modules match the selected filter.
+            </div>
+          )}
         </div>
       </section>
 
-      {/* ── CTA SECTION ── */}
-      <section className="py-24 bg-slate-900 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
-             style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-             
-        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-          <h2 className="text-4xl md:text-6xl font-serif text-white mb-6">Initiate Your Project</h2>
-          <p className="text-slate-400 font-light text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-            Whether it's a feasibility study, full-scale dredging operation, or expert consultation — our engineering team is ready to deliver.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/contact">
-              <button className="bg-[#B38356] hover:bg-white hover:text-slate-900 text-white px-10 py-5 text-[10px] tracking-[0.2em] uppercase font-bold transition-all duration-300 shadow-md hover:shadow-[#B38356]/20 flex items-center gap-3">
-                Engage With Us
-                <ArrowDownRight className="w-4 h-4 -rotate-90" />
-              </button>
-            </Link>
-          </div>
+      {/* ═══════════════════════════════════════════════════════════ */}
+      {/* BOTTOM NOTE                                                  */}
+      {/* ═══════════════════════════════════════════════════════════ */}
+      <div className="border-t border-slate-200 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400">
+          <span>
+            Modules combine under a single mandate when engagements span
+            multiple disciplines.
+          </span>
+          <Link
+            to="/about"
+            className="text-slate-900 hover:text-[#B38356] transition-colors border-b border-slate-300 hover:border-[#B38356] pb-0.5"
+          >
+            About the firm →
+          </Link>
         </div>
-      </section>
+      </div>
 
       <Footer />
     </div>

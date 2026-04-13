@@ -1,10 +1,21 @@
-import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect, useRef } from "react";
+import { Link } from "react-router";
+import { ArrowUpRight, MapPin, Phone, Mail, Clock } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * MEKA Consultants — Footer
+ * Palette (shared with Dredging): Ink #050A15 / Base #FAFAFA / Bronze #B38356
+ * Layout distinctions from Dredging (which uses dark navy footer with a
+ * glowing blob and a 3-column layout after the brand block):
+ *   - LIGHT cream background
+ *   - Tagline-triad masthead with primary CTA at the top
+ *   - Consulting service list (not dredging services)
+ *   - Regulatory note from mekaconsultants.com
+ */
 export default function Footer() {
   const footerRef = useRef(null);
   const ctaRef = useRef(null);
@@ -13,45 +24,46 @@ export default function Footer() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // CTA section reveal
       if (ctaRef.current) {
-        gsap.fromTo(ctaRef.current.children,
-          { y: 50, opacity: 0 },
+        gsap.fromTo(
+          ctaRef.current.children,
+          { y: 40, opacity: 0 },
           {
-            y: 0, opacity: 1, duration: 1.2, stagger: 0.2, ease: 'power3.out',
-            scrollTrigger: {
-              trigger: ctaRef.current,
-              start: 'top 85%',
-            }
+            y: 0,
+            opacity: 1,
+            duration: 1.1,
+            stagger: 0.15,
+            ease: "power3.out",
+            scrollTrigger: { trigger: ctaRef.current, start: "top 85%" },
           }
         );
       }
 
-      // Columns stagger reveal
       if (columnsRef.current) {
-        const cols = columnsRef.current.querySelectorAll('.footer-col');
-        gsap.fromTo(cols,
+        const cols = columnsRef.current.querySelectorAll(".footer-col");
+        gsap.fromTo(
+          cols,
           { y: 30, opacity: 0 },
           {
-            y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: 'power3.out',
-            scrollTrigger: {
-              trigger: columnsRef.current,
-              start: 'top 90%',
-            }
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: { trigger: columnsRef.current, start: "top 90%" },
           }
         );
       }
 
-      // Bottom bar fade in
       if (bottomRef.current) {
-        gsap.fromTo(bottomRef.current,
+        gsap.fromTo(
+          bottomRef.current,
           { opacity: 0 },
           {
-            opacity: 1, duration: 1.2, ease: 'power2.out',
-            scrollTrigger: {
-              trigger: bottomRef.current,
-              start: 'top 95%',
-            }
+            opacity: 1,
+            duration: 1.1,
+            ease: "power2.out",
+            scrollTrigger: { trigger: bottomRef.current, start: "top 95%" },
           }
         );
       }
@@ -61,65 +73,212 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-[#050A15] text-slate-400 py-24 border-t border-white/5 relative z-10 overflow-hidden">
-      {/* Subtle ambient glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-200 h-100 bg-[#B38356]/5 blur-[120px] rounded-full pointer-events-none translate-y-1/2"></div>
+    <footer
+      ref={footerRef}
+      className="bg-[#FAFAFA] text-slate-900 border-t border-slate-200 relative z-10 overflow-hidden"
+    >
+      {/* ── CTA MASTHEAD ── */}
+      <div
+        ref={ctaRef}
+        className="max-w-7xl mx-auto px-6 lg:px-12 pt-24 md:pt-32 pb-16 md:pb-20"
+      >
+        <p className="text-[#B38356] text-[10px] tracking-[0.3em] uppercase font-bold mb-6 flex items-center gap-3">
+          <span className="w-8 h-px bg-[#B38356]" /> Ready to partner
+        </p>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight max-w-4xl">
+          Think Smarter.{" "}
+          <span className="text-[#B38356] italic">Grow Faster.</span>{" "}
+          Lead Confidently.
+        </h2>
 
-        {/* Columns */}
-        <div ref={columnsRef} className="grid grid-cols-1 md:grid-cols-12 gap-12">
+        <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <Link
+            to="/contact"
+            className="group inline-flex items-center gap-3 bg-slate-900 hover:bg-[#B38356] text-white px-8 py-4 rounded-full text-[10px] tracking-[0.2em] uppercase font-bold transition-all duration-300 shadow-sm hover:shadow-lg hover:shadow-[#B38356]/20"
+          >
+            Start a Conversation
+            <ArrowUpRight
+              size={14}
+              className="transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+            />
+          </Link>
+          <a
+            href="mailto:mail@meka.com"
+            className="text-sm font-light text-slate-600 hover:text-slate-900 transition-colors border-b border-transparent hover:border-slate-900 pb-0.5"
+          >
+            mail@meka.com
+          </a>
+        </div>
+      </div>
 
-          {/* Brand Column */}
-          <div className="md:col-span-5 footer-col">
-            <Link to="/">
-              <span className="font-serif font-bold text-3xl tracking-widest uppercase text-white block mb-6 hover:opacity-80 transition-opacity">
-                Meka <span className="text-[#B38356]">Dredging</span>
-              </span>
-            </Link>
-            <p className="text-sm leading-relaxed max-w-sm font-light mb-8 opacity-80">
-              A proud division of the Meka Group. Delivering high-performance dredging and coastal development solutions with precision and reliability.
-            </p>
-            <div className="text-sm font-light opacity-80 space-y-2">
-              <p>20 Madhuli Dr. A B Road, Worli</p>
-              <p>Mumbai (400 018) India</p>
-              <a href="tel:+912240890000" className="block hover:text-[#B38356] transition-colors">+91 22 4089 0000</a>
-              <a href="mailto:mail@meka.com" className="block hover:text-[#B38356] transition-colors">mail@meka.com</a>
+      <div className="border-t border-slate-200">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 md:py-20">
+          {/* ── COLUMNS ── */}
+          <div
+            ref={columnsRef}
+            className="grid grid-cols-1 md:grid-cols-12 gap-12"
+          >
+            {/* Brand */}
+            <div className="md:col-span-5 footer-col">
+              <Link to="/">
+                <span className="font-serif text-2xl md:text-3xl tracking-tight text-slate-900 block mb-6 hover:opacity-80 transition-opacity">
+                  MEKA <span className="text-[#B38356] italic">Consultants</span>
+                </span>
+              </Link>
+              <p className="text-sm leading-relaxed max-w-sm font-light text-slate-600 mb-8">
+                A professional services firm delivering strategic consulting
+                and outsourced manpower solutions. A proud member of the Meka
+                Group.
+              </p>
+
+              <div className="text-sm font-light text-slate-600 space-y-3">
+                <div className="flex items-start gap-3">
+                  <MapPin size={14} className="mt-0.5 shrink-0 text-[#B38356]" />
+                  <p className="leading-relaxed">
+                    20 Madhuli Dr. A B Road, Worli
+                    <br />
+                    Mumbai (400 018) India
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone size={14} className="shrink-0 text-[#B38356]" />
+                  <a
+                    href="tel:+912240890000"
+                    className="hover:text-[#B38356] transition-colors"
+                  >
+                    +91 22 4089 0000
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail size={14} className="shrink-0 text-[#B38356]" />
+                  <a
+                    href="mailto:mail@meka.com"
+                    className="hover:text-[#B38356] transition-colors"
+                  >
+                    mail@meka.com
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Clock size={14} className="shrink-0 text-[#B38356]" />
+                  <span>Mon–Fri · 9am – 5pm IST</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Services */}
+            <div className="md:col-span-3 md:col-start-7 footer-col">
+              <h4 className="text-slate-900 text-[10px] tracking-[0.25em] uppercase font-bold mb-6">
+                Services
+              </h4>
+              <ul className="space-y-3.5 text-sm font-light text-slate-600">
+                <li>
+                  <Link
+                    to="/services#strategic"
+                    className="hover:text-[#B38356] transition-colors"
+                  >
+                    Strategic &amp; Management Consulting
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/services#operations"
+                    className="hover:text-[#B38356] transition-colors"
+                  >
+                    Operational Excellence
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/services#manpower"
+                    className="hover:text-[#B38356] transition-colors"
+                  >
+                    Outsourced Manpower Supply
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/services#execution"
+                    className="hover:text-[#B38356] transition-colors"
+                  >
+                    End-to-End Execution Support
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Navigation */}
+            <div className="md:col-span-3 footer-col">
+              <h4 className="text-slate-900 text-[10px] tracking-[0.25em] uppercase font-bold mb-6">
+                Company
+              </h4>
+              <ul className="space-y-3.5 text-sm font-light text-slate-600">
+                <li>
+                  <Link to="/" className="hover:text-[#B38356] transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="hover:text-[#B38356] transition-colors">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog" className="hover:text-[#B38356] transition-colors">
+                    Insights
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/faq" className="hover:text-[#B38356] transition-colors">
+                    FAQ
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/contact"
+                    className="hover:text-[#B38356] transition-colors"
+                  >
+                    Get in Touch
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href="https://meka.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 hover:text-[#B38356] transition-colors"
+                  >
+                    Meka Group <ArrowUpRight size={12} />
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
 
-          {/* Navigation */}
-          <div className="md:col-span-3 md:col-start-7 footer-col">
-            <h4 className="text-white text-[10px] tracking-[0.25em] uppercase font-bold mb-8">Navigation</h4>
-            <ul className="space-y-4 text-sm font-light opacity-80">
-              <li><Link to="/" className="hover:text-[#B38356] hover:opacity-100 transition-all">Home</Link></li>
-              <li><Link to="/about" className="hover:text-[#B38356] hover:opacity-100 transition-all">About</Link></li>
-              <li><Link to="/services" className="hover:text-[#B38356] hover:opacity-100 transition-all">Services</Link></li>
-              <li><Link to="/projects" className="hover:text-[#B38356] hover:opacity-100 transition-all">Projects</Link></li>
-              <li><a href="https://meka.com/careers" className="hover:text-[#B38356] hover:opacity-100 transition-all">Careers</a></li>
-              <li><Link to="/contact" className="hover:text-[#B38356] hover:opacity-100 transition-all">Contact</Link></li>
-            </ul>
-          </div>
-
-          {/* Services Highlights */}
-          <div className="md:col-span-3 footer-col">
-            <h4 className="text-white text-[10px] tracking-[0.25em] uppercase font-bold mb-8">Services</h4>
-            <ul className="space-y-4 text-sm font-light opacity-80">
-              <li><Link to="/services#feasibility" className="hover:text-[#B38356] hover:opacity-100 transition-all">Feasibility Studies</Link></li>
-              <li><Link to="/services#planning" className="hover:text-[#B38356] hover:opacity-100 transition-all">Planning & Design</Link></li>
-              <li><Link to="/services#assessment" className="hover:text-[#B38356] hover:opacity-100 transition-all">Environmental Assessment</Link></li>
-              <li><Link to="/services#supervision" className="hover:text-[#B38356] hover:opacity-100 transition-all">Contract Supervision</Link></li>
-              <li><Link to="/services#resolution" className="hover:text-[#B38356] hover:opacity-100 transition-all">Dispute Resolution</Link></li>
-            </ul>
+          {/* ── REGULATORY NOTE ── */}
+          <div className="mt-16 pt-8 border-t border-slate-200">
+            <p className="text-[11px] text-slate-500 font-light italic max-w-3xl">
+              MEKA Consultants provides manpower services only. No machinery or
+              equipment is supplied.
+            </p>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div ref={bottomRef} className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs font-light opacity-60">
-          <p>&copy; {new Date().getFullYear()} Meka Dredging. All rights reserved.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+      {/* ── BOTTOM BAR ── */}
+      <div className="border-t border-slate-200">
+        <div
+          ref={bottomRef}
+          className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-col md:flex-row justify-between items-center text-xs font-light text-slate-500 gap-3"
+        >
+          <p>&copy; {new Date().getFullYear()} Meka Group. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link to="/privacy" className="hover:text-slate-900 transition-colors">
+              Privacy Policy
+            </Link>
+            <Link to="/terms" className="hover:text-slate-900 transition-colors">
+              Terms &amp; Conditions
+            </Link>
           </div>
         </div>
       </div>
