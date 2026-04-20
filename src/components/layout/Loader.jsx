@@ -28,6 +28,16 @@ export default function Loader({ onComplete }) {
 
   useGSAP(
     () => {
+      const prefersReducedMotion =
+        typeof window !== "undefined" &&
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (prefersReducedMotion) {
+        onComplete && onComplete();
+        return;
+      }
+
       const tl = gsap.timeline({
         onComplete: () => onComplete && onComplete(),
       });
@@ -121,6 +131,7 @@ export default function Loader({ onComplete }) {
     <div
       ref={containerRef}
       className="fixed inset-0 z-[999] pointer-events-none"
+      aria-hidden="true"
     >
       {/* SINGLE unified panel (not 5 columns) */}
       <div

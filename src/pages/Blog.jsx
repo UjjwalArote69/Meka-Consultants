@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 import React, { useState, useRef, useEffect } from "react";
 import {
   ArrowUpRight,
@@ -14,156 +13,19 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
+import { posts, categories, tags } from "../data/posts";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * MEKA Consultants — Blog / Insights
+ * MEKA Consultants — Blog / Insights listing
  *
- * Structured as §VII of the ongoing dossier. Titles sourced from
- * mekaconsultants.com/blog-list, rewritten or retained faithfully;
- * lorem-ipsum bodies replaced with consulting-voice excerpts that match
- * the firm's positioning. Categories mirror the live site's taxonomy
- * (Business / Strategy / Operations / Manpower / Research).
+ * §VII of the ongoing dossier. Titles mirror the live site
+ * (mekaconsultants.com/blog-list); full post bodies live in
+ * src/data/posts.js and are rendered by BlogPost.jsx.
  *
  * Palette: Ink #050A15 · Base #FAFAFA · Bronze #B38356
  */
-
-// ═══════════════════════════════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════════════════════════════
-
-const categories = [
-  { id: "all", label: "All Insights" },
-  { id: "strategy", label: "Strategy" },
-  { id: "operations", label: "Operations" },
-  { id: "manpower", label: "Manpower" },
-  { id: "business", label: "Business" },
-  { id: "research", label: "Research" },
-];
-
-const posts = [
-  {
-    id: "creating-successful-strategies",
-    num: "01",
-    title: "Creating successful strategies for businesses",
-    excerpt:
-      "A good strategy tells you what you will and won't do — and why. This note sketches the three-part test we apply to any strategic plan before it lands on a board table: is it specific, is it sequenced, and is it owned by a named leader?",
-    category: "strategy",
-    categoryLabel: "Strategy",
-    date: "April 08, 2026",
-    readTime: "6 min read",
-    author: "The Practice",
-    featured: true,
-  },
-  {
-    id: "redefining-goals-faster",
-    num: "02",
-    title: "Discover a better way of redefining company goals faster",
-    excerpt:
-      "Most organizations revisit their goals annually, whether they need to or not. We argue for a different cadence — quarterly refreshes, with a structured diagnostic that asks only three questions.",
-    category: "strategy",
-    categoryLabel: "Strategy",
-    date: "March 26, 2026",
-    readTime: "5 min read",
-    author: "The Practice",
-  },
-  {
-    id: "five-signals-operating-model",
-    num: "03",
-    title: "Five signals of an operating model under strain",
-    excerpt:
-      "Before metrics crack, weaker signals tell the story. This note enumerates the five warning signs we watch for — from rising meeting load to decision latency to the disappearance of quiet work.",
-    category: "operations",
-    categoryLabel: "Operations",
-    date: "March 18, 2026",
-    readTime: "4 min read",
-    author: "The Practice",
-  },
-  {
-    id: "boost-performance",
-    num: "04",
-    title: "Boost your work performance with us",
-    excerpt:
-      "Performance rarely stalls for a single reason. In most engagements we find a compounding mix of unclear priorities, missing feedback loops, and the absence of a shared operating rhythm.",
-    category: "business",
-    categoryLabel: "Business",
-    date: "March 04, 2026",
-    readTime: "4 min read",
-    author: "The Practice",
-  },
-  {
-    id: "manpower-accountable-owner",
-    num: "05",
-    title: "Why outsourced manpower needs an accountable owner",
-    excerpt:
-      "Deploying external talent without naming an internal owner is the fastest way to waste capacity. A short argument for single-threaded accountability on every outsourced engagement.",
-    category: "manpower",
-    categoryLabel: "Manpower",
-    date: "February 21, 2026",
-    readTime: "3 min read",
-    author: "The Practice",
-  },
-  {
-    id: "measurement-frameworks-wallpaper",
-    num: "06",
-    title: "Measurement frameworks that don't become wallpaper",
-    excerpt:
-      "Most KPI dashboards are consulted once, then forgotten. Three design principles that keep measurement systems alive inside an organization — and the one that matters most is rarely discussed.",
-    category: "research",
-    categoryLabel: "Research",
-    date: "February 09, 2026",
-    readTime: "7 min read",
-    author: "The Practice",
-  },
-  {
-    id: "functional-features-businesses",
-    num: "07",
-    title: "Functional new features that enhance businesses",
-    excerpt:
-      "Operational features — the small, repeating routines that shape how work flows — often outrank strategy for near-term impact. Five that consistently compound across our mandates.",
-    category: "research",
-    categoryLabel: "Research",
-    date: "January 28, 2026",
-    readTime: "5 min read",
-    author: "The Practice",
-  },
-  {
-    id: "apps-productivity",
-    num: "08",
-    title: "Apps that can help you with productivity",
-    excerpt:
-      "Tooling doesn't make teams productive on its own, but the right configuration can remove enough friction to unlock an extra gear. A curated view of the stack that consistently delivers.",
-    category: "business",
-    categoryLabel: "Business",
-    date: "January 14, 2026",
-    readTime: "3 min read",
-    author: "The Practice",
-  },
-  {
-    id: "contributing-to-initiatives",
-    num: "09",
-    title: "How we think about contributing to global initiatives",
-    excerpt:
-      "A short note on why consulting firms should take clear positions on initiatives beyond their clients — and how we think about the trade-off between independence and engagement.",
-    category: "operations",
-    categoryLabel: "Operations",
-    date: "December 18, 2025",
-    readTime: "6 min read",
-    author: "The Practice",
-  },
-];
-
-const tags = [
-  "Advisory",
-  "Leadership",
-  "Operations",
-  "Governance",
-  "Manpower",
-  "Measurement",
-  "Productivity",
-  "Strategy",
-];
 
 const POSTS_PER_PAGE = 6;
 
@@ -302,6 +164,8 @@ export default function Blog() {
       ref={containerRef}
       className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#B38356] selection:text-white overflow-hidden"
     >
+      <title>Journal — Meka Consultants</title>
+      <meta name="description" content="Field notes, essays, and case studies from the Meka Consultants team on engineering, infrastructure, and practice." />
       <Navbar />
 
       {/* ═══════════════════════════════════════════════════════════ */}

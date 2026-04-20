@@ -209,7 +209,9 @@ export default function LeadershipSection() {
                     ) : (
                       <img
                         src={leader.img}
-                        alt={leader.name}
+                        alt={`Portrait of ${leader.name}`}
+                        loading="lazy"
+                        decoding="async"
                         onError={() =>
                           setImageErrors((prev) => ({
                             ...prev,
@@ -305,7 +307,9 @@ export default function LeadershipSection() {
               ) : (
                 <img
                   src={activeBio.img}
-                  alt={activeBio.name}
+                  alt={`Portrait of ${activeBio.name}`}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-top"
                 />
               )}

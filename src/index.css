@@ -34,4 +34,23 @@
   }
 }
 
+/* Keyboard focus ring — visible outline only for keyboard users,
+   not mouse clicks. Tailwind's preflight removes the browser default. */
+:focus-visible {
+  outline: 2px solid #B38356;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
 
+/* Honor reduced-motion preferences globally: shorten or disable
+   animations/transitions for users who've opted out. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

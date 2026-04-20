@@ -292,6 +292,8 @@ export default function About() {
       ref={pageRef}
       className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#B38356] selection:text-white overflow-hidden"
     >
+      <title>About — Meka Consultants</title>
+      <meta name="description" content="Learn about Meka Consultants — our story, leadership, and the principles behind our engineering and consulting work." />
       <Navbar />
 
       {/* ═══════════════════════════════════════════════════════════ */}

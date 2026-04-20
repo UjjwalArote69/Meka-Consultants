@@ -373,6 +373,8 @@ export default function Services() {
       ref={containerRef}
       className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#B38356] selection:text-white overflow-hidden"
     >
+      <title>Services — Meka Consultants</title>
+      <meta name="description" content="Explore the full range of engineering, project management, and infrastructure consulting services offered by Meka Consultants." />
       <Navbar />
 
       {/* ═══════════════════════════════════════════════════════════ */}

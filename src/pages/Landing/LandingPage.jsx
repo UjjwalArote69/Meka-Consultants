@@ -29,6 +29,8 @@ function SectionFallback() {
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#B38356] selection:text-white overflow-hidden">
+      <title>Meka Consultants — Engineering & Infrastructure Consulting</title>
+      <meta name="description" content="Meka Consultants delivers expert engineering, project management, and infrastructure consulting services." />
       <Navbar />
 
       <main>

@@ -281,6 +281,8 @@ export default function FAQ() {
       ref={containerRef}
       className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#B38356] selection:text-white overflow-hidden"
     >
+      <title>FAQ — Meka Consultants</title>
+      <meta name="description" content="Answers to common questions about working with Meka Consultants — engagements, process, timelines, and more." />
       <Navbar />
 
       {/* ═══════════════════════════════════════════════════════════ */}

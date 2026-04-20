@@ -301,7 +301,7 @@ export default function Navbar() {
         },
       ],
     },
-    // { label: "Insights", href: "/blog" },
+    { label: "Insights", href: "/blog" },
     { label: "FAQ", href: "/faq" },
   ];
 
@@ -395,6 +395,9 @@ export default function Navbar() {
                 className="md:h-12 md:w-auto h-8 w-auto"
                 src="/logo.png"
                 alt="Meka Consultants"
+                width="160"
+                height="48"
+                decoding="async"
               />
             </Link>
 

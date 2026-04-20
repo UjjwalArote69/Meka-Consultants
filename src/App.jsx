@@ -1,22 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router'
-import LandingPage from './pages/Landing/LandingPage'
-import About from './pages//About/About'
-import Contact from './pages/Contact'
-import Loader from './components/layout/Loader' // Adjust the import path if your Loader is inside /components
-import Services from './pages/Services'
-import FAQ from './pages/FAQ'
+import Loader from './components/layout/Loader'
 import ScrollToTop from './components/ScrollToTop'
+import ErrorBoundary from './components/ErrorBoundary'
+
+const LandingPage = lazy(() => import('./pages/Landing/LandingPage'))
+const About = lazy(() => import('./pages/About/About'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Services = lazy(() => import('./pages/Services'))
+const FAQ = lazy(() => import('./pages/FAQ'))
+const Blog = lazy(() => import('./pages/Blog'))
+const BlogPost = lazy(() => import('./pages/BlogPost'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 const App = () => {
-  // 1. Initialize state by checking sessionStorage. 
-  // If 'siteLoaded' exists, they've been here before in this tab, so skip the loader.
   const [showLoader, setShowLoader] = useState(() => {
     const hasVisited = sessionStorage.getItem('siteLoaded');
-    return !hasVisited; 
+    return !hasVisited;
   });
 
-  // 2. When the GSAP animation finishes, hide the loader and set the session token.
   const handleLoaderComplete = () => {
     setShowLoader(false);
     sessionStorage.setItem('siteLoaded', 'true');
@@ -24,19 +26,23 @@ const App = () => {
 
   return (
     <>
-      {/* 3. Conditionally render the Loader completely outside the Router */}
       {showLoader && <Loader onComplete={handleLoaderComplete} />}
-      {/* 4. The Router stays mounted in the background. 
-          When the loader columns slide up, this content will be ready underneath. */}
       <Router>
-          <ScrollToTop/>
-        <Routes>
-          <Route path='/' element={<LandingPage/>}/>
-          <Route path='/about' element={<About/>}/>
-          <Route path='/services' element={<Services/>}/>
-          <Route path='/faq' element={<FAQ/>}/>
-          <Route path='/contact' element={<Contact/>}/>
-        </Routes>
+        <ScrollToTop />
+        <ErrorBoundary>
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path='/' element={<LandingPage />} />
+              <Route path='/about' element={<About />} />
+              <Route path='/services' element={<Services />} />
+              <Route path='/faq' element={<FAQ />} />
+              <Route path='/contact' element={<Contact />} />
+              <Route path='/blog' element={<Blog />} />
+              <Route path='/blog/:slug' element={<BlogPost />} />
+              <Route path='*' element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </Router>
     </>
   )

@@ -235,6 +235,8 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#B38356] selection:text-white overflow-hidden">
+      <title>Contact — Meka Consultants</title>
+      <meta name="description" content="Get in touch with Meka Consultants to discuss your project, partnership, or consulting engagement." />
       <Navbar />
 
       {/* ═══════════════════════════════════════════════════════════ */}
