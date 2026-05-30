@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { ArrowUpRight, X } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -29,7 +30,7 @@ const leaders = [
     name: "Mr. Hemanth Meka Rao",
     role: "Director",
     practice: "Group Leadership",
-    img: "/hero/hmr.webp",
+    img: "/directors/hemantrao.png",
     teaser:
       "A Mechanical Engineer from Georgia Tech, leading the strategic direction of the Meka Group practice.",
     practiceAreas: ["Strategy", "Growth", "Group Leadership"],
@@ -41,43 +42,33 @@ const leaders = [
   },
   {
     num: "02",
-    name: "Practice Lead — Advisory",
-    role: "Strategy & Operations",
-    practice: "Advisory",
-    img: "/hero/leadership-2.webp",
+    name: "Dr. Meka Rao",
+    role: "Founder",
+    practice: "Founding Leadership",
+    img: "/directors/drmekapaparao.jpeg",
     teaser:
-      "Heads strategic and operational consulting mandates with cross-industry advisory experience.",
-    practiceAreas: [
-      "Strategic Consulting",
-      "Org Design",
-      "Process Optimization",
-    ],
+      "Founder of the Meka Group. Four decades of engineering-led leadership across marine, infrastructure, and professional services.",
+    practiceAreas: ["Founding Vision", "Governance", "Mentorship"],
     bio: [
-      "[Placeholder bio paragraph one — replace with the actual leader's background, education, and career arc.]",
-      "[Placeholder bio paragraph two — replace with notable engagements, sectors served, and methodology.]",
-      "[Placeholder bio paragraph three — replace with current focus areas and the practice they oversee.]",
+      "Dr. Meka Rao founded the Meka Group in 1978, establishing an engineering-first culture that today spans nine practices — from marine construction and dredging to urban infrastructure, consulting, and professional services.",
+      "His leadership has shaped the group's foundational principles of innovation, engineering excellence, and client accountability — values that continue to anchor every mandate MEKA Consultants takes on.",
+      "He remains actively involved in governance and mentorship, guiding the next generation of practice leaders across the group.",
     ],
-    isPlaceholder: true,
   },
   {
     num: "03",
-    name: "Practice Lead — Manpower",
-    role: "Outsourced Solutions & Execution",
-    practice: "Manpower",
-    img: "/hero/leadership-3.webp",
+    name: "Mrs. Rajlakshmi Rao",
+    role: "Co-Founder",
+    practice: "Founding Leadership",
+    img: "/directors/mrsrajyalaskhmirao.jpg",
     teaser:
-      "Oversees the firm's outsourced manpower practice and end-to-end engagement delivery.",
-    practiceAreas: [
-      "Manpower Solutions",
-      "HR & Compliance",
-      "Program Delivery",
-    ],
+      "Co-Founder of the Meka Group. Central to the organization's people-first culture and long-term operating ethos since 1978.",
+    practiceAreas: ["People & Culture", "Governance", "Stakeholder Relations"],
     bio: [
-      "[Placeholder bio paragraph one — replace with the actual leader's background, education, and career arc.]",
-      "[Placeholder bio paragraph two — replace with notable engagements, client types, and operating model.]",
-      "[Placeholder bio paragraph three — replace with current focus areas and the practice they oversee.]",
+      "Mrs. Rajlakshmi Rao is a Co-Founder of the Meka Group, alongside Dr. Meka Rao since the group's founding in 1978. Her influence has shaped the people-first culture that defines how the group's nine practices operate today.",
+      "Her stewardship has anchored lasting relationships with clients, partners, and the extended practice community — relationships that continue to underwrite the group's reputation for reliability.",
+      "She remains active in guiding the organization on matters of culture, governance, and long-term stakeholder relationships.",
     ],
-    isPlaceholder: true,
   },
 ];
 
@@ -91,23 +82,68 @@ function getInitials(name) {
 
 export default function LeadershipSection() {
   const sectionRef = useRef(null);
+  const modalRef = useRef(null);
+  const previouslyFocusedRef = useRef(null);
   const [activeBio, setActiveBio] = useState(null);
   const [imageErrors, setImageErrors] = useState({});
 
   const closeBio = useCallback(() => {
     setActiveBio(null);
     document.body.style.overflow = "auto";
+    // Resume Lenis smooth-scroll if it's running. Lenis maintains its own
+    // RAF loop and ignores body.overflow, so it must be toggled directly.
+    if (window.__lenis && typeof window.__lenis.start === "function") {
+      window.__lenis.start();
+    }
+    if (previouslyFocusedRef.current) {
+      previouslyFocusedRef.current.focus();
+      previouslyFocusedRef.current = null;
+    }
   }, []);
 
-  const openBio = useCallback((leader) => {
+  const openBio = useCallback((leader, event) => {
+    previouslyFocusedRef.current =
+      (event && event.currentTarget) || document.activeElement;
     setActiveBio(leader);
     document.body.style.overflow = "hidden";
+    if (window.__lenis && typeof window.__lenis.stop === "function") {
+      window.__lenis.stop();
+    }
   }, []);
 
-  // Escape closes modal
+  // Move focus into the modal when it opens
   useEffect(() => {
+    if (!activeBio || !modalRef.current) return;
+    const focusable = modalRef.current.querySelector(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    focusable?.focus();
+  }, [activeBio]);
+
+  // Escape closes modal + focus trap (Tab cycles within modal)
+  useEffect(() => {
+    if (!activeBio) return;
     const handleKey = (e) => {
-      if (e.key === "Escape" && activeBio) closeBio();
+      if (e.key === "Escape") {
+        closeBio();
+        return;
+      }
+      if (e.key !== "Tab" || !modalRef.current) return;
+
+      const focusables = modalRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
@@ -157,12 +193,12 @@ export default function LeadershipSection() {
           {/* ═══════ HEADER ═══════ */}
           <div className="lead-header flex flex-col md:flex-row justify-between items-end mb-20 md:mb-24 border-b border-slate-200 pb-12 gap-8">
             <div className="max-w-2xl">
-              <p className="lead-header-el text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase mb-4 flex items-center gap-4">
+              <p className="lead-header-el text-[#8B5E3C] font-bold tracking-[0.3em] text-[10px] uppercase mb-4 flex items-center gap-4">
                 <span className="w-8 h-px bg-[#B38356]" /> Practice Leadership
               </p>
               <h2 className="lead-header-el text-4xl md:text-6xl font-serif text-slate-900 leading-[1.1]">
                 The people behind{" "}
-                <span className="text-[#B38356] italic font-light">
+                <span className="text-[#8B5E3C] italic font-light">
                   the practice.
                 </span>
               </h2>
@@ -176,23 +212,32 @@ export default function LeadershipSection() {
 
           {/* ═══════ UNIFORM 3-COL GRID ═══════ */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-            {leaders.map((leader) => {
+            {leaders.filter((l) => !l.isPlaceholder).map((leader) => {
               const showInitials =
                 imageErrors[leader.num] || leader.isPlaceholder;
               return (
-                <article
+                <div
                   key={leader.num}
                   className="leader-card group cursor-pointer"
-                  onClick={() => openBio(leader)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Read bio of ${leader.name}`}
+                  onClick={(e) => openBio(leader, e)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      openBio(leader, e);
+                    }
+                  }}
                 >
                   {/* Top index strip */}
                   <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+                    <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
                       {leader.num} · {leader.practice}
                     </span>
                     <ArrowUpRight
                       size={14}
-                      className="text-slate-300 group-hover:text-[#B38356] transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500"
+                      className="text-slate-300 group-hover:text-[#8B5E3C] transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500"
                       strokeWidth={1.5}
                     />
                   </div>
@@ -202,7 +247,7 @@ export default function LeadershipSection() {
                     {showInitials ? (
                       // Initials fallback for placeholders / failed loads
                       <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#FAFAFA] to-[#f0ece4]">
-                        <span className="font-serif text-[#B38356]/40 text-7xl md:text-8xl tracking-tight select-none">
+                        <span className="font-serif text-[#8B5E3C]/40 text-7xl md:text-8xl tracking-tight select-none">
                           {getInitials(leader.name)}
                         </span>
                       </div>
@@ -212,13 +257,15 @@ export default function LeadershipSection() {
                         alt={`Portrait of ${leader.name}`}
                         loading="lazy"
                         decoding="async"
+                        width="400"
+                        height="500"
                         onError={() =>
                           setImageErrors((prev) => ({
                             ...prev,
                             [leader.num]: true,
                           }))
                         }
-                        className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-[1.2s] ease-out"
+                        className="w-full h-full object-cover object-top md:grayscale md:group-hover:grayscale-0 transition-all duration-[1.2s] ease-out"
                       />
                     )}
 
@@ -231,10 +278,10 @@ export default function LeadershipSection() {
 
                   {/* Card body */}
                   <div className="pt-6">
-                    <h3 className="text-xl md:text-2xl font-serif text-slate-900 group-hover:text-[#B38356] transition-colors duration-300 leading-snug mb-1">
+                    <h3 className="text-xl md:text-2xl font-serif text-slate-900 group-hover:text-[#8B5E3C] transition-colors duration-300 leading-snug mb-1">
                       {leader.name}
                     </h3>
-                    <p className="text-[#B38356] text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
+                    <p className="text-[#8B5E3C] text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
                       {leader.role}
                     </p>
 
@@ -253,17 +300,17 @@ export default function LeadershipSection() {
                       ))}
                     </div>
 
-                    <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase font-bold text-slate-900 group-hover:text-[#B38356] transition-colors duration-300 border-b border-slate-300 group-hover:border-[#B38356] pb-0.5">
+                    <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase font-bold text-slate-900 group-hover:text-[#8B5E3C] transition-colors duration-300 border-b border-slate-300 group-hover:border-[#B38356] pb-0.5">
                       Read Profile
                     </span>
                   </div>
-                </article>
+                </div>
               );
             })}
           </div>
 
           {/* ═══════ BOTTOM NOTE ═══════ */}
-          <div className="mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 text-[10px] tracking-[0.2em] uppercase font-mono text-slate-400">
+          <div className="mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 text-[10px] tracking-[0.2em] uppercase font-mono text-slate-500">
             <span>
               Every engagement is led by a senior partner accountable to the
               client.
@@ -274,9 +321,18 @@ export default function LeadershipSection() {
       </section>
 
       {/* ════════ BIO MODAL ════════ */}
-      {activeBio && (
+      {/* Rendered via Portal to document.body so the modal escapes the
+          <div className="cv-auto"> wrapper in LandingPage.jsx — that
+          wrapper applies `content-visibility: auto` which establishes a
+          containing block for position:fixed descendants, causing the
+          modal to be sized to the section rather than the viewport.
+          Sits at z-[100] — above the fixed navbar (z-50) — so the bio
+          fully occupies the viewport and the navbar is hidden behind
+          the backdrop. Body scroll AND Lenis RAF loop are both paused
+          while the modal is open. */}
+      {activeBio && createPortal(
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center"
+          className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-6"
           onClick={closeBio}
         >
           {/* Backdrop */}
@@ -284,13 +340,17 @@ export default function LeadershipSection() {
 
           {/* Modal */}
           <div
-            className="relative z-10 bg-white w-[95vw] max-w-5xl max-h-[90vh] overflow-hidden flex flex-col md:flex-row animate-slideUp"
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="bio-modal-title"
+            className="relative z-10 bg-white w-full max-w-5xl max-h-[90dvh] overflow-hidden flex flex-col md:flex-row animate-slideUp"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close */}
             <button
               onClick={closeBio}
-              className="absolute top-6 right-6 z-20 w-10 h-10 flex items-center justify-center text-slate-400 hover:text-[#B38356] transition-colors duration-300 bg-white/80 backdrop-blur-sm"
+              className="absolute top-6 right-6 z-20 w-10 h-10 flex items-center justify-center text-slate-500 hover:text-[#8B5E3C] transition-colors duration-300 bg-white/80 backdrop-blur-sm"
               aria-label="Close profile"
             >
               <X size={20} />
@@ -300,7 +360,7 @@ export default function LeadershipSection() {
             <div className="relative w-full md:w-2/5 h-64 md:h-auto min-h-[300px] bg-[#FAFAFA] overflow-hidden shrink-0">
               {imageErrors[activeBio.num] || activeBio.isPlaceholder ? (
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#FAFAFA] to-[#f0ece4]">
-                  <span className="font-serif text-[#B38356]/40 text-9xl tracking-tight select-none">
+                  <span className="font-serif text-[#8B5E3C]/40 text-9xl tracking-tight select-none">
                     {getInitials(activeBio.name)}
                   </span>
                 </div>
@@ -310,22 +370,25 @@ export default function LeadershipSection() {
                   alt={`Portrait of ${activeBio.name}`}
                   loading="lazy"
                   decoding="async"
+                  width="600"
+                  height="750"
                   className="w-full h-full object-cover object-top"
                 />
               )}
-              {/* Soft gradient bleed into the content side */}
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-white" />
             </div>
 
             {/* Content side */}
             <div className="flex-1 p-8 md:p-12 overflow-y-auto bio-scroll">
-              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-2">
+              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-2">
                 {activeBio.num} · {activeBio.practice}
               </p>
-              <p className="text-[#B38356] text-[10px] font-bold tracking-[0.2em] uppercase mb-3">
+              <p className="text-[#8B5E3C] text-[10px] font-bold tracking-[0.2em] uppercase mb-3">
                 {activeBio.role}
               </p>
-              <h3 className="text-3xl md:text-4xl font-serif text-slate-900 mb-8 leading-tight">
+              <h3
+                id="bio-modal-title"
+                className="text-3xl md:text-4xl font-serif text-slate-900 mb-8 leading-tight"
+              >
                 {activeBio.name}
               </h3>
 
@@ -342,7 +405,7 @@ export default function LeadershipSection() {
 
               {/* Practice areas in modal */}
               <div className="mt-8">
-                <p className="text-[10px] tracking-[0.25em] uppercase font-bold text-slate-400 mb-3">
+                <p className="text-[10px] tracking-[0.25em] uppercase font-bold text-slate-500 mb-3">
                   Practice Areas
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -359,7 +422,7 @@ export default function LeadershipSection() {
 
               {/* Footer attribution */}
               <div className="mt-10 pt-6 border-t border-slate-200">
-                <p className="text-slate-400 text-[10px] tracking-[0.2em] uppercase font-bold">
+                <p className="text-slate-500 text-[10px] tracking-[0.2em] uppercase font-bold">
                   MEKA Consultants — A Meka Group practice
                 </p>
               </div>
@@ -382,7 +445,8 @@ export default function LeadershipSection() {
             .bio-scroll::-webkit-scrollbar-track { background: transparent; }
             .bio-scroll::-webkit-scrollbar-thumb { background: #B38356; border-radius: 2px; }
           `}</style>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

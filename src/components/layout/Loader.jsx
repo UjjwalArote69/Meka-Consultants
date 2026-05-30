@@ -157,7 +157,7 @@ export default function Loader({ onComplete }) {
         <div className="absolute top-8 right-8 md:top-12 md:right-12">
           <span
             ref={percentRef}
-            className="font-mono text-[11px] tracking-[0.15em] text-slate-400"
+            className="font-mono text-[11px] tracking-[0.15em] text-slate-500"
           >
             000
           </span>
@@ -174,7 +174,7 @@ export default function Loader({ onComplete }) {
           </span>
           <span
             ref={subBrandRef}
-            className="inline-block font-serif italic text-3xl md:text-5xl lg:text-6xl tracking-tight text-[#B38356] leading-none mt-2"
+            className="inline-block font-serif italic text-3xl md:text-5xl lg:text-6xl tracking-tight text-[#8B5E3C] leading-none mt-2"
             style={{ willChange: "transform, opacity" }}
           >
             Consultants

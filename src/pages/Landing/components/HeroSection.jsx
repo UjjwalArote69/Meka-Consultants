@@ -34,15 +34,7 @@ export default function HeroSection() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
 
-      // 1. Ambient fade in for masthead framing
-      tl.fromTo(
-        ".frame-element",
-        { y: -15, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power2.out" },
-        0.1
-      );
-
-      // 2. Centered Mask Reveal for Headline
+      // 1. Centered Mask Reveal for Headline
       tl.fromTo(
         ".hero-word-inner",
         { y: "110%", rotate: 2 },
@@ -72,17 +64,24 @@ export default function HeroSection() {
         1.1
       );
 
-      // 5. Parallax the background grid slightly on scroll
-      gsap.to(".bg-grid", {
-        yPercent: 15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+      // 5. Parallax the background grid slightly on scroll (desktop only —
+      //    a decorative effect that isn't worth its main-thread cost on mobile)
+      const isDesktop =
+        window.matchMedia("(min-width: 1024px)").matches &&
+        window.matchMedia("(pointer: fine)").matches;
+
+      if (isDesktop) {
+        gsap.to(".bg-grid", {
+          yPercent: 15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
 
     }, containerRef);
 
@@ -100,34 +99,34 @@ export default function HeroSection() {
         style={{
           backgroundImage:
             "repeating-linear-gradient(135deg, #050A15 0, #050A15 1px, transparent 1px, transparent 24px)",
+          willChange: "transform",
+          transform: "translateZ(0)",
         }}
       />
       
-      {/* Subtle Central Glow */}
-      <div className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-white opacity-80 blur-[100px] rounded-full pointer-events-none z-0" />
+      {/* Subtle Central Glow — hidden on mobile where large blur is a
+          paint hot-path for the GPU */}
+      <div className="hidden lg:block absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-white opacity-80 blur-[100px] rounded-full pointer-events-none z-0" />
 
       {/* ── MAIN CONTENT ── */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex-1 flex flex-col h-full">
-        
-     
-
         {/* ── CENTERED HERO BODY ── */}
         <div className="flex-1 flex flex-col items-center justify-center text-center mt-10 lg:mt-4 max-w-5xl mx-auto w-full">
           
           <h1 
-            className="font-serif text-slate-900 tracking-tight leading-[0.9] text-[3.5rem] md:text-7xl lg:text-[7.5rem] mb-8"
+            className="font-serif text-slate-900 tracking-tight leading-[1] text-[3.5rem] md:text-7xl lg:text-[7.5rem] mb-8"
             aria-label="You run the business. We run the people."
           >
             <span className="block flex flex-wrap justify-center gap-x-[0.2em] gap-y-2 mb-2 lg:mb-4">
               {["You", "run", "the", "business."].map((word, i) => (
-                <span key={`w1-${i}`} className="overflow-hidden block inline-flex pb-2">
+                <span key={`w1-${i}`} className="overflow-hidden block inline-flex pb-[0.22em]">
                   <span className="hero-word-inner inline-block origin-top-left">{word}</span>
                 </span>
               ))}
             </span>
-            <span className="block flex flex-wrap justify-center gap-x-[0.2em] gap-y-2 text-[#B38356] italic font-light">
+            <span className="block flex flex-wrap justify-center gap-x-[0.2em] gap-y-2 text-[#8B5E3C] italic font-light">
               {["We", "run", "the", "people."].map((word, i) => (
-                <span key={`w2-${i}`} className="overflow-hidden block inline-flex pb-2">
+                <span key={`w2-${i}`} className="overflow-hidden block inline-flex pb-[0.22em]">
                   <span className="hero-word-inner inline-block origin-top-left">{word}</span>
                 </span>
               ))}
@@ -151,7 +150,7 @@ export default function HeroSection() {
             </Link>
             <Link
               to="/services"
-              className="text-[11px] tracking-[0.25em] uppercase font-bold text-slate-500 hover:text-[#B38356] transition-colors border-b border-transparent hover:border-[#B38356] pb-1"
+              className="text-[11px] tracking-[0.25em] uppercase font-bold text-slate-500 hover:text-[#8B5E3C] transition-colors border-b border-transparent hover:border-[#B38356] pb-1"
             >
               Explore Services
             </Link>
@@ -168,19 +167,19 @@ export default function HeroSection() {
                 className="group relative block p-8 lg:p-10 hover:bg-[#FAFAFA] transition-colors duration-500"
               >
                 <div className="flex justify-between items-start mb-8">
-                  <span className="font-serif text-[#B38356] text-lg lg:text-xl italic font-light">
+                  <span className="font-serif text-[#8B5E3C] text-lg lg:text-xl italic font-light">
                     {p.num}
                   </span>
                   <ArrowUpRight
                     size={16}
-                    className="text-slate-300 group-hover:text-[#B38356] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
+                    className="text-slate-300 group-hover:text-[#8B5E3C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
                   />
                 </div>
                 
                 <div>
-                  <h3 className="font-serif text-xl text-slate-900 mb-2 group-hover:text-[#B38356] transition-colors duration-300">
+                  <h2 className="font-serif text-xl text-slate-900 mb-2 group-hover:text-[#8B5E3C] transition-colors duration-300">
                     {p.title}
-                  </h3>
+                  </h2>
                   <p className="text-[13px] text-slate-500 leading-relaxed font-light">
                     {p.desc}
                   </p>

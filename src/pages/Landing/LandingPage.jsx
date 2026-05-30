@@ -1,4 +1,5 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
 
@@ -27,6 +28,13 @@ function SectionFallback() {
 }
 
 export default function LandingPage() {
+  // Refresh ScrollTrigger once lazy sections have mounted so their
+  // triggers pick up the correct page offsets.
+  useEffect(() => {
+    const id = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => cancelAnimationFrame(id);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#B38356] selection:text-white overflow-hidden">
       <title>Meka Consultants — Engineering & Infrastructure Consulting</title>
@@ -37,10 +45,18 @@ export default function LandingPage() {
         <HeroSection />
 
         <Suspense fallback={<SectionFallback />}>
-          <MetricsSection />
-          <PhilosophySection />
-          <CapabilitiesSection />
-          <LeadershipSection />
+          <div className="cv-auto">
+            <MetricsSection />
+          </div>
+          <div className="cv-auto">
+            <PhilosophySection />
+          </div>
+          <div className="cv-auto">
+            <CapabilitiesSection />
+          </div>
+          <div className="cv-auto">
+            <LeadershipSection />
+          </div>
         </Suspense>
       </main>
 

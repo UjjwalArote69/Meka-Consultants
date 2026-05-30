@@ -82,13 +82,13 @@ export default function Footer() {
         ref={ctaRef}
         className="max-w-7xl mx-auto px-6 lg:px-12 pt-24 md:pt-32 pb-16 md:pb-20"
       >
-        <p className="text-[#B38356] text-[10px] tracking-[0.3em] uppercase font-bold mb-6 flex items-center gap-3">
+        <p className="text-[#8B5E3C] text-[10px] tracking-[0.3em] uppercase font-bold mb-6 flex items-center gap-3">
           <span className="w-8 h-px bg-[#B38356]" /> Ready to partner
         </p>
 
         <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight max-w-4xl">
           Think Smarter.{" "}
-          <span className="text-[#B38356] italic">Grow Faster.</span>{" "}
+          <span className="text-[#8B5E3C] italic">Grow Faster.</span>{" "}
           Lead Confidently.
         </h2>
 
@@ -123,7 +123,7 @@ export default function Footer() {
             <div className="md:col-span-5 footer-col">
               <Link to="/">
                 <span className="font-serif text-2xl md:text-3xl tracking-tight text-slate-900 block mb-6 hover:opacity-80 transition-opacity">
-                  MEKA <span className="text-[#B38356] italic">Consultants</span>
+                  MEKA <span className="text-[#8B5E3C] italic">Consultants</span>
                 </span>
               </Link>
               <p className="text-sm leading-relaxed max-w-sm font-light text-slate-600 mb-8">
@@ -134,7 +134,7 @@ export default function Footer() {
 
               <div className="text-sm font-light text-slate-600 space-y-3">
                 <div className="flex items-start gap-3">
-                  <MapPin size={14} className="mt-0.5 shrink-0 text-[#B38356]" />
+                  <MapPin size={14} className="mt-0.5 shrink-0 text-[#8B5E3C]" />
                   <p className="leading-relaxed">
                     20 Madhuli Dr. A B Road, Worli
                     <br />
@@ -142,25 +142,25 @@ export default function Footer() {
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Phone size={14} className="shrink-0 text-[#B38356]" />
+                  <Phone size={14} className="shrink-0 text-[#8B5E3C]" />
                   <a
                     href="tel:+912240890000"
-                    className="hover:text-[#B38356] transition-colors"
+                    className="hover:text-[#8B5E3C] transition-colors"
                   >
                     +91 22 4089 0000
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Mail size={14} className="shrink-0 text-[#B38356]" />
+                  <Mail size={14} className="shrink-0 text-[#8B5E3C]" />
                   <a
                     href="mailto:mail@meka.com"
-                    className="hover:text-[#B38356] transition-colors"
+                    className="hover:text-[#8B5E3C] transition-colors"
                   >
                     mail@meka.com
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Clock size={14} className="shrink-0 text-[#B38356]" />
+                  <Clock size={14} className="shrink-0 text-[#8B5E3C]" />
                   <span>Mon–Fri · 9am – 5pm IST</span>
                 </div>
               </div>
@@ -168,14 +168,14 @@ export default function Footer() {
 
             {/* Services */}
             <div className="md:col-span-3 md:col-start-7 footer-col">
-              <h4 className="text-slate-900 text-[10px] tracking-[0.25em] uppercase font-bold mb-6">
+              <h3 className="text-slate-900 text-[10px] tracking-[0.25em] uppercase font-bold mb-6">
                 Services
-              </h4>
+              </h3>
               <ul className="space-y-3.5 text-sm font-light text-slate-600">
                 <li>
                   <Link
                     to="/services#strategic"
-                    className="hover:text-[#B38356] transition-colors"
+                    className="hover:text-[#8B5E3C] transition-colors"
                   >
                     Strategic &amp; Management Consulting
                   </Link>
@@ -183,7 +183,7 @@ export default function Footer() {
                 <li>
                   <Link
                     to="/services#operations"
-                    className="hover:text-[#B38356] transition-colors"
+                    className="hover:text-[#8B5E3C] transition-colors"
                   >
                     Operational Excellence
                   </Link>
@@ -191,7 +191,7 @@ export default function Footer() {
                 <li>
                   <Link
                     to="/services#manpower"
-                    className="hover:text-[#B38356] transition-colors"
+                    className="hover:text-[#8B5E3C] transition-colors"
                   >
                     Outsourced Manpower Supply
                   </Link>
@@ -199,7 +199,7 @@ export default function Footer() {
                 <li>
                   <Link
                     to="/services#execution"
-                    className="hover:text-[#B38356] transition-colors"
+                    className="hover:text-[#8B5E3C] transition-colors"
                   >
                     End-to-End Execution Support
                   </Link>
@@ -209,34 +209,34 @@ export default function Footer() {
 
             {/* Navigation */}
             <div className="md:col-span-3 footer-col">
-              <h4 className="text-slate-900 text-[10px] tracking-[0.25em] uppercase font-bold mb-6">
+              <h3 className="text-slate-900 text-[10px] tracking-[0.25em] uppercase font-bold mb-6">
                 Company
-              </h4>
+              </h3>
               <ul className="space-y-3.5 text-sm font-light text-slate-600">
                 <li>
-                  <Link to="/" className="hover:text-[#B38356] transition-colors">
+                  <Link to="/" className="hover:text-[#8B5E3C] transition-colors">
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" className="hover:text-[#B38356] transition-colors">
+                  <Link to="/about" className="hover:text-[#8B5E3C] transition-colors">
                     About
                   </Link>
                 </li>
                 {/* <li>
-                  <Link to="/blog" className="hover:text-[#B38356] transition-colors">
+                  <Link to="/blog" className="hover:text-[#8B5E3C] transition-colors">
                     Insights
                   </Link>
                 </li> */}
                 <li>
-                  <Link to="/faq" className="hover:text-[#B38356] transition-colors">
+                  <Link to="/faq" className="hover:text-[#8B5E3C] transition-colors">
                     FAQ
                   </Link>
                 </li>
                 <li>
                   <Link
                     to="/contact"
-                    className="hover:text-[#B38356] transition-colors"
+                    className="hover:text-[#8B5E3C] transition-colors"
                   >
                     Get in Touch
                   </Link>
@@ -246,7 +246,7 @@ export default function Footer() {
                     href="https://meka.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 hover:text-[#B38356] transition-colors"
+                    className="inline-flex items-center gap-1 hover:text-[#8B5E3C] transition-colors"
                   >
                     Meka Group <ArrowUpRight size={12} />
                   </a>
@@ -255,8 +255,50 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* ── GROUP COMPANIES STRIP ── */}
+          <div className="mt-16 pt-8 border-t border-slate-200 footer-col">
+            <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 mb-6">
+              <h3 className="text-slate-900 text-[10px] tracking-[0.25em] uppercase font-bold">
+                Part of the Meka Group
+              </h3>
+              <span className="text-[10px] tracking-[0.2em] uppercase font-mono text-slate-500">
+                Since 1978 · 9 Practices
+              </span>
+            </div>
+
+            <ul className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 text-sm font-light text-slate-600">
+              {[
+                { name: "Amma Lines", focus: "Marine Construction", href: "https://www.ammalines.com/" },
+                { name: "Meka Dredging", focus: "Dredging & Reclamation", href: "https://mekadredging.com/" },
+                { name: "Meka Infrastructure", focus: "Urban Infrastructure", href: "https://mekainfra.com/" },
+                { name: "India Ports", focus: "Port Development", href: "https://meka.com/" },
+                { name: "Viraj Consulting", focus: "Geophysical & PMC", href: "https://meka.com/" },
+                { name: "Meka Realty", focus: "Real Estate", href: "https://meka.com/" },
+                { name: "Meka Education", focus: "Education", href: "https://meka.com/" },
+                { name: "Meka Heavy Engineering", focus: "Fabrication", href: "https://meka.com/" },
+              ].map((c) => (
+                <li key={c.name}>
+                  <a
+                    href={c.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group inline-flex flex-col hover:text-[#8B5E3C] transition-colors"
+                  >
+                    <span className="inline-flex items-center gap-1 text-slate-900 group-hover:text-[#8B5E3C] transition-colors">
+                      {c.name}
+                      <ArrowUpRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </span>
+                    <span className="text-[11px] text-slate-500 font-light tracking-wide mt-0.5">
+                      {c.focus}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* ── REGULATORY NOTE ── */}
-          <div className="mt-16 pt-8 border-t border-slate-200">
+          <div className="mt-12 pt-8 border-t border-slate-200">
             <p className="text-[11px] text-slate-500 font-light italic max-w-3xl">
               MEKA Consultants provides manpower services only. No machinery or
               equipment is supplied.
@@ -273,8 +315,12 @@ export default function Footer() {
         >
           <p>&copy; {new Date().getFullYear()} Meka Group. All rights reserved.</p>
           <div className="flex gap-6">
-            <span>Privacy Policy</span>
-            <span>Terms &amp; Conditions</span>
+            <Link to="/privacy" className="hover:text-[#8B5E3C] transition-colors">
+              Privacy Policy
+            </Link>
+            <Link to="/terms" className="hover:text-[#8B5E3C] transition-colors">
+              Terms &amp; Conditions
+            </Link>
           </div>
         </div>
       </div>

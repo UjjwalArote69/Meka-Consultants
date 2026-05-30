@@ -77,7 +77,7 @@ function DesktopNavItem({ link, currentPath, onNavClick }) {
         href={link.href}
         onClick={(e) => onNavClick(e, link.href)}
         className={`flex items-center gap-1.5 transition-colors duration-300 ${
-          isActive ? "text-[#B38356]" : "text-slate-500 hover:text-slate-900"
+          isActive ? "text-[#8B5E3C]" : "text-slate-500 hover:text-slate-900"
         }`}
       >
         {isActive && (
@@ -90,8 +90,8 @@ function DesktopNavItem({ link, currentPath, onNavClick }) {
             strokeWidth={2.5}
             className={`transition-transform duration-300 ${
               isOpen
-                ? "rotate-180 text-[#B38356]"
-                : "text-slate-400 group-hover:text-slate-900"
+                ? "rotate-180 text-[#8B5E3C]"
+                : "text-slate-500 group-hover:text-slate-900"
             }`}
           />
         )}
@@ -122,11 +122,11 @@ function DesktopNavItem({ link, currentPath, onNavClick }) {
                   className="group/link flex items-start gap-4 px-4 py-3 rounded-xl transition-colors duration-300 hover:bg-[#FAFAFA]"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-slate-800 group-hover/link:text-[#B38356] transition-colors">
+                    <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-slate-800 group-hover/link:text-[#8B5E3C] transition-colors">
                       {child.label}
                     </p>
                   </div>
-                  <span className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#B38356] shrink-0 mt-0.5">
+                  <span className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#8B5E3C] shrink-0 mt-0.5">
                     →
                   </span>
                 </a>
@@ -173,8 +173,8 @@ function MobileNavItem({ link, currentPath, onNavClick, onClose }) {
         <span
           className={`font-serif text-4xl font-light leading-none transition-colors duration-300 ${
             isActive
-              ? "text-[#B38356]"
-              : "text-white group-hover:text-[#B38356]"
+              ? "text-[#8B5E3C]"
+              : "text-white group-hover:text-[#8B5E3C]"
           }`}
         >
           {link.label}
@@ -185,7 +185,7 @@ function MobileNavItem({ link, currentPath, onNavClick, onClose }) {
             size={20}
             strokeWidth={1.5}
             className={`text-white/40 transition-all duration-500 ${
-              isExpanded ? "rotate-180 text-[#B38356]" : ""
+              isExpanded ? "rotate-180 text-[#8B5E3C]" : ""
             }`}
           />
         )}
@@ -203,7 +203,7 @@ function MobileNavItem({ link, currentPath, onNavClick, onClose }) {
                   key={child.href}
                   href={child.href}
                   onClick={(e) => handleChildClick(e, child.href)}
-                  className="block text-slate-400 text-sm font-light leading-snug hover:text-[#B38356] transition-colors"
+                  className="block text-slate-500 text-sm font-light leading-snug hover:text-[#8B5E3C] transition-colors"
                 >
                   {child.label}
                 </a>
@@ -312,6 +312,12 @@ export default function Navbar() {
       {/* ═══════════════════════════════════════════ */}
       <div
         ref={mobilePanelRef}
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Main menu"
+        aria-hidden={!isMobileMenuOpen}
+        inert={!isMobileMenuOpen}
         className={`fixed inset-0 z-[100] bg-[#050A15] text-white transition-transform duration-[0.8s] ease-[cubic-bezier(0.76,0,0.24,1)] flex flex-col ${
           isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
         }`}
@@ -320,13 +326,13 @@ export default function Navbar() {
         <div className="flex justify-between items-center px-6 md:px-8 pt-6 pb-6">
           <span className="font-serif text-xl tracking-wide text-white">
             MEKA{" "}
-            <span className="text-[#B38356] italic font-light">
+            <span className="text-[#8B5E3C] italic font-light">
               Consultants
             </span>
           </span>
           <button
             onClick={() => setIsMobileMenuOpen(false)}
-            className="w-10 h-10 flex items-center justify-center text-white hover:text-[#B38356] transition-colors"
+            className="w-10 h-10 flex items-center justify-center text-white hover:text-[#8B5E3C] transition-colors"
             aria-label="Close menu"
           >
             <X size={24} strokeWidth={1.5} />
@@ -363,14 +369,14 @@ export default function Navbar() {
           <div className="mobile-footer-el mt-5 flex items-center justify-center gap-4 text-xs font-light text-slate-500">
             <a
               href="mailto:mail@meka.com"
-              className="hover:text-[#B38356] transition-colors"
+              className="hover:text-[#8B5E3C] transition-colors"
             >
               mail@meka.com
             </a>
             <span className="w-1 h-1 rounded-full bg-slate-700" />
             <a
               href="tel:+912240890000"
-              className="hover:text-[#B38356] transition-colors"
+              className="hover:text-[#8B5E3C] transition-colors"
             >
               +91 22 4089 0000
             </a>
@@ -421,8 +427,10 @@ export default function Navbar() {
             <div className="flex lg:hidden items-center">
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="text-slate-900 p-2 hover:text-[#B38356] transition-colors"
+                className="text-slate-900 p-2 hover:text-[#8B5E3C] transition-colors"
                 aria-label="Open menu"
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-menu"
               >
                 <Menu size={28} strokeWidth={1.5} />
               </button>

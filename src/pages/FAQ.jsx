@@ -37,7 +37,7 @@ const faqSections = [
       {
         num: "1.1",
         q: "What does MEKA Consultants do?",
-        a: "MEKA Consultants is a professional services firm specializing in business consulting and outsourced manpower supply. Operating under the Meka Group — founded in 1986 — we help organizations improve decision-making, strengthen operations, and deploy the right people at the right scale.",
+        a: "MEKA Consultants is a professional services firm specializing in business consulting and outsourced manpower supply. Operating under the Meka Group — founded in 1978 — we help organizations improve decision-making, strengthen operations, and deploy the right people at the right scale.",
       },
       {
         num: "1.2",
@@ -289,7 +289,7 @@ export default function FAQ() {
       {/* MASTHEAD                                                     */}
       {/* ═══════════════════════════════════════════════════════════ */}
       <section className="relative pt-40 pb-20 lg:pt-52 lg:pb-24 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-12 flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-12 flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
           <span className="faq-meta">File · MC-2026-01</span>
           <span className="faq-meta">§ IX · FAQ</span>
           <span className="faq-meta">
@@ -299,17 +299,17 @@ export default function FAQ() {
 
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="overflow-hidden mb-6">
-            <p className="faq-hero-line text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4">
+            <p className="faq-hero-line text-[#8B5E3C] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4">
               <span className="w-8 h-px bg-[#B38356]" /> Frequently Asked
             </p>
           </div>
 
-          <h1 className="font-serif text-slate-900 tracking-tight leading-[0.95] text-5xl md:text-7xl lg:text-[7rem] mb-10">
-            <span className="block overflow-hidden">
+          <h1 className="font-serif text-slate-900 tracking-tight leading-[1.05] text-5xl md:text-7xl lg:text-[7rem] mb-10">
+            <span className="block overflow-hidden pb-[0.18em] -mb-[0.18em]">
               <span className="faq-hero-line inline-block">Questions,</span>
             </span>
-            <span className="block overflow-hidden">
-              <span className="faq-hero-line inline-block text-[#B38356] italic font-light">
+            <span className="block overflow-hidden pb-[0.18em] -mb-[0.18em]">
+              <span className="faq-hero-line inline-block text-[#8B5E3C] italic font-light">
                 answered.
               </span>
             </span>
@@ -318,7 +318,7 @@ export default function FAQ() {
           <p className="faq-hero-desc max-w-2xl text-slate-600 text-base md:text-lg leading-relaxed font-light">
             A reference on how we work — from engagement structure to
             discipline scope to deployed manpower. Can't find what you're
-            looking for? <Link to="/contact" className="text-slate-900 border-b border-slate-300 hover:border-[#B38356] hover:text-[#B38356] transition-colors pb-0.5">Start a conversation</Link>.
+            looking for? <Link to="/contact" className="text-slate-900 border-b border-slate-300 hover:border-[#B38356] hover:text-[#8B5E3C] transition-colors pb-0.5">Start a conversation</Link>.
           </p>
         </div>
       </section>
@@ -328,7 +328,7 @@ export default function FAQ() {
       {/* ═══════════════════════════════════════════════════════════ */}
       <div className="faq-filter-bar sticky top-[88px] z-30 bg-[#FAFAFA]/95 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center gap-4 overflow-x-auto">
-          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 flex items-center gap-2 shrink-0">
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 flex items-center gap-2 shrink-0">
             <Filter size={12} />
             Navigator
           </span>
@@ -343,7 +343,7 @@ export default function FAQ() {
                   className={`group inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] tracking-[0.15em] uppercase font-bold transition-all duration-300 ${
                     isActive
                       ? "bg-slate-900 text-white"
-                      : "bg-white border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#B38356]"
+                      : "bg-white border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#8B5E3C]"
                   }`}
                 >
                   <span>{f.label}</span>
@@ -351,7 +351,7 @@ export default function FAQ() {
                     className={`font-mono text-[9px] ${
                       isActive
                         ? "text-white/60"
-                        : "text-slate-400 group-hover:text-[#B38356]/70"
+                        : "text-slate-500 group-hover:text-[#8B5E3C]/70"
                     }`}
                   >
                     {f.count}
@@ -364,14 +364,14 @@ export default function FAQ() {
           <div className="ml-auto shrink-0 flex items-center gap-4 text-[10px] tracking-[0.2em] uppercase font-bold">
             <button
               onClick={expandAll}
-              className="text-slate-500 hover:text-[#B38356] transition-colors"
+              className="text-slate-500 hover:text-[#8B5E3C] transition-colors"
             >
               Expand All
             </button>
             <span className="w-px h-3 bg-slate-300" />
             <button
               onClick={collapseAll}
-              className="text-slate-500 hover:text-[#B38356] transition-colors"
+              className="text-slate-500 hover:text-[#8B5E3C] transition-colors"
             >
               Collapse
             </button>
@@ -397,10 +397,10 @@ export default function FAQ() {
               {/* Section header */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-10 md:mb-14">
                 <div className="lg:col-span-3">
-                  <p className="section-header-el font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-3">
+                  <p className="section-header-el font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-3">
                     § {section.num} · Section
                   </p>
-                  <span className="section-header-el font-serif text-7xl md:text-8xl text-[#B38356] leading-none inline-block">
+                  <span className="section-header-el font-serif text-7xl md:text-8xl text-[#8B5E3C] leading-none inline-block">
                     {section.num}
                   </span>
                 </div>
@@ -409,10 +409,10 @@ export default function FAQ() {
                   <h2 className="section-header-el font-serif text-3xl md:text-5xl text-slate-900 leading-[1.05] mb-4">
                     {section.title}
                   </h2>
-                  <p className="section-header-el font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400">
+                  <p className="section-header-el font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500">
                     {section.items.length}{" "}
                     {section.items.length === 1 ? "question" : "questions"} ·{" "}
-                    <span className="text-[#B38356]">
+                    <span className="text-[#8B5E3C]">
                       {section.num}.1 – {section.num}.{section.items.length}
                     </span>
                   </p>
@@ -445,13 +445,16 @@ export default function FAQ() {
                         className="w-full flex items-start gap-4 md:gap-6 text-left p-5 md:p-7"
                         aria-expanded={isOpen}
                       >
-                        <span className="font-mono text-[11px] tracking-[0.15em] text-[#B38356] font-bold shrink-0 pt-1.5 w-8">
+                        <span className="sr-only">
+                          {isOpen ? "Collapse" : "Expand"}
+                        </span>
+                        <span className="font-mono text-[11px] tracking-[0.15em] text-[#8B5E3C] font-bold shrink-0 pt-1.5 w-8">
                           {item.num}
                         </span>
 
                         <h3
                           className={`flex-1 font-serif text-lg md:text-xl leading-snug transition-colors duration-300 ${
-                            isOpen ? "text-[#B38356]" : "text-slate-900"
+                            isOpen ? "text-[#8B5E3C]" : "text-slate-900"
                           }`}
                         >
                           {item.q}
@@ -461,7 +464,7 @@ export default function FAQ() {
                           className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-500 ${
                             isOpen
                               ? "border-[#B38356] bg-[#B38356] text-white rotate-45"
-                              : "border-slate-200 text-slate-400"
+                              : "border-slate-200 text-slate-500"
                           }`}
                           aria-hidden="true"
                         >
@@ -482,7 +485,7 @@ export default function FAQ() {
                               <div className="mb-4 flex items-start gap-3 p-4 border border-[#B38356]/30 bg-[#B38356]/5 text-sm">
                                 <AlertCircle
                                   size={16}
-                                  className="text-[#B38356] mt-0.5 shrink-0"
+                                  className="text-[#8B5E3C] mt-0.5 shrink-0"
                                   strokeWidth={1.5}
                                 />
                                 <p className="text-slate-700 italic font-light leading-relaxed">
@@ -505,7 +508,7 @@ export default function FAQ() {
           ))}
 
           {visibleSections.length === 0 && (
-            <div className="py-32 text-center text-slate-400 text-sm">
+            <div className="py-32 text-center text-slate-500 text-sm">
               No questions match the selected filter.
             </div>
           )}
@@ -517,7 +520,7 @@ export default function FAQ() {
       {/* BOTTOM NOTE                                                  */}
       {/* ═══════════════════════════════════════════════════════════ */}
       <div className="border-t border-slate-200 bg-[#FAFAFA]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500">
           <span>
             Answers reviewed quarterly · Last revised April 2026.
           </span>

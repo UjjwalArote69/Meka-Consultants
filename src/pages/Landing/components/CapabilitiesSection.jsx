@@ -135,12 +135,12 @@ export default function CapabilitiesSection() {
         {/* ═══════ HEADER ═══════ */}
         <div className="cap-header mb-16 lg:mb-28 flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-slate-200">
           <div className="max-w-3xl">
-            <p className="cap-header-el text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase mb-6 flex items-center gap-4">
+            <p className="cap-header-el text-[#8B5E3C] font-bold tracking-[0.3em] text-[10px] uppercase mb-6 flex items-center gap-4">
               <span className="w-8 h-px bg-[#B38356]" /> Our Practice
             </p>
             <h2 className="cap-header-el text-4xl md:text-5xl lg:text-6xl font-serif text-slate-900 leading-[1.1] tracking-tight">
               Four disciplines.{" "}
-              <span className="text-[#B38356] italic font-light">
+              <span className="text-[#8B5E3C] italic font-light">
                 One accountable partner.
               </span>
             </h2>
@@ -175,7 +175,7 @@ export default function CapabilitiesSection() {
                     
                     {/* Index number */}
                     <div className="md:col-span-1 hidden md:block">
-                      <span className="font-serif text-[#B38356] text-3xl lg:text-4xl tracking-tight italic font-light">
+                      <span className="font-serif text-[#8B5E3C] text-3xl lg:text-4xl tracking-tight italic font-light">
                         {service.num}
                       </span>
                     </div>
@@ -183,17 +183,17 @@ export default function CapabilitiesSection() {
                     {/* Title + tagline + icon */}
                     <div className="md:col-span-5 transform group-hover:translate-x-2 transition-transform duration-500 ease-out">
                       <div className="flex items-start gap-5 mb-3">
-                        <div className="w-12 h-12 shrink-0 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:border-[#B38356] group-hover:text-[#B38356] group-hover:bg-white transition-all duration-500">
+                        <div className="w-12 h-12 shrink-0 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 group-hover:border-[#B38356] group-hover:text-[#8B5E3C] group-hover:bg-white transition-all duration-500">
                           <Icon size={18} strokeWidth={1.5} aria-hidden="true" />
                         </div>
                         <div className="flex-1 min-w-0 pt-1">
-                          <span className="md:hidden font-serif text-[#B38356] text-xl tracking-tight italic font-light block mb-2">
+                          <span className="md:hidden font-serif text-[#8B5E3C] text-xl tracking-tight italic font-light block mb-2">
                             {service.num}
                           </span>
-                          <h3 className="text-2xl lg:text-3xl font-serif text-slate-900 group-hover:text-[#B38356] transition-colors duration-300 leading-tight">
+                          <h3 className="text-2xl lg:text-3xl font-serif text-slate-900 group-hover:text-[#8B5E3C] transition-colors duration-300 leading-tight">
                             {service.title}
                           </h3>
-                          <p className="text-[#B38356] italic text-sm font-light mt-2">
+                          <p className="text-[#8B5E3C] italic text-sm font-light mt-2">
                             {service.tagline}
                           </p>
                         </div>
@@ -206,7 +206,7 @@ export default function CapabilitiesSection() {
                         {service.desc}
                       </p>
 
-                      <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400 mb-5">
+                      <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500 mb-5">
                         {service.engagement}
                       </p>
 
@@ -214,7 +214,7 @@ export default function CapabilitiesSection() {
                         {service.tags.map((tag, tIdx) => (
                           <span
                             key={tIdx}
-                            className="row-tag text-[9px] tracking-[0.15em] uppercase font-bold px-3 py-1.5 border border-slate-200 text-slate-500 group-hover:border-[#B38356]/30 group-hover:text-[#B38356] group-hover:bg-[#B38356]/5 transition-all duration-500"
+                            className="row-tag text-[9px] tracking-[0.15em] uppercase font-bold px-3 py-1.5 border border-slate-200 text-slate-500 group-hover:border-[#B38356]/30 group-hover:text-[#8B5E3C] group-hover:bg-[#B38356]/5 transition-all duration-500"
                             style={{ transitionDelay: `${tIdx * 40}ms` }}
                           >
                             {tag}
@@ -228,7 +228,7 @@ export default function CapabilitiesSection() {
                       <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-[#B38356] transition-colors duration-500">
                         <ArrowUpRight
                           size={18}
-                          className="text-slate-400 group-hover:text-white transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500"
+                          className="text-slate-500 group-hover:text-white transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500"
                           strokeWidth={2}
                           aria-hidden="true"
                         />
@@ -242,14 +242,14 @@ export default function CapabilitiesSection() {
         </ul>
 
         {/* ═══════ BOTTOM NOTE ═══════ */}
-        <div className="mt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[10px] tracking-[0.2em] uppercase font-mono text-slate-400">
+        <div className="mt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[10px] tracking-[0.2em] uppercase font-mono text-slate-500">
           <span className="flex items-center gap-3">
             <span className="w-1.5 h-1.5 bg-[#B38356] rounded-full" />
             Mandates often combine disciplines under a single accountable lead.
           </span>
           <Link
             to="/services"
-            className="text-slate-900 hover:text-[#B38356] font-bold transition-colors border-b border-slate-300 hover:border-[#B38356] pb-1"
+            className="text-slate-900 hover:text-[#8B5E3C] font-bold transition-colors border-b border-slate-300 hover:border-[#B38356] pb-1"
           >
             See full service index →
           </Link>

@@ -172,7 +172,7 @@ export default function Blog() {
       {/* MASTHEAD                                                     */}
       {/* ═══════════════════════════════════════════════════════════ */}
       <section className="relative pt-40 pb-20 lg:pt-52 lg:pb-24 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-12 flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-12 flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
           <span className="blog-meta">File · MC-2026-01</span>
           <span className="blog-meta">§ VII · The Journal</span>
           <span className="blog-meta">{posts.length} Entries · Vol. 01</span>
@@ -180,17 +180,17 @@ export default function Blog() {
 
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="overflow-hidden mb-6">
-            <p className="blog-hero-line text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4">
+            <p className="blog-hero-line text-[#8B5E3C] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4">
               <span className="w-8 h-px bg-[#B38356]" /> Insights & Field Notes
             </p>
           </div>
 
-          <h1 className="font-serif text-slate-900 tracking-tight leading-[0.95] text-5xl md:text-7xl lg:text-[7rem] mb-10">
-            <span className="block overflow-hidden">
+          <h1 className="font-serif text-slate-900 tracking-tight leading-[1.05] text-5xl md:text-7xl lg:text-[7rem] mb-10">
+            <span className="block overflow-hidden pb-[0.05em]">
               <span className="blog-hero-line inline-block">Notes from</span>
             </span>
-            <span className="block overflow-hidden">
-              <span className="blog-hero-line inline-block text-[#B38356] italic font-light">
+            <span className="block overflow-hidden pb-[0.18em] -mb-[0.18em]">
+              <span className="blog-hero-line inline-block text-[#8B5E3C] italic font-light">
                 the practice.
               </span>
             </span>
@@ -209,7 +209,7 @@ export default function Blog() {
       {/* ═══════════════════════════════════════════════════════════ */}
       <div className="blog-filter-bar sticky top-[88px] z-30 bg-[#FAFAFA]/95 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center gap-4 overflow-x-auto">
-          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 flex items-center gap-2 shrink-0">
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 flex items-center gap-2 shrink-0">
             <Filter size={12} />
             Categories
           </span>
@@ -228,7 +228,7 @@ export default function Blog() {
                   className={`group inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] tracking-[0.15em] uppercase font-bold transition-all duration-300 ${
                     isActive
                       ? "bg-slate-900 text-white"
-                      : "bg-white border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#B38356]"
+                      : "bg-white border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#8B5E3C]"
                   }`}
                 >
                   <span>{c.label}</span>
@@ -236,7 +236,7 @@ export default function Blog() {
                     className={`font-mono text-[9px] ${
                       isActive
                         ? "text-white/60"
-                        : "text-slate-400 group-hover:text-[#B38356]/70"
+                        : "text-slate-500 group-hover:text-[#8B5E3C]/70"
                     }`}
                   >
                     {count}
@@ -250,7 +250,7 @@ export default function Blog() {
           <div className="ml-auto shrink-0 relative">
             <Search
               size={14}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none"
             />
             <input
               type="text"
@@ -269,7 +269,7 @@ export default function Blog() {
       {featured && (
         <section className="featured-section py-16 md:py-24 border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <p className="featured-el font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-8">
+            <p className="featured-el font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-8">
               Featured · Latest Entry
             </p>
 
@@ -282,12 +282,12 @@ export default function Blog() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#B38356]/20 via-transparent to-transparent" />
                 <div className="absolute top-8 left-8 flex items-center gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#B38356]" />
-                  <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-[#B38356]">
+                  <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-[#8B5E3C]">
                     {featured.categoryLabel}
                   </span>
                 </div>
                 <div className="absolute bottom-8 left-8">
-                  <p className="font-serif text-[#B38356] text-sm tracking-tight mb-1">
+                  <p className="font-serif text-[#8B5E3C] text-sm tracking-tight mb-1">
                     Entry
                   </p>
                   <p className="font-serif text-white text-6xl md:text-8xl leading-none tracking-tight">
@@ -301,7 +301,7 @@ export default function Blog() {
 
               {/* Content */}
               <div className="lg:col-span-6 flex flex-col justify-center">
-                <div className="flex items-center gap-4 mb-6 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+                <div className="flex items-center gap-4 mb-6 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
                   <span>{featured.date}</span>
                   <span className="w-4 h-px bg-slate-300" />
                   <span className="flex items-center gap-1.5">
@@ -310,7 +310,7 @@ export default function Blog() {
                   </span>
                 </div>
 
-                <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-slate-900 leading-[1.05] mb-6 group-hover:text-[#B38356] transition-colors duration-500">
+                <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-slate-900 leading-[1.05] mb-6 group-hover:text-[#8B5E3C] transition-colors duration-500">
                   {featured.title}
                 </h2>
 
@@ -318,7 +318,7 @@ export default function Blog() {
                   {featured.excerpt}
                 </p>
 
-                <div className="flex items-center gap-3 text-[10px] tracking-[0.25em] uppercase font-bold text-slate-900 group-hover:text-[#B38356] transition-colors duration-300">
+                <div className="flex items-center gap-3 text-[10px] tracking-[0.25em] uppercase font-bold text-slate-900 group-hover:text-[#8B5E3C] transition-colors duration-300">
                   <span className="border-b border-slate-300 group-hover:border-[#B38356] pb-0.5">
                     Read the Entry
                   </span>
@@ -340,7 +340,7 @@ export default function Blog() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {paginatedPosts.length === 0 ? (
             <div className="py-32 text-center">
-              <p className="text-slate-400 text-sm mb-4">
+              <p className="text-slate-500 text-sm mb-4">
                 No entries match the current filter.
               </p>
               <button
@@ -348,7 +348,7 @@ export default function Blog() {
                   setActiveCategory("all");
                   setSearchQuery("");
                 }}
-                className="text-[10px] tracking-[0.25em] uppercase font-bold text-slate-900 hover:text-[#B38356] border-b border-slate-300 hover:border-[#B38356] pb-0.5 transition-colors"
+                className="text-[10px] tracking-[0.25em] uppercase font-bold text-slate-900 hover:text-[#8B5E3C] border-b border-slate-300 hover:border-[#B38356] pb-0.5 transition-colors"
               >
                 Clear filters
               </button>
@@ -356,19 +356,19 @@ export default function Blog() {
           ) : (
             <>
               <div className="flex justify-between items-end mb-10">
-                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
                   {filtered.length}{" "}
                   {filtered.length === 1 ? "entry" : "entries"}
                   {activeCategory !== "all" && (
                     <>
                       {" · "}
-                      <span className="text-[#B38356]">
+                      <span className="text-[#8B5E3C]">
                         {categories.find((c) => c.id === activeCategory)?.label}
                       </span>
                     </>
                   )}
                 </p>
-                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 hidden md:block">
+                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 hidden md:block">
                   Page {currentPage} of {totalPages}
                 </p>
               </div>
@@ -384,23 +384,23 @@ export default function Blog() {
                     <div className="relative aspect-[16/9] bg-gradient-to-br from-[#FAFAFA] via-white to-[#B38356]/10 overflow-hidden border-b border-slate-200 group-hover:border-[#B38356] transition-colors duration-500">
                       <div className="absolute top-5 left-5 flex items-center gap-2">
                         <span className="w-1 h-1 rounded-full bg-[#B38356]" />
-                        <span className="font-mono text-[9px] tracking-[0.25em] uppercase text-[#B38356] font-bold">
+                        <span className="font-mono text-[9px] tracking-[0.25em] uppercase text-[#8B5E3C] font-bold">
                           {post.categoryLabel}
                         </span>
                       </div>
                       <div className="absolute bottom-4 right-5">
-                        <p className="font-serif text-[#B38356]/40 group-hover:text-[#B38356] text-6xl md:text-7xl leading-none tracking-tight transition-colors duration-500">
+                        <p className="font-serif text-[#8B5E3C]/40 group-hover:text-[#8B5E3C] text-6xl md:text-7xl leading-none tracking-tight transition-colors duration-500">
                           {post.num}
                         </p>
                       </div>
-                      <div className="absolute top-5 right-5 font-mono text-[9px] tracking-[0.2em] uppercase text-slate-400">
+                      <div className="absolute top-5 right-5 font-mono text-[9px] tracking-[0.2em] uppercase text-slate-500">
                         Journal
                       </div>
                     </div>
 
                     {/* Body */}
                     <div className="p-6 md:p-8 flex-1 flex flex-col">
-                      <div className="flex items-center gap-3 mb-4 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400">
+                      <div className="flex items-center gap-3 mb-4 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500">
                         <span>{post.date}</span>
                         <span className="w-3 h-px bg-slate-300" />
                         <span className="flex items-center gap-1">
@@ -409,7 +409,7 @@ export default function Blog() {
                         </span>
                       </div>
 
-                      <h3 className="font-serif text-xl md:text-2xl text-slate-900 group-hover:text-[#B38356] transition-colors duration-300 leading-snug mb-4">
+                      <h3 className="font-serif text-xl md:text-2xl text-slate-900 group-hover:text-[#8B5E3C] transition-colors duration-300 leading-snug mb-4">
                         {post.title}
                       </h3>
 
@@ -417,7 +417,7 @@ export default function Blog() {
                         {post.excerpt}
                       </p>
 
-                      <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase font-bold text-slate-900 group-hover:text-[#B38356] transition-colors duration-300">
+                      <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase font-bold text-slate-900 group-hover:text-[#8B5E3C] transition-colors duration-300">
                         <span className="border-b border-slate-300 group-hover:border-[#B38356] pb-0.5">
                           Read More
                         </span>
@@ -439,7 +439,7 @@ export default function Blog() {
                       setCurrentPage((p) => Math.max(1, p - 1))
                     }
                     disabled={currentPage === 1}
-                    className="w-10 h-10 flex items-center justify-center border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#B38356] transition-colors duration-300 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-slate-200 disabled:hover:text-slate-500"
+                    className="w-10 h-10 flex items-center justify-center border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#8B5E3C] transition-colors duration-300 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-slate-200 disabled:hover:text-slate-500"
                     aria-label="Previous page"
                   >
                     <ChevronLeft size={16} />
@@ -453,7 +453,7 @@ export default function Blog() {
                         className={`w-10 h-10 flex items-center justify-center font-mono text-[11px] tracking-[0.1em] font-bold transition-colors duration-300 ${
                           currentPage === p
                             ? "bg-slate-900 text-white"
-                            : "border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#B38356]"
+                            : "border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#8B5E3C]"
                         }`}
                       >
                         {String(p).padStart(2, "0")}
@@ -466,7 +466,7 @@ export default function Blog() {
                       setCurrentPage((p) => Math.min(totalPages, p + 1))
                     }
                     disabled={currentPage === totalPages}
-                    className="w-10 h-10 flex items-center justify-center border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#B38356] transition-colors duration-300 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-slate-200 disabled:hover:text-slate-500"
+                    className="w-10 h-10 flex items-center justify-center border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#8B5E3C] transition-colors duration-300 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-slate-200 disabled:hover:text-slate-500"
                     aria-label="Next page"
                   >
                     <ChevronRight size={16} />
@@ -485,7 +485,7 @@ export default function Blog() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
           {/* Categories */}
           <div className="widget-el">
-            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-6">
+            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-6">
               Categories
             </p>
             <ul className="space-y-3">
@@ -504,10 +504,10 @@ export default function Blog() {
                         }}
                         className="group flex items-center justify-between w-full text-left py-2 border-b border-slate-100 hover:border-[#B38356]/30 transition-colors duration-300"
                       >
-                        <span className="font-serif text-lg text-slate-700 group-hover:text-[#B38356] transition-colors duration-300">
+                        <span className="font-serif text-lg text-slate-700 group-hover:text-[#8B5E3C] transition-colors duration-300">
                           {c.label}
                         </span>
-                        <span className="font-mono text-[10px] tracking-[0.2em] text-slate-400 group-hover:text-[#B38356]">
+                        <span className="font-mono text-[10px] tracking-[0.2em] text-slate-500 group-hover:text-[#8B5E3C]">
                           {String(count).padStart(2, "0")}
                         </span>
                       </button>
@@ -519,14 +519,14 @@ export default function Blog() {
 
           {/* Tags */}
           <div className="widget-el">
-            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-6">
+            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-6">
               Tags
             </p>
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-[9px] tracking-[0.12em] uppercase font-bold px-3 py-1.5 border border-slate-200 text-slate-500 hover:border-[#B38356]/40 hover:text-[#B38356] transition-colors duration-300 cursor-default"
+                  className="text-[9px] tracking-[0.12em] uppercase font-bold px-3 py-1.5 border border-slate-200 text-slate-500 hover:border-[#B38356]/40 hover:text-[#8B5E3C] transition-colors duration-300 cursor-default"
                 >
                   {tag}
                 </span>
@@ -536,7 +536,7 @@ export default function Blog() {
 
           {/* Subscribe */}
           <div className="widget-el">
-            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-6">
+            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-6">
               Subscribe
             </p>
             <h4 className="font-serif text-lg text-slate-900 mb-3 leading-snug">
@@ -560,7 +560,7 @@ export default function Blog() {
               />
               <button
                 type="submit"
-                className="text-[10px] tracking-[0.25em] uppercase font-bold text-slate-900 hover:text-[#B38356] transition-colors"
+                className="text-[10px] tracking-[0.25em] uppercase font-bold text-slate-900 hover:text-[#8B5E3C] transition-colors"
               >
                 Send →
               </button>
@@ -573,14 +573,14 @@ export default function Blog() {
       {/* BOTTOM NOTE                                                  */}
       {/* ═══════════════════════════════════════════════════════════ */}
       <div className="border-t border-slate-200 bg-[#FAFAFA]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500">
           <span>
             All entries reflect the views of the authors, not specific client
             engagements.
           </span>
           <Link
             to="/services"
-            className="text-slate-900 hover:text-[#B38356] transition-colors border-b border-slate-300 hover:border-[#B38356] pb-0.5"
+            className="text-slate-900 hover:text-[#8B5E3C] transition-colors border-b border-slate-300 hover:border-[#B38356] pb-0.5"
           >
             Review services →
           </Link>

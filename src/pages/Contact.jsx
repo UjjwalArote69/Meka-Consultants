@@ -246,7 +246,7 @@ export default function Contact() {
         ref={heroRef}
         className="relative pt-40 pb-20 lg:pt-52 lg:pb-24 border-b border-slate-200"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-12 flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-12 flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
           <span ref={(el) => addToRefs(el, metaRefs)}>File · MC-2026-01</span>
           <span ref={(el) => addToRefs(el, metaRefs)}>§ VIII · Correspondence</span>
           <span ref={(el) => addToRefs(el, metaRefs)}>Mumbai, India</span>
@@ -257,14 +257,14 @@ export default function Contact() {
             <div className="overflow-hidden mb-6">
               <p
                 ref={(el) => addToRefs(el, heroTextRefs)}
-                className="text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4"
+                className="text-[#8B5E3C] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4"
               >
                 <span className="w-8 h-px bg-[#B38356]" /> Get in Touch
               </p>
             </div>
 
-            <h1 className="font-serif text-slate-900 tracking-tight leading-[0.95] text-5xl md:text-7xl lg:text-[7rem]">
-              <span className="block overflow-hidden">
+            <h1 className="font-serif text-slate-900 tracking-tight leading-[1.05] text-5xl md:text-7xl lg:text-[7rem]">
+              <span className="block overflow-hidden pb-[0.18em] -mb-[0.18em]">
                 <span
                   ref={(el) => addToRefs(el, heroTextRefs)}
                   className="inline-block"
@@ -272,10 +272,10 @@ export default function Contact() {
                   Start a
                 </span>
               </span>
-              <span className="block overflow-hidden">
+              <span className="block overflow-hidden pb-[0.18em] -mb-[0.18em]">
                 <span
                   ref={(el) => addToRefs(el, heroTextRefs)}
-                  className="inline-block text-[#B38356] italic font-light"
+                  className="inline-block text-[#8B5E3C] italic font-light"
                 >
                   conversation.
                 </span>
@@ -305,12 +305,12 @@ export default function Contact() {
             {/* LEFT: Form */}
             <div className="lg:col-span-7">
               <div className="mb-12">
-                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-3">
+                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-3">
                   § VIII.a
                 </p>
                 <h2 className="font-serif text-3xl md:text-4xl text-slate-900 mb-4 leading-tight">
                   Direct{" "}
-                  <span className="italic text-[#B38356] font-light">
+                  <span className="italic text-[#8B5E3C] font-light">
                     inquiry.
                   </span>
                 </h2>
@@ -337,7 +337,7 @@ export default function Contact() {
                     />
                     <label
                       htmlFor="name"
-                      className="absolute left-0 top-4 text-slate-400 font-light text-sm transition-all duration-300 peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-[#B38356] peer-focus:tracking-wider peer-focus:uppercase peer-valid:-top-3 peer-valid:text-[10px] peer-valid:tracking-wider peer-valid:uppercase"
+                      className="absolute left-0 top-4 text-slate-500 font-light text-sm transition-all duration-300 peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-[#8B5E3C] peer-focus:tracking-wider peer-focus:uppercase peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:tracking-wider peer-[:not(:placeholder-shown)]:uppercase"
                     >
                       Full Name
                     </label>
@@ -353,7 +353,7 @@ export default function Contact() {
                     />
                     <label
                       htmlFor="email"
-                      className="absolute left-0 top-4 text-slate-400 font-light text-sm transition-all duration-300 peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-[#B38356] peer-focus:tracking-wider peer-focus:uppercase peer-valid:-top-3 peer-valid:text-[10px] peer-valid:tracking-wider peer-valid:uppercase"
+                      className="absolute left-0 top-4 text-slate-500 font-light text-sm transition-all duration-300 peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-[#8B5E3C] peer-focus:tracking-wider peer-focus:uppercase peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:tracking-wider peer-[:not(:placeholder-shown)]:uppercase"
                     >
                       Corporate Email
                     </label>
@@ -371,7 +371,7 @@ export default function Contact() {
                     />
                     <label
                       htmlFor="company"
-                      className="absolute left-0 top-4 text-slate-400 font-light text-sm transition-all duration-300 peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-[#B38356] peer-focus:tracking-wider peer-focus:uppercase peer-valid:-top-3 peer-valid:text-[10px] peer-valid:tracking-wider peer-valid:uppercase"
+                      className="absolute left-0 top-4 text-slate-500 font-light text-sm transition-all duration-300 peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-[#8B5E3C] peer-focus:tracking-wider peer-focus:uppercase peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:tracking-wider peer-[:not(:placeholder-shown)]:uppercase"
                     >
                       Company / Organization
                     </label>
@@ -395,7 +395,7 @@ export default function Contact() {
                     </select>
                     <label
                       htmlFor="inquiry"
-                      className="absolute left-0 -top-3 text-[10px] text-slate-400 tracking-wider uppercase font-light"
+                      className="absolute left-0 -top-3 text-[10px] text-slate-500 tracking-wider uppercase font-light"
                     >
                       Discipline
                     </label>
@@ -412,7 +412,7 @@ export default function Contact() {
                   />
                   <label
                     htmlFor="message"
-                    className="absolute left-0 top-4 text-slate-400 font-light text-sm transition-all duration-300 peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-[#B38356] peer-focus:tracking-wider peer-focus:uppercase peer-valid:-top-3 peer-valid:text-[10px] peer-valid:tracking-wider peer-valid:uppercase"
+                    className="absolute left-0 top-4 text-slate-500 font-light text-sm transition-all duration-300 peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-[#8B5E3C] peer-focus:tracking-wider peer-focus:uppercase peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:tracking-wider peer-[:not(:placeholder-shown)]:uppercase"
                   >
                     What are you trying to achieve?
                   </label>
@@ -436,7 +436,7 @@ export default function Contact() {
                       </>
                     )}
                   </button>
-                  <p className="mt-4 text-[10px] tracking-[0.2em] uppercase font-mono text-slate-400">
+                  <p className="mt-4 text-[10px] tracking-[0.2em] uppercase font-mono text-slate-500">
                     Response time · Within 1 business day
                   </p>
                 </div>
@@ -446,12 +446,12 @@ export default function Contact() {
             {/* RIGHT: Data sheet */}
             <aside className="lg:col-span-5 lg:pl-6">
               <div className="mb-10">
-                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-3">
+                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-3">
                   § VIII.b
                 </p>
                 <h2 className="font-serif text-3xl md:text-4xl text-slate-900 mb-4 leading-tight">
                   The{" "}
-                  <span className="italic text-[#B38356] font-light">
+                  <span className="italic text-[#8B5E3C] font-light">
                     office.
                   </span>
                 </h2>
@@ -460,11 +460,11 @@ export default function Contact() {
               {/* Data sheet — label / value rows (echoes About's "At a Glance") */}
               <div ref={dataSheetRef} className="border-t border-slate-200">
                 <div className="data-row grid grid-cols-12 gap-4 py-5 border-b border-slate-200 items-start">
-                  <p className="col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 pt-0.5">
+                  <p className="col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 pt-0.5">
                     Office
                   </p>
                   <div className="col-span-8">
-                    <p className="text-[#B38356] text-[10px] font-bold tracking-[0.2em] uppercase mb-2">
+                    <p className="text-[#8B5E3C] text-[10px] font-bold tracking-[0.2em] uppercase mb-2">
                       {primaryOffice.type}
                     </p>
                     <p className="font-serif text-xl text-slate-900">
@@ -474,13 +474,13 @@ export default function Contact() {
                 </div>
 
                 <div className="data-row grid grid-cols-12 gap-4 py-5 border-b border-slate-200 items-start">
-                  <p className="col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 pt-0.5">
+                  <p className="col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 pt-0.5">
                     Address
                   </p>
                   <div className="col-span-8 flex gap-3">
                     <MapPin
                       size={14}
-                      className="mt-1 shrink-0 text-[#B38356]"
+                      className="mt-1 shrink-0 text-[#8B5E3C]"
                       strokeWidth={1.5}
                     />
                     <div className="text-slate-600 font-light text-sm leading-relaxed">
@@ -492,18 +492,18 @@ export default function Contact() {
                 </div>
 
                 <div className="data-row grid grid-cols-12 gap-4 py-5 border-b border-slate-200 items-center">
-                  <p className="col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+                  <p className="col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
                     Phone
                   </p>
                   <div className="col-span-8 flex items-center gap-3">
                     <Phone
                       size={14}
-                      className="shrink-0 text-[#B38356]"
+                      className="shrink-0 text-[#8B5E3C]"
                       strokeWidth={1.5}
                     />
                     <a
                       href={`tel:${primaryOffice.phoneHref}`}
-                      className="text-slate-700 font-light hover:text-[#B38356] transition-colors text-sm"
+                      className="text-slate-700 font-light hover:text-[#8B5E3C] transition-colors text-sm"
                     >
                       {primaryOffice.phone}
                     </a>
@@ -511,18 +511,18 @@ export default function Contact() {
                 </div>
 
                 <div className="data-row grid grid-cols-12 gap-4 py-5 border-b border-slate-200 items-center">
-                  <p className="col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+                  <p className="col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
                     Email
                   </p>
                   <div className="col-span-8 flex items-center gap-3">
                     <Mail
                       size={14}
-                      className="shrink-0 text-[#B38356]"
+                      className="shrink-0 text-[#8B5E3C]"
                       strokeWidth={1.5}
                     />
                     <a
                       href={`mailto:${primaryOffice.email}`}
-                      className="text-slate-700 font-light hover:text-[#B38356] transition-colors text-sm"
+                      className="text-slate-700 font-light hover:text-[#8B5E3C] transition-colors text-sm"
                     >
                       {primaryOffice.email}
                     </a>
@@ -530,13 +530,13 @@ export default function Contact() {
                 </div>
 
                 <div className="data-row grid grid-cols-12 gap-4 py-5 border-b border-slate-200 items-center">
-                  <p className="col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+                  <p className="col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
                     Hours
                   </p>
                   <div className="col-span-8 flex items-center gap-3">
                     <Clock
                       size={14}
-                      className="shrink-0 text-[#B38356]"
+                      className="shrink-0 text-[#8B5E3C]"
                       strokeWidth={1.5}
                     />
                     <span className="text-slate-600 font-light text-sm">
@@ -546,7 +546,7 @@ export default function Contact() {
                 </div>
 
                 <div className="data-row grid grid-cols-12 gap-4 py-5 items-center">
-                  <p className="col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+                  <p className="col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
                     Response
                   </p>
                   <div className="col-span-8">
@@ -561,7 +561,7 @@ export default function Contact() {
               <div className="data-row mt-10 flex items-start gap-3 p-5 border border-[#B38356]/30 bg-[#B38356]/5 text-sm">
                 <AlertCircle
                   size={16}
-                  className="text-[#B38356] mt-0.5 shrink-0"
+                  className="text-[#8B5E3C] mt-0.5 shrink-0"
                   strokeWidth={1.5}
                 />
                 <p className="text-slate-700 italic font-light leading-relaxed">
@@ -583,12 +583,12 @@ export default function Contact() {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="mb-16 lg:mb-20 max-w-3xl">
-            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-3">
+            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-3">
               § VIII.c
             </p>
             <h2 className="font-serif text-3xl md:text-5xl text-slate-900 leading-[1.05]">
               What happens{" "}
-              <span className="italic text-[#B38356] font-light">next.</span>
+              <span className="italic text-[#8B5E3C] font-light">next.</span>
             </h2>
             <p className="text-slate-500 font-light max-w-xl leading-relaxed mt-6 text-base">
               A transparent view of how we take an inquiry from first note
@@ -605,7 +605,7 @@ export default function Contact() {
             {engagementSteps.map((step) => (
               <div key={step.num} className="step-item relative">
                 <div className="w-2 h-2 rounded-full bg-[#B38356] -mt-[49px] mb-8" />
-                <p className="font-serif text-[#B38356] text-3xl md:text-4xl tracking-tight mb-4">
+                <p className="font-serif text-[#8B5E3C] text-3xl md:text-4xl tracking-tight mb-4">
                   {step.num}
                 </p>
                 <h3 className="font-serif text-xl text-slate-900 leading-snug mb-3">
@@ -627,12 +627,12 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-12 md:mb-16 border-b border-slate-200 pb-8">
             <div className="max-w-2xl">
-              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-3">
+              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-3">
                 § VIII.d
               </p>
               <h2 className="font-serif text-3xl md:text-4xl text-slate-900 leading-tight">
                 Or reach a{" "}
-                <span className="italic text-[#B38356] font-light">
+                <span className="italic text-[#8B5E3C] font-light">
                   specific practice.
                 </span>
               </h2>
@@ -653,14 +653,14 @@ export default function Contact() {
                 className="channel-card group bg-white border border-slate-200 p-6 md:p-8 flex items-center justify-between gap-6 transition-colors duration-500 hover:border-[#B38356] hover:shadow-[0_8px_30px_-16px_rgba(179,131,86,0.2)]"
               >
                 <div className="flex items-center gap-6">
-                  <span className="font-serif text-[#B38356] text-3xl md:text-4xl leading-none">
+                  <span className="font-serif text-[#8B5E3C] text-3xl md:text-4xl leading-none">
                     {channel.num}
                   </span>
                   <div>
-                    <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400 mb-1">
+                    <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500 mb-1">
                       Practice
                     </p>
-                    <h3 className="font-serif text-lg md:text-xl text-slate-900 group-hover:text-[#B38356] transition-colors duration-300 leading-tight">
+                    <h3 className="font-serif text-lg md:text-xl text-slate-900 group-hover:text-[#8B5E3C] transition-colors duration-300 leading-tight">
                       {channel.label}
                     </h3>
                   </div>
@@ -669,12 +669,12 @@ export default function Contact() {
                 <div className="flex items-center gap-3 shrink-0">
                   <Mail
                     size={14}
-                    className="text-slate-300 group-hover:text-[#B38356] transition-colors duration-500"
+                    className="text-slate-300 group-hover:text-[#8B5E3C] transition-colors duration-500"
                     strokeWidth={1.5}
                   />
                   <ArrowRight
                     size={18}
-                    className="text-slate-300 group-hover:text-[#B38356] transform group-hover:translate-x-1 transition-all duration-500"
+                    className="text-slate-300 group-hover:text-[#8B5E3C] transform group-hover:translate-x-1 transition-all duration-500"
                     strokeWidth={1.5}
                   />
                 </div>
@@ -688,7 +688,7 @@ export default function Contact() {
       {/* BOTTOM NOTE                                                  */}
       {/* ═══════════════════════════════════════════════════════════ */}
       <div className="border-t border-slate-200 bg-[#FAFAFA]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500">
           <span>
             All inquiries are read by a senior partner before being routed.
           </span>

@@ -5,26 +5,22 @@ import App from "./App.jsx";
 
 import Lenis from "@studio-freight/lenis";
 
-const prefersReducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
-).matches;
+const lenis = new Lenis({
+  duration: 1.2,
+  smoothWheel: true,
+  smoothTouch: false,
+});
 
-if (!prefersReducedMotion) {
-  const lenis = new Lenis({
-    duration: 1.2,
-    smoothWheel: true,
-    smoothTouch: false,
-  });
+// Expose for ScrollToTop (and anything else that needs to drive Lenis
+// from outside main.jsx). Underscore prefix marks it as internal.
+window.__lenis = lenis;
 
-  window.__lenis = lenis;
-
-  const raf = (time) => {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  };
-
+function raf(time) {
+  lenis.raf(time);
   requestAnimationFrame(raf);
 }
+
+requestAnimationFrame(raf);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

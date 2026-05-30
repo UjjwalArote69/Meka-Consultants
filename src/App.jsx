@@ -11,6 +11,8 @@ const Services = lazy(() => import('./pages/Services'))
 const FAQ = lazy(() => import('./pages/FAQ'))
 const Blog = lazy(() => import('./pages/Blog'))
 const BlogPost = lazy(() => import('./pages/BlogPost'))
+const Privacy = lazy(() => import('./pages/Privacy'))
+const Terms = lazy(() => import('./pages/Terms'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 const App = () => {
@@ -39,6 +41,8 @@ const App = () => {
               <Route path='/contact' element={<Contact />} />
               <Route path='/blog' element={<Blog />} />
               <Route path='/blog/:slug' element={<BlogPost />} />
+              <Route path='/privacy' element={<Privacy />} />
+              <Route path='/terms' element={<Terms />} />
               <Route path='*' element={<NotFound />} />
             </Routes>
           </Suspense>

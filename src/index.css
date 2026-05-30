@@ -12,15 +12,22 @@
   font-family: 'Montserrat';
   src: url('/fonts/Montserrat-VariableFont_wght.woff2') format('woff2');
   font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Italic-VariableFont_wght.woff2') format('woff2');
+  font-weight: 100 900;
   font-style: italic;
   font-display: swap;
 }
 
-/* Add Editorial Old */
 @font-face {
-  font-family: 'Editorial';
+  font-family: 'Editorial Old';
   src: url('/fonts/Editorial-Old.woff2') format('woff2');
-  font-weight: 400; /* Adjust if your specific file is bold/light */
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -42,15 +49,41 @@
   border-radius: 2px;
 }
 
-/* Honor reduced-motion preferences globally: shorten or disable
-   animations/transitions for users who've opted out. */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+/* Mark long-lived, below-the-fold sections as deferrable: the browser
+   skips rendering them until they're near the viewport, which cuts
+   layout/paint cost on mobile dramatically. Pair with a min-height
+   estimate at the call site to avoid layout shift. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
 }
+
+/* Hero headlines wrap each reveal-animated word/line in overflow-hidden
+   so the slide-up animation is masked. At display sizes with leading-[1.05]
+   that clip also trims italic-serif descenders (p, g, y, f). Swap to
+   overflow: clip + clip-margin so descenders render without breaking the
+   reveal mask, and give the animated child a touch of bottom padding as a
+   belt-and-braces fallback for engines that don't support clip-margin. */
+:is(
+  .hero-word-inner,
+  .blog-hero-line,
+  .masthead-line,
+  .faq-hero-line,
+  .svc-hero-line,
+  .post-hero-line
+) {
+  padding-bottom: 0.12em;
+}
+
+:is(h1, h2, h3).font-serif .overflow-hidden:has(
+  > .hero-word-inner,
+  > .blog-hero-line,
+  > .masthead-line,
+  > .faq-hero-line,
+  > .svc-hero-line,
+  > .post-hero-line
+) {
+  overflow: clip;
+  overflow-clip-margin: 0.35em;
+}
+

@@ -158,18 +158,18 @@ export default function PhilosophySection() {
             ref={sidebarRef}
             className="lg:col-span-4 flex flex-col lg:sticky lg:top-40 lg:self-start z-10"
           >
-            <p className="text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase mb-5 flex items-center gap-4">
+            <p className="text-[#8B5E3C] font-bold tracking-[0.3em] text-[10px] uppercase mb-5 flex items-center gap-4">
               <span className="w-8 h-px bg-[#B38356]" /> Our Ethos
             </p>
 
-            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400 mb-10">
+            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500 mb-10">
               A note on practice
             </p>
 
             {/* Decorative Quote */}
             <span
               ref={quoteGlyphRef}
-              className="font-serif italic text-[#B38356]/20 text-[8rem] md:text-[10rem] lg:text-[14rem] leading-none select-none pointer-events-none origin-top-left -ml-4"
+              className="font-serif italic text-[#8B5E3C]/20 text-[8rem] md:text-[10rem] lg:text-[14rem] leading-none select-none pointer-events-none origin-top-left -ml-4"
               style={{ willChange: "transform, opacity" }}
               aria-hidden="true"
             >
@@ -219,7 +219,7 @@ export default function PhilosophySection() {
               <span className="w-8 h-px bg-slate-300 hidden sm:block" />
               <span className="text-slate-900 font-bold">Meka Consultants</span>
               <span className="text-slate-300">·</span>
-              <span>A Meka Group practice since 1986</span>
+              <span>A Meka Group practice since 1978</span>
             </div>
             
           </div>

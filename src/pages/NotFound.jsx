@@ -15,19 +15,19 @@ export default function NotFound() {
       <main className="flex-1 flex items-center">
         <section className="w-full pt-40 pb-24 lg:pt-52 lg:pb-32">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <div className="flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-12">
+            <div className="flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-12">
               <span>File · MC-2026-404</span>
               <span>§ ∅ · Not Found</span>
               <span>Status · 404</span>
             </div>
 
-            <p className="text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4 mb-6">
+            <p className="text-[#8B5E3C] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4 mb-6">
               <span className="w-8 h-px bg-[#B38356]" /> Off the map
             </p>
 
-            <h1 className="font-serif text-slate-900 tracking-tight leading-[0.95] text-5xl md:text-7xl lg:text-[7rem] mb-10">
+            <h1 className="font-serif text-slate-900 tracking-tight leading-[1.05] text-5xl md:text-7xl lg:text-[7rem] mb-10">
               <span className="block">This page</span>
-              <span className="block text-[#B38356] italic font-light">
+              <span className="block text-[#8B5E3C] italic font-light">
                 doesn't exist.
               </span>
             </h1>
@@ -47,7 +47,7 @@ export default function NotFound() {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className="bg-[#FAFAFA] px-6 py-6 text-xs tracking-[0.25em] uppercase font-bold text-slate-700 hover:bg-white hover:text-[#B38356] transition-colors text-center"
+                  className="bg-[#FAFAFA] px-6 py-6 text-xs tracking-[0.25em] uppercase font-bold text-slate-700 hover:bg-white hover:text-[#8B5E3C] transition-colors text-center"
                 >
                   {link.label}
                 </Link>

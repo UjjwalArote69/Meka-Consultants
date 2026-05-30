@@ -381,7 +381,7 @@ export default function Services() {
       {/* HERO / MASTHEAD                                              */}
       {/* ═══════════════════════════════════════════════════════════ */}
       <section className="relative pt-40 pb-20 lg:pt-52 lg:pb-24 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-12 flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-12 flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
           <span className="svc-meta">File · MC-2026-01</span>
           <span className="svc-meta">§ VI · Services Index</span>
           <span className="svc-meta">17 Modules · 4 Disciplines</span>
@@ -389,17 +389,17 @@ export default function Services() {
 
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="overflow-hidden mb-6">
-            <p className="svc-hero-line text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4">
+            <p className="svc-hero-line text-[#8B5E3C] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4">
               <span className="w-8 h-px bg-[#B38356]" /> The Services Index
             </p>
           </div>
 
-          <h1 className="font-serif text-slate-900 tracking-tight leading-[0.95] text-5xl md:text-7xl lg:text-[7rem] mb-10">
-            <span className="block overflow-hidden">
+          <h1 className="font-serif text-slate-900 tracking-tight leading-[1.05] text-5xl md:text-7xl lg:text-[7rem] mb-10">
+            <span className="block overflow-hidden pb-[0.18em] -mb-[0.18em]">
               <span className="svc-hero-line inline-block">Four disciplines.</span>
             </span>
-            <span className="block overflow-hidden">
-              <span className="svc-hero-line inline-block text-[#B38356] italic font-light">
+            <span className="block overflow-hidden pb-[0.18em] -mb-[0.18em]">
+              <span className="svc-hero-line inline-block text-[#8B5E3C] italic font-light">
                 One practice.
               </span>
             </span>
@@ -411,6 +411,11 @@ export default function Services() {
             a larger mandate, and every engagement is led by a senior partner
             accountable to the client.
           </p>
+
+          <p className="svc-hero-desc mt-6 max-w-2xl text-[11px] tracking-[0.2em] uppercase font-bold text-[#8B5E3C] flex items-center gap-3">
+            <span className="w-6 h-px bg-[#B38356]" />
+            Manpower services only · No machinery or equipment supplied
+          </p>
         </div>
       </section>
 
@@ -419,7 +424,7 @@ export default function Services() {
       {/* ═══════════════════════════════════════════════════════════ */}
       <div className="svc-filter-bar sticky top-[88px] z-30 bg-[#FAFAFA]/95 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center gap-4 overflow-x-auto">
-          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 flex items-center gap-2 shrink-0">
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 flex items-center gap-2 shrink-0">
             <Filter size={12} />
             Navigator
           </span>
@@ -434,7 +439,7 @@ export default function Services() {
                   className={`group inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] tracking-[0.15em] uppercase font-bold transition-all duration-300 ${
                     isActive
                       ? "bg-slate-900 text-white"
-                      : "bg-white border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#B38356]"
+                      : "bg-white border border-slate-200 text-slate-500 hover:border-[#B38356] hover:text-[#8B5E3C]"
                   }`}
                 >
                   <span>{f.label}</span>
@@ -442,7 +447,7 @@ export default function Services() {
                     className={`font-mono text-[9px] ${
                       isActive
                         ? "text-white/60"
-                        : "text-slate-400 group-hover:text-[#B38356]/70"
+                        : "text-slate-500 group-hover:text-[#8B5E3C]/70"
                     }`}
                   >
                     {f.count}
@@ -470,10 +475,10 @@ export default function Services() {
               {/* Discipline header */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-10 md:mb-14">
                 <div className="lg:col-span-3">
-                  <p className="disc-header-el font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-3">
+                  <p className="disc-header-el font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-3">
                     § {disc.num} · Discipline
                   </p>
-                  <span className="disc-header-el font-serif text-7xl md:text-8xl text-[#B38356] leading-none inline-block">
+                  <span className="disc-header-el font-serif text-7xl md:text-8xl text-[#8B5E3C] leading-none inline-block">
                     {disc.num}
                   </span>
                 </div>
@@ -482,18 +487,18 @@ export default function Services() {
                   <h2 className="disc-header-el font-serif text-3xl md:text-5xl lg:text-6xl text-slate-900 leading-[1.05] mb-6">
                     {disc.title}
                   </h2>
-                  <p className="disc-header-el text-[#B38356] italic text-lg md:text-xl font-light mb-6">
+                  <p className="disc-header-el text-[#8B5E3C] italic text-lg md:text-xl font-light mb-6">
                     {disc.tagline}
                   </p>
                   <p className="disc-header-el text-slate-600 text-base leading-relaxed font-light max-w-2xl mb-8">
                     {disc.desc}
                   </p>
-                  <div className="disc-header-el flex items-center gap-3 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400">
+                  <div className="disc-header-el flex items-center gap-3 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500">
                     <span>
                       {disc.modules.length} modules in this discipline
                     </span>
                     <span className="w-6 h-px bg-slate-300" />
-                    <span className="text-[#B38356]">
+                    <span className="text-[#8B5E3C]">
                       {disc.num}.1 – {disc.num}.{disc.modules.length}
                     </span>
                   </div>
@@ -506,7 +511,7 @@ export default function Services() {
                   <div className="flex items-start gap-3 p-5 border border-[#B38356]/30 bg-[#B38356]/5 text-sm">
                     <AlertCircle
                       size={16}
-                      className="text-[#B38356] mt-0.5 shrink-0"
+                      className="text-[#8B5E3C] mt-0.5 shrink-0"
                       strokeWidth={1.5}
                     />
                     <p className="text-slate-700 italic font-light leading-relaxed">
@@ -527,23 +532,23 @@ export default function Services() {
                       className="module-card scroll-mt-40 group bg-white border border-slate-200 p-6 md:p-8 transition-colors duration-500 hover:border-[#B38356] hover:shadow-[0_8px_30px_-16px_rgba(179,131,86,0.2)] flex gap-5"
                     >
                       {/* Icon box */}
-                      <div className="w-14 h-14 shrink-0 border border-slate-200 flex items-center justify-center text-slate-400 group-hover:border-[#B38356] group-hover:text-[#B38356] group-hover:bg-[#FAFAFA] transition-all duration-500">
+                      <div className="w-14 h-14 shrink-0 border border-slate-200 flex items-center justify-center text-slate-500 group-hover:border-[#B38356] group-hover:text-[#8B5E3C] group-hover:bg-[#FAFAFA] transition-all duration-500">
                         <Icon size={20} strokeWidth={1.5} />
                       </div>
 
                       {/* Content */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-3 mb-2">
-                          <span className="font-mono text-[11px] tracking-[0.15em] text-[#B38356] font-bold">
+                          <span className="font-mono text-[11px] tracking-[0.15em] text-[#8B5E3C] font-bold">
                             {m.num}
                           </span>
                           <span className="h-px flex-1 bg-slate-200" />
                         </div>
 
-                        <h3 className="font-serif text-xl md:text-2xl text-slate-900 group-hover:text-[#B38356] transition-colors duration-300 leading-tight mb-1">
+                        <h3 className="font-serif text-xl md:text-2xl text-slate-900 group-hover:text-[#8B5E3C] transition-colors duration-300 leading-tight mb-1">
                           {m.title}
                         </h3>
-                        <p className="text-[#B38356] italic text-sm font-light mb-4">
+                        <p className="text-[#8B5E3C] italic text-sm font-light mb-4">
                           {m.tagline}
                         </p>
 
@@ -555,7 +560,7 @@ export default function Services() {
                           {m.tags.map((tag, tIdx) => (
                             <span
                               key={tIdx}
-                              className="text-[9px] tracking-[0.12em] uppercase font-bold px-2.5 py-1 border border-slate-200 text-slate-500 group-hover:border-[#B38356]/40 group-hover:text-[#B38356]/80 transition-colors duration-500"
+                              className="text-[9px] tracking-[0.12em] uppercase font-bold px-2.5 py-1 border border-slate-200 text-slate-500 group-hover:border-[#B38356]/40 group-hover:text-[#8B5E3C]/80 transition-colors duration-500"
                             >
                               {tag}
                             </span>
@@ -570,7 +575,7 @@ export default function Services() {
           ))}
 
           {visibleDisciplines.length === 0 && (
-            <div className="py-32 text-center text-slate-400 text-sm">
+            <div className="py-32 text-center text-slate-500 text-sm">
               No modules match the selected filter.
             </div>
           )}
@@ -581,14 +586,14 @@ export default function Services() {
       {/* BOTTOM NOTE                                                  */}
       {/* ═══════════════════════════════════════════════════════════ */}
       <div className="border-t border-slate-200 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500">
           <span>
             Modules combine under a single mandate when engagements span
             multiple disciplines.
           </span>
           <Link
             to="/about"
-            className="text-slate-900 hover:text-[#B38356] transition-colors border-b border-slate-300 hover:border-[#B38356] pb-0.5"
+            className="text-slate-900 hover:text-[#8B5E3C] transition-colors border-b border-slate-300 hover:border-[#B38356] pb-0.5"
           >
             About the firm →
           </Link>

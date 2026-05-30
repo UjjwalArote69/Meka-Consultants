@@ -34,7 +34,7 @@ const sectionIndex = [
 ];
 
 const specs = [
-  { label: "Founded", value: "1986 (Meka Group)" },
+  { label: "Founded", value: "1978 (Meka Group)" },
   { label: "Practice", value: "Professional Services" },
   { label: "Headquarters", value: "Mumbai, India" },
   {
@@ -44,7 +44,7 @@ const specs = [
   },
   { label: "Professionals Deployed", value: "1,200+" },
   { label: "Mandates Delivered", value: "350+" },
-  { label: "Group Heritage", value: "40+ years" },
+  { label: "Group Heritage", value: "45+ years" },
   { label: "Operating Hours", value: "Mon–Fri · 9am–5pm IST" },
 ];
 
@@ -77,7 +77,7 @@ const principles = [
 ];
 
 const milestones = [
-  { year: "1986", title: "Meka Group Founded", desc: "Dr. Meka Vijay Paparao establishes the parent group with an engineering-first culture." },
+  { year: "1978", title: "Meka Group Founded", desc: "Dr. Meka Vijay Paparao establishes the parent group with an engineering-first culture." },
   { year: "1995", title: "Advisory Roots", desc: "Early mandates in engineering and operational advisory across industrial clients." },
   { year: "2008", title: "Manpower Practice", desc: "Expansion into outsourced manpower — deploying specialists and teams end-to-end." },
   { year: "2016", title: "Consulting Practice", desc: "Dedicated strategy and operations consulting practice formalized under the group." },
@@ -303,7 +303,7 @@ export default function About() {
       {/* ═══════════════════════════════════════════════════════════ */}
       <section className="relative pt-20 pb-24 lg:pt-36 lg:pb-32 border-b border-slate-200">
         {/* Top meta strip — like a document header */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-16 md:mb-24 flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-16 md:mb-24 flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
           <span className="masthead-meta">File · MC-2026-01</span>
           <span className="masthead-meta">Firm Profile</span>
           <span className="masthead-meta">Vol. 01 / 2026</span>
@@ -312,21 +312,21 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Big document-style title */}
           <div className="overflow-hidden mb-4">
-            <p className="masthead-line text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4">
+            <p className="masthead-line text-[#8B5E3C] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4">
               <span className="w-8 h-px bg-[#B38356]" /> About the Firm
             </p>
           </div>
 
-          <h1 className="font-serif text-slate-900 tracking-tight leading-[0.95] text-5xl md:text-7xl lg:text-[8rem] mb-10 lg:mb-14">
-            <span className="block overflow-hidden">
+          <h1 className="font-serif text-slate-900 tracking-tight leading-[1.05] text-5xl md:text-7xl lg:text-[8rem] mb-10 lg:mb-14">
+            <span className="block overflow-hidden pb-[0.1em]">
               <span className="masthead-line inline-block">A professional</span>
             </span>
-            <span className="block overflow-hidden">
+            <span className="block overflow-hidden pb-[0.1em]">
               <span className="masthead-line inline-block">services firm —</span>
             </span>
-            <span className="block overflow-hidden mt-1 lg:mt-2">
-              <span className="masthead-line inline-block text-[#B38356] italic font-light">
-                since 1986.
+            <span className="block overflow-hidden mt-1 lg:mt-2 pb-[0.18em] -mb-[0.18em]">
+              <span className="masthead-line inline-block text-[#8B5E3C] italic font-light">
+                since 1978.
               </span>
             </span>
           </h1>
@@ -343,14 +343,14 @@ export default function About() {
 
           {/* Table of contents hint */}
           <div className="flex flex-wrap gap-x-8 gap-y-3 border-t border-slate-200 pt-6">
-            <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 masthead-meta">
+            <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 masthead-meta">
               Contents:
             </span>
             {sectionIndex.map((item, i) => (
               <a
                 key={i}
                 href={`#section-${item.num.toLowerCase()}`}
-                className="toc-item font-mono text-[10px] tracking-[0.2em] uppercase text-slate-600 hover:text-[#B38356] transition-colors duration-300"
+                className="toc-item font-mono text-[10px] tracking-[0.2em] uppercase text-slate-600 hover:text-[#8B5E3C] transition-colors duration-300"
               >
                 {item.num}. {item.label}
               </a>
@@ -372,12 +372,12 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             {/* Sidebar */}
             <aside className="lg:col-span-3">
-              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-3">
+              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-3">
                 § I
               </p>
               <h2 className="font-serif text-3xl md:text-4xl text-slate-900 leading-tight">
                 The firm, <br />
-                <span className="italic text-[#B38356] font-light">
+                <span className="italic text-[#8B5E3C] font-light">
                   in profile.
                 </span>
               </h2>
@@ -388,13 +388,13 @@ export default function About() {
               {/* First paragraph with drop-cap */}
               <div className="article-para mb-8">
                 <p className="font-serif text-xl md:text-2xl leading-[1.55] text-slate-800">
-                  <span className="drop-cap float-left font-serif text-[#B38356] text-7xl md:text-8xl leading-[0.85] mr-3 mt-1">
+                  <span className="drop-cap float-left font-serif text-[#8B5E3C] text-7xl md:text-8xl leading-[0.85] mr-3 mt-1">
                     M
                   </span>
                   eka Consultants is a professional services firm specializing
                   in business consulting and outsourced manpower supply.
                   Operating under the umbrella of the Meka Group — founded in
-                  1986 — the firm helps organizations improve decision-making,
+                  1978 — the firm helps organizations improve decision-making,
                   strengthen operations, and deploy the right people at the
                   right scale.
                 </p>
@@ -427,7 +427,7 @@ export default function About() {
                   <br />
                   Execution without the right people is chance.
                 </p>
-                <p className="mt-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+                <p className="mt-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
                   — Operating premise
                 </p>
               </blockquote>
@@ -456,12 +456,12 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12">
             <aside className="lg:col-span-3">
-              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-3">
+              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-3">
                 § II
               </p>
               <h2 className="font-serif text-3xl md:text-4xl text-slate-900 leading-tight">
                 At a{" "}
-                <span className="italic text-[#B38356] font-light">glance.</span>
+                <span className="italic text-[#8B5E3C] font-light">glance.</span>
               </h2>
               <p className="text-slate-500 text-sm font-light leading-relaxed mt-6 max-w-xs">
                 A structured summary of the firm's practice, scale, and
@@ -477,7 +477,7 @@ export default function About() {
                     key={i}
                     className="spec-row grid grid-cols-12 gap-4 py-5 border-b border-slate-200 items-start"
                   >
-                    <p className="col-span-12 md:col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 md:pt-0.5">
+                    <p className="col-span-12 md:col-span-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 md:pt-0.5">
                       {spec.label}
                     </p>
                     <p className="col-span-12 md:col-span-8 font-serif text-lg md:text-xl text-slate-900 leading-snug">
@@ -502,12 +502,12 @@ export default function About() {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="mb-16 md:mb-24 max-w-3xl">
-            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-3">
+            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-3">
               § III
             </p>
             <h2 className="font-serif text-4xl md:text-6xl text-slate-900 leading-[1.05]">
               Operating{" "}
-              <span className="italic text-[#B38356] font-light">
+              <span className="italic text-[#8B5E3C] font-light">
                 principles.
               </span>
             </h2>
@@ -528,7 +528,7 @@ export default function About() {
 
                 {/* Roman numeral column */}
                 <div className="lg:col-span-3">
-                  <span className="principle-numeral font-serif text-6xl md:text-7xl text-[#B38356] leading-none inline-block">
+                  <span className="principle-numeral font-serif text-6xl md:text-7xl text-[#8B5E3C] leading-none inline-block">
                     {p.num}
                   </span>
                 </div>
@@ -560,12 +560,12 @@ export default function About() {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="mb-16 md:mb-20 max-w-3xl">
-            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-3">
+            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-3">
               § IV
             </p>
             <h2 className="font-serif text-4xl md:text-6xl text-slate-900 leading-[1.05]">
               A working{" "}
-              <span className="italic text-[#B38356] font-light">
+              <span className="italic text-[#8B5E3C] font-light">
                 chronology.
               </span>
             </h2>
@@ -588,7 +588,7 @@ export default function About() {
                 <p className="font-serif text-3xl md:text-4xl text-slate-900 mb-2">
                   {m.year}
                 </p>
-                <p className="text-[#B38356] text-[10px] font-bold tracking-[0.2em] uppercase mb-3">
+                <p className="text-[#8B5E3C] text-[10px] font-bold tracking-[0.2em] uppercase mb-3">
                   {m.title}
                 </p>
                 <p className="text-slate-500 text-sm font-light leading-relaxed">
@@ -598,7 +598,7 @@ export default function About() {
             ))}
           </div>
 
-          <p className="mt-8 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400 text-center md:text-left">
+          <p className="mt-8 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500 text-center md:text-left">
             Drag or scroll horizontally ·{" "}
             {milestones.length} entries
           </p>
@@ -617,12 +617,12 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-14">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             <aside className="lg:col-span-3">
-              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-3">
+              <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-3">
                 § V
               </p>
               <h2 className="font-serif text-3xl md:text-4xl text-slate-900 leading-tight">
                 Sectors{" "}
-                <span className="italic text-[#B38356] font-light">
+                <span className="italic text-[#8B5E3C] font-light">
                   served.
                 </span>
               </h2>
@@ -631,7 +631,7 @@ export default function About() {
             <div className="lg:col-span-9 space-y-10">
               {/* Primary */}
               <div>
-                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-4">
+                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-4">
                   Primary Industries
                 </p>
                 <div className="flex flex-wrap gap-3">
@@ -648,14 +648,14 @@ export default function About() {
 
               {/* Secondary */}
               <div>
-                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-4">
+                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-4">
                   Adjacent Sectors
                 </p>
                 <div className="flex flex-wrap gap-3">
                   {sectorsSecondary.map((s, i) => (
                     <span
                       key={i}
-                      className="sector-tag inline-block text-slate-600 text-sm tracking-wide border border-slate-200 px-4 py-2 hover:border-[#B38356]/50 hover:text-[#B38356] transition-colors duration-300 cursor-default"
+                      className="sector-tag inline-block text-slate-600 text-sm tracking-wide border border-slate-200 px-4 py-2 hover:border-[#B38356]/50 hover:text-[#8B5E3C] transition-colors duration-300 cursor-default"
                     >
                       {s}
                     </span>
@@ -665,7 +665,7 @@ export default function About() {
 
               {/* Functional */}
               <div>
-                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-4">
+                <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-4">
                   Functional Areas
                 </p>
                 <div className="flex flex-wrap gap-3">
@@ -694,7 +694,7 @@ export default function About() {
                   className="font-serif italic text-2xl md:text-3xl text-slate-300 shrink-0"
                 >
                   {s}
-                  <span className="mx-6 text-[#B38356]">·</span>
+                  <span className="mx-6 text-[#8B5E3C]">·</span>
                 </span>
               )
             )}
@@ -707,7 +707,7 @@ export default function About() {
       {/* DOCUMENT FOOTER STRIP                                        */}
       {/* ═══════════════════════════════════════════════════════════ */}
       <div className="border-t border-slate-200 bg-[#FAFAFA]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-wrap justify-between items-center gap-3 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-wrap justify-between items-center gap-3 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500">
           <span>MC-2026-01 · Firm Profile</span>
           <span>A Meka Group practice · Mumbai, India</span>
           <span>Vol. 01 / 2026</span>
@@ -728,6 +728,12 @@ export default function About() {
         }
         .marquee-track:hover {
           animation-play-state: paused;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .marquee-track {
+            animation: none;
+            transform: none;
+          }
         }
         /* Thin scrollbar for chronology strip */
         .scrollbar-thin::-webkit-scrollbar { height: 4px; }

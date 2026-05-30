@@ -8,10 +8,10 @@ gsap.registerPlugin(ScrollTrigger);
 const metricsData = [
   {
     num: "01",
-    target: 40,
+    target: 45,
     suffix: "+",
     label: "Years of Group Legacy",
-    sub: "Meka Group · Est. 1986",
+    sub: "Meka Group · Est. 1978",
     fill: 0.9,
   },
   {
@@ -151,21 +151,25 @@ export default function MetricsSection() {
         
         {/* ═══════ HEADER ═══════ */}
         <div className="mb-12 max-w-3xl">
-          <p className="header-element text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase mb-5">
+          <p className="header-element text-[#8B5E3C] font-bold tracking-[0.3em] text-[10px] uppercase mb-5">
             By the Numbers
           </p>
           <h2 className="header-element text-5xl md:text-6xl lg:text-[4.5rem] font-serif text-slate-900 leading-[1] tracking-tight">
-            Scale, <span className="italic text-[#B38356] font-light">measured.</span>
+            Scale, <span className="italic text-[#8B5E3C] font-light">measured.</span>
           </h2>
         </div>
 
         {/* ═══════ META ROW ═══════ */}
-        <div className="header-element flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-400 mb-8">
+        <div className="header-element flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500 mb-8">
           <span>Dossier · 2026</span>
           <span className="w-8 h-px bg-slate-300" />
           <span>Meka Consultants</span>
           <span className="w-8 h-px bg-slate-300" />
           <span>Professional Services</span>
+          <span className="w-8 h-px bg-slate-300" />
+          <span>ISO 9001:2015 Certified</span>
+          <span className="w-8 h-px bg-slate-300" />
+          <span>9 Group Companies</span>
         </div>
 
         {/* ═══════ TOP RULE ═══════ */}
@@ -186,7 +190,7 @@ export default function MetricsSection() {
               {/* Index marker */}
               <div className="metric-index flex items-center gap-3 mb-10">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#B38356] group-hover:scale-125 transition-transform duration-300" />
-                <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 group-hover:text-slate-600 transition-colors">
+                <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 group-hover:text-slate-600 transition-colors">
                   {metric.num}
                 </span>
               </div>
@@ -201,7 +205,7 @@ export default function MetricsSection() {
 
               {/* Label + sub */}
               <div className="mt-auto mb-8">
-                <p className="metric-text text-[11px] tracking-[0.2em] uppercase font-bold text-[#B38356] mb-3 leading-relaxed">
+                <p className="metric-text text-[11px] tracking-[0.2em] uppercase font-bold text-[#8B5E3C] mb-3 leading-relaxed">
                   {metric.label}
                 </p>
                 <p className="metric-text text-slate-500 font-light text-[13px] leading-relaxed max-w-[220px]">
@@ -218,7 +222,7 @@ export default function MetricsSection() {
         </div>
 
         {/* ═══════ BOTTOM NOTE ═══════ */}
-        <div className="bottom-note mt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[10px] tracking-[0.2em] uppercase font-mono text-slate-400">
+        <div className="bottom-note mt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[10px] tracking-[0.2em] uppercase font-mono text-slate-500">
           <span className="flex items-center gap-3">
             <span className="w-1 h-1 bg-slate-300 rounded-full" />
             Figures combine Meka Group legacy with Consultants practice

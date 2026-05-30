@@ -32,18 +32,18 @@ export default class ErrorBoundary extends React.Component {
         <title>Something went wrong — Meka Consultants</title>
 
         <div className="max-w-2xl w-full">
-          <div className="flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-400 mb-12">
+          <div className="flex flex-wrap justify-between items-start gap-4 font-mono text-[10px] tracking-[0.25em] uppercase text-slate-500 mb-12">
             <span>Error · Unexpected Fault</span>
             <span>§ 500</span>
           </div>
 
-          <p className="text-[#B38356] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4 mb-6">
+          <p className="text-[#8B5E3C] font-bold tracking-[0.3em] text-[10px] uppercase flex items-center gap-4 mb-6">
             <span className="w-8 h-px bg-[#B38356]" /> System Interrupt
           </p>
 
-          <h1 className="font-serif tracking-tight leading-[0.95] text-5xl md:text-7xl mb-8">
+          <h1 className="font-serif tracking-tight leading-[1.05] text-5xl md:text-7xl mb-8">
             Something
-            <span className="block text-[#B38356] italic font-light">
+            <span className="block text-[#8B5E3C] italic font-light">
               broke.
             </span>
           </h1>
@@ -70,7 +70,7 @@ export default class ErrorBoundary extends React.Component {
             <button
               type="button"
               onClick={this.handleReload}
-              className="px-6 py-3 border border-slate-300 text-slate-900 text-xs tracking-[0.25em] uppercase font-bold hover:border-[#B38356] hover:text-[#B38356] transition-colors"
+              className="px-6 py-3 border border-slate-300 text-slate-900 text-xs tracking-[0.25em] uppercase font-bold hover:border-[#B38356] hover:text-[#8B5E3C] transition-colors"
             >
               Return Home
             </button>
